@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dhruvil Thummar | Software Engineer</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&family=Roboto+Mono:wght@400&family=Montserrat:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- GSAP Libraries for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <style>
+      /* General Styles */
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: #000000;
+        color: #ffffff;
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+        cursor: none;
+      }
+      .font-display {
+        font-family: "Poppins", sans-serif;
+      }
+      .font-mono {
+        font-family: "Roboto Mono", monospace;
+      }
+      .font-logo {
+        font-family: "Montserrat", sans-serif;
+      }
+
+      /* Preloader Styles */
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        z-index: 2000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #00bfff;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+      }
+      .preloader-wrapper {
+        width: 300px;
+        text-align: center;
+      }
+      #preloader-logo {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 20px;
+      }
+      #preloader-logo svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        fill: none;
+        stroke-width: 2;
+        transform-origin: center center;
+      }
+      .logo-path {
+        stroke: #00bfff;
+        stroke-dasharray: 500;
+        stroke-dashoffset: 500;
+      }
+      .logo-letters {
+        fill: #00bfff;
+        opacity: 0;
+        font-size: 2.5rem;
+        transform-origin: center center;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+      }
+      .progress-bar-container {
+        width: 100%;
+        height: 4px;
+        background-color: rgba(0, 191, 255, 0.2);
+        border-radius: 2px;
+        margin-top: 1rem;
+      }
+      #progress-bar {
+        width: 0%;
+        height: 100%;
+        background-color: #00bfff;
+        border-radius: 2px;
+        transition: width 0.3s ease;
+      }
+      #status-text {
+        margin-top: 1rem;
+        font-family: "Roboto Mono", monospace;
+        color: #b0b0b0;
+      }
+      .pulsing-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+      @keyframes pulse-glow {
+        0% {
+          filter: drop-shadow(0 0 5px #00bfff);
+          opacity: 0.8;
+        }
+        50% {
+          filter: drop-shadow(0 0 15px #00bfff);
+          opacity: 1;
+        }
+        100% {
+          filter: drop-shadow(0 0 5px #00bfff);
+          opacity: 0.8;
+        }
+      }
+
+      /* Custom Cursor */
+      .cursor-ring,
+      .cursor-dot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 1100;
+        pointer-events: none;
+      }
+      .cursor-ring {
+        width: 30px;
+        height: 30px;
+        border: 2px solid #00bfff;
+        transition: width 0.3s, height 0.3s, transform 0.3s, border-width 0.3s;
+      }
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #00bfff;
+      }
+      /* Hover effect */
+      .hovered .cursor-ring {
+        width: 50px;
+        height: 50px;
+        border-width: 1px;
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+      /* Click effect */
+      .active .cursor-ring {
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #00bfff;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #0077b6;
+      }
+
+      /* Background Animation Canvas */
+      #background-canvas {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      /* Enhanced Glassmorphism Card Effect */
+      .glass-card {
+        background: rgba(10, 10, 10, 0.5);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .glass-card::before {
+        content: "";
+        position: absolute;
+        top: var(--mouse-y, -100px);
+        left: var(--mouse-x, -100px);
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 191, 255, 0.25) 0%,
+          rgba(0, 191, 255, 0) 60%
+        );
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+      .glass-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 0 40px rgba(0, 191, 255, 0.3),
+          0 0 15px rgba(0, 191, 255, 0.2);
+      }
+      .glass-card:hover::before {
+        opacity: 1;
+      }
+
+      /* General Futuristic Styles */
+      .section-heading {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+        transition: clip-path 1s ease-out;
+      }
+      .section-heading.is-visible {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+      .glow-link {
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+      }
+      .glow-link:hover {
+        color: #00bfff;
+        text-shadow: 0 0 10px #00bfff;
+      }
+
+      /* Text Reveal CSS */
+      .word-wrapper {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: top;
+      }
+      .word {
+        display: inline-block;
+        transform-origin: bottom;
+      }
+
+      /* About Section Decorative Shapes */
+      .about-shape {
+        position: absolute;
+        stroke: #00bfff;
+        stroke-width: 1;
+        fill: none;
+        opacity: 0.3;
+        z-index: -1;
+      }
+
+      /* Contact Section Button Shimmer */
+      .shimmer-btn {
+        position: relative;
+        overflow: hidden;
+      }
+      .shimmer-btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transition: left 0.6s ease;
+      }
+      .shimmer-btn:hover::after {
+        left: 150%;
+      }
+
+      /* Skill Tag Styling */
+      .skill-tag {
+        background-color: rgba(0, 191, 255, 0.1);
+        border: 1px solid rgba(0, 191, 255, 0.3);
+        transition: background-color 0.3s, transform 0.3s;
+      }
+      .skill-tag:hover {
+        background-color: rgba(0, 191, 255, 0.3);
+        transform: scale(1.05);
+      }
+
+      /* CV Download Button */
+      .cv-button {
+        border: 1px solid #00bfff;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .cv-button:hover {
+        background-color: #00bfff;
+        color: #000;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              background: "#000000",
+              primary: "#FFFFFF",
+              secondary: "#B0B0B0",
+              accent: "#00BFFF",
+              "accent-dark": "#0077B6",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Poppins", "sans-serif"],
+              mono: ["Roboto Mono", "monospace"],
+              logo: ["Montserrat", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background">
+    <div class="cursor-ring"></div>
+    <div class="cursor-dot"></div>
+
+    <canvas id="background-canvas"></canvas>
+
+    <div id="preloader">
+      <div class="preloader-wrapper">
+        <div id="preloader-logo">
+          <svg
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#00BFFF"
+            stroke-width="2"
+            fill="none"
+          >
+            <path
+              id="path-a"
+              class="logo-path"
+              d="M30 35 L50 15 L70 35 M50 15 L50 85"
+            />
+            <path
+              id="path-b"
+              class="logo-path"
+              d="M70 35 Q 85 50, 70 65 L30 65 Q 15 50, 30 35"
+            />
+            <text
+              x="50"
+              y="50"
+              text-anchor="middle"
+              alignment-baseline="middle"
+              id="logo-dt-text"
+              class="logo-letters opacity-0"
+            >
+              DT
+            </text>
+          </svg>
+        </div>
+        <div id="status-text">Initializing System...</div>
+        <div class="progress-bar-container">
+          <div id="progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <header
+      class="fixed top-0 left-0 w-full bg-background/80 backdrop-blur-sm z-50"
+    >
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a
+          href="#"
+          class="font-display text-xl font-bold text-primary glow-link"
+          >Dhruvil Thummar</a
+        >
+        <div class="hidden md:flex space-x-8">
+          <a href="#about" class="text-secondary glow-link">About</a>
+          <a href="#education" class="text-secondary glow-link">Education</a>
+          <a href="#projects" class="text-secondary glow-link">Projects</a>
+          <a href="#skills" class="text-secondary glow-link">Skills</a>
+          <a href="#contact" class="text-secondary glow-link">Contact</a>
+        </div>
+        <button
+          class="md:hidden text-secondary hover:text-accent focus:outline-none"
+          id="menu-toggle"
+        >
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </nav>
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-background/95 backdrop-blur-sm absolute top-16 left-0 w-full py-4"
+      >
+        <div class="flex flex-col items-center space-y-4">
+          <a
+            href="#about"
+            class="text-secondary hover:text-accent transition-colors"
+            >About</a
+          >
+          <a
+            href="#education"
+            class="text-secondary hover:text-accent transition-colors"
+            >Education</a
+          >
+          <a
+            href="#projects"
+            class="text-secondary hover:text-accent transition-colors"
+            >Projects</a
+          >
+          <a
+            href="#skills"
+            class="text-secondary hover:text-accent transition-colors"
+            >Skills</a
+          >
+          <a
+            href="#contact"
+            class="text-secondary hover:text-accent transition-colors"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section
+        id="home"
+        class="relative w-full h-screen mx-auto flex flex-col justify-center items-center text-center"
+      >
+        <div class="z-10 p-4">
+          <h1
+            id="hero-name"
+            class="font-display text-5xl md:text-7xl font-bold text-primary"
+            data-value="Dhruvil Thummar"
+          >
+            Dhruvil Thummar
+          </h1>
+          <p
+            class="mt-4 text-secondary text-lg md:text-2xl flex justify-center items-center gap-2"
+          >
+            <span class="text-accent font-semibold"
+              >Computer Engineering Student at L.J. University</span
+            >
+          </p>
+          <div class="mt-8 flex justify-center items-center gap-6">
+            <a href="#about" class="text-secondary animate-bounce">
+              <i class="fa-solid fa-chevron-down text-2xl"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="about"
+        class="relative min-h-screen container mx-auto px-6 py-20 flex justify-center items-center"
+      >
+        <svg
+          id="about-shape-1"
+          class="about-shape"
+          width="100"
+          height="100"
+          viewBox="0 0 100 100"
+          style="top: 20%; left: 10%"
+        >
+          <rect x="10" y="10" width="80" height="80" />
+        </svg>
+        <svg
+          id="about-shape-2"
+          class="about-shape"
+          width="120"
+          height="120"
+          viewBox="0 0 120 120"
+          style="bottom: 15%; right: 5%"
+        >
+          <circle cx="60" cy="60" r="50" />
+        </svg>
+        <div class="max-w-3xl text-center section-content">
+          <h2
+            class="font-display text-4xl font-bold text-primary mb-6 section-heading"
+          >
+            About Me
+          </h2>
+          <p class="text-secondary text-lg leading-relaxed reveal-text">
+            I am a dedicated Computer Engineering student with a strong passion
+            for software development and problem-solving. <br />
+            My coursework has provided me with a solid foundation in
+            <span class="text-accent font-semibold"
+              >Object-Oriented Programming, Data Structures, and
+              Algorithms</span
+            >. <br />
+            I am driven by the challenge of creating efficient, scalable, and
+            user-friendly applications and am actively seeking opportunities to
+            apply my skills to real-world projects.
+          </p>
+        </div>
+      </section>
+
+      <section id="education" class="min-h-screen container mx-auto px-6 py-20">
+        <h2
+          class="font-display text-4xl font-bold text-primary text-center mb-12 section-heading"
+        >
+          Education
+        </h2>
+        <div class="max-w-2xl mx-auto">
+          <div class="glass-card p-8 rounded-lg section-content">
+            <div class="flex items-center mb-4">
+              <i class="fas fa-university text-accent text-3xl mr-4"></i>
+              <div>
+                <h3 class="font-display text-2xl text-primary">
+                  L J University
+                </h3>
+                <p class="text-secondary">Ahmedabad, Gujarat, India</p>
+              </div>
+            </div>
+            <p class="text-accent font-semibold mb-2">
+              Bachelor of Technology - B.Tech, Computer Engineering
+            </p>
+            <p class="text-secondary">2024 - 2028</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="min-h-screen container mx-auto px-6 py-20">
+        <h2
+          class="font-display text-4xl font-bold text-primary text-center mb-12 section-heading"
+        >
+          Projects
+        </h2>
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+        >
+          <div class="glass-card p-6 rounded-lg section-content flex flex-col">
+            <h3 class="font-display text-2xl text-accent mb-3">
+              What's in my Fridge?
+            </h3>
+            <p class="text-secondary mb-4 flex-grow">
+              A web app that suggests recipes based on ingredients you have,
+              helping to reduce food waste.
+            </p>
+            <div class="mt-auto flex justify-between items-center">
+              <p class="font-mono text-sm text-accent-dark mb-3">
+                HTML, CSS, JavaScript, API
+              </p>
+              <div class="flex items-center gap-4">
+                <a
+                  href="https://github.com/DhruvilThummar/What-s-in-my-fridge"
+                  target="_blank"
+                  class="glow-link text-secondary"
+                  ><i class="fab fa-github mr-2"></i>GitHub</a
+                >
+                <a
+                  href="https://fridgezy.vercel.app/"
+                  target="_blank"
+                  class="glow-link text-secondary"
+                  ><i class="fa-solid fa-arrow-up-right-from-square mr-2"></i
+                  >Live Demo</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="glass-card p-6 rounded-lg section-content flex flex-col">
+            <h3 class="font-display text-2xl text-accent mb-3">
+              The Intelliverse
+            </h3>
+            <p class="text-secondary mb-4 flex-grow">
+              A modern AI chatbot with voice input, integrated with the GPT API
+              for intelligent, human-like conversations.
+            </p>
+            <div class="mt-auto flex justify-between items-center">
+              <p class="font-mono text-sm text-accent-dark mb-3">
+                Html , Tailwind CSS , JavaScript , API
+              </p>
+              <div class="flex items-center gap-4">
+                <a
+                  href="https://github.com/DhruvilThummar/The-Intelliverse"
+                  target="_blank"
+                  class="glow-link text-secondary"
+                  ><i class="fab fa-github mr-2"></i>GitHub</a
+                >
+                <a
+                  href="https://the-intelliverse.vercel.app/"
+                  target="_blank"
+                  class="glow-link text-secondary"
+                  ><i class="fa-solid fa-arrow-up-right-from-square mr-2"></i
+                  >Live Demo</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="glass-card p-6 rounded-lg section-content flex flex-col">
+            <h3 class="font-display text-2xl text-accent mb-3">
+              Tourism Management System
+            </h3>
+            <p class="text-secondary mb-4 flex-grow">
+              Tourism Management System is a Java-based Tourism Management
+              System that allows users to easily book tours, accommodations, and
+              transportation. It supports Admin, Travel Agent, and Customer
+              roles for efficient management and uses MySQL for data storage.
+            </p>
+            <div class="mt-auto">
+              <p class="font-mono text-sm text-accent-dark mb-3">Java, MySQL</p>
+              <a
+                href="https://github.com/DhruvilThummar/Tourism_Management_System"
+                target="_blank"
+                class="glow-link text-secondary"
+                ><i class="fab fa-github mr-2"></i>View on GitHub</a
+              >
+            </div>
+          </div>
+          <div class="glass-card p-6 rounded-lg section-content flex flex-col">
+            <h3 class="font-display text-2xl text-accent mb-3">Hangman Game</h3>
+            <p class="text-secondary mb-4 flex-grow">
+              This is a console-based Hangman game implemented in Java. Players
+              can choose from different difficulty levels (Easy, Medium, Hard)
+              and try to guess Java programming-related words. The game tracks
+              your score and provides a visual representation of the Hangman
+              figure as you make incorrect guesses.
+            </p>
+            <div class="mt-auto">
+              <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
+              <a
+                href="https://github.com/DhruvilThummar/HangmanGame"
+                target="_blank"
+                class="glow-link text-secondary"
+                ><i class="fab fa-github mr-2"></i>View on GitHub</a
+              >
+            </div>
+          </div>
+          <div class="glass-card p-6 rounded-lg section-content flex flex-col">
+            <h3 class="font-display text-2xl text-accent mb-3">
+              Airline Reservation System
+            </h3>
+            <p class="text-secondary mb-4 flex-grow">
+              A comprehensive airline reservation system built with Java,
+              allowing users to book, cancel, and manage flight reservations.
+            </p>
+            <div class="mt-auto">
+              <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
+              <a
+                href="https://github.com/DhruvilThummar/Airline-Reservation-System"
+                target="_blank"
+                class="glow-link text-secondary"
+                ><i class="fab fa-github mr-2"></i>View on GitHub</a
+              >
+            </div>
+          </div>
+          <div class="glass-card p-6 rounded-lg section-content flex flex-col">
+            <h3 class="font-display text-2xl text-accent mb-3">
+              Stone Paper Scissors Game
+            </h3>
+            <p class="text-secondary mb-4 flex-grow">
+              A simple Java implementation of the classic Stone-Paper-Scissors
+              game, allowing users to play against the computer.
+            </p>
+            <div class="mt-auto">
+              <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
+              <a
+                href="https://github.com/DhruvilThummar/Stone-Paper-Scissors-Game"
+                target="_blank"
+                class="glow-link text-secondary"
+                ><i class="fab fa-github mr-2"></i>View on GitHub</a
+              >
+            </div>
+          </div>
+          <div class="glass-card p-6 rounded-lg section-content flex flex-col">
+            <h3 class="font-display text-2xl text-accent mb-3">
+              Salary-Calculator
+            </h3>
+            <p class="text-secondary mb-4 flex-grow">
+              The given Java program is a Salary Calculator that computes an
+              employee's gross pay, annual income, and income tax based on their
+              grade level, city classification, and other allowances and
+              deductions.
+            </p>
+            <div class="mt-auto">
+              <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
+              <a
+                href="https://github.com/DhruvilThummar/Salary-Calculator"
+                target="_blank"
+                class="glow-link text-secondary"
+                ><i class="fab fa-github mr-2"></i>View on GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="min-h-screen container mx-auto px-6 py-20">
+        <h2
+          class="font-display text-4xl font-bold text-primary text-center mb-12 section-heading"
+        >
+          Technical Skills
+        </h2>
+        <div class="max-w-4xl mx-auto space-y-8 section-content">
+          <div>
+            <h3 class="font-display text-xl text-accent mb-4">Core Concepts</h3>
+            <div class="flex flex-wrap gap-3">
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >Data Structures</span
+              >
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >Algorithms</span
+              >
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >Object-Oriented Programming (OOP)</span
+              >
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >Database Management System (DBMS)</span
+              >
+            </div>
+          </div>
+          <div>
+            <h3 class="font-display text-xl text-accent mb-4">Languages</h3>
+            <div class="flex flex-wrap gap-3">
+              <span class="skill-tag font-mono px-4 py-2 rounded-md">Java</span>
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >Python</span
+              >
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >JavaScript</span
+              >
+              <span class="skill-tag font-mono px-4 py-2 rounded-md">SQL</span>
+              <span class="skill-tag font-mono px-4 py-2 rounded-md">HTML</span>
+              <span class="skill-tag font-mono px-4 py-2 rounded-md">CSS</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="font-display text-xl text-accent mb-4">
+              Web Development
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              <span class="skill-tag font-mono px-4 py-2 rounded-md">HTML</span>
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >JavaScript</span
+              >
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >Tailwind CSS</span
+              >
+            </div>
+          </div>
+          <div>
+            <h3 class="font-display text-xl text-accent mb-4">Databases</h3>
+            <div class="flex flex-wrap gap-3">
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >MySQL</span
+              >
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >PostgreSQL</span
+              >
+            </div>
+          </div>
+          <div>
+            <h3 class="font-display text-xl text-accent mb-4">
+              Tools & Platforms
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              <span class="skill-tag font-mono px-4 py-2 rounded-md">Git</span>
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >GitHub</span
+              >
+              <span class="skill-tag font-mono px-4 py-2 rounded-md"
+                >VS Code</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer
+        id="contact"
+        class="container mx-auto px-6 py-20 text-center border-t border-gray-800"
+      >
+        <div class="section-content">
+          <h2
+            class="font-display text-4xl font-bold text-primary mb-4 section-heading"
+          >
+            Get In Touch
+          </h2>
+          <p class="text-secondary text-lg mb-8 max-w-2xl mx-auto">
+            I'm actively looking for internship and freelance opportunities.
+            Let's connect and build something amazing together.
+          </p>
+          <a
+            href="mailto:dhruvithummar1303@gmail.com"
+            class="shimmer-btn inline-block bg-accent text-background font-semibold px-6 py-3 rounded-lg hover:bg-opacity-80 transition-all duration-300 hover:shadow-lg hover:shadow-accent/50 mb-10"
+          >
+            dhruvithummar1303@gmail.com
+          </a>
+          <div class="flex justify-center gap-8 mb-10">
+            <a
+              href="https://www.linkedin.com/in/dhruvil-thummar-54422731a"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-secondary glow-link text-3xl magnetic-icon"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a
+              href="https://github.com/DhruvilThummar"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-secondary glow-link text-3xl magnetic-icon"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.instagram.com/dhruvil_thummar_?igsh=ZG9xdGw3aGxsYjZv"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-secondary glow-link text-3xl magnetic-icon"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+          <p class="text-gray-600 mt-12 text-sm">
+            Designed & Built by Dhruvil Thummar © 2025
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <script type="module">
+      // --- PRELOADER ---
+      gsap.registerPlugin(TextPlugin);
+      const preloader = document.getElementById("preloader");
+      const statusText = document.getElementById("status-text");
+      const progressBar = document.getElementById("progress-bar");
+      const logoPathA = document.getElementById("path-a");
+      const logoPathB = document.getElementById("path-b");
+      const logoText = document.getElementById("logo-dt-text");
+
+      // This promise resolves when the window has fully loaded all assets
+      const pageLoaded = new Promise((resolve) => {
+        if (document.readyState === "complete") {
+          resolve();
+        } else {
+          window.addEventListener("load", resolve);
+        }
+      });
+
+      // The preloader animation sequence
+      const preloaderTL = gsap.timeline({
+        paused: true,
+        onComplete: () => {
+          // After preloader animation, make sure page is loaded, then fade out
+          pageLoaded.then(() => {
+            gsap.to(preloader, {
+              opacity: 0,
+              duration: 1,
+              delay: 0.5,
+              onComplete: () => {
+                preloader.style.display = "none";
+                // Start the hero name animation only after preloader is gone
+                scrambleHeroName();
+              },
+            });
+          });
+        },
+      });
+
+      // Get the total length of the paths for the animation
+      const lengthPathA = logoPathA.getTotalLength();
+      const lengthPathB = logoPathB.getTotalLength();
+      gsap.set(logoPathA, {
+        strokeDasharray: lengthPathA,
+        strokeDashoffset: lengthPathA,
+        opacity: 1,
+      });
+      gsap.set(logoPathB, {
+        strokeDasharray: lengthPathB,
+        strokeDashoffset: lengthPathB,
+        opacity: 1,
+      });
+
+      // Animation sequence for the new logo
+      preloaderTL
+        .to(logoPathA, {
+          strokeDashoffset: 0,
+          duration: 1,
+          ease: "power2.inOut",
+        })
+        .to(
+          logoPathB,
+          { strokeDashoffset: 0, duration: 1, ease: "power2.inOut" },
+          "<0.2"
+        )
+        .to(logoText, { opacity: 1, duration: 0.8, ease: "power1.in" }, "-=0.5")
+        .to(
+          statusText,
+          { text: "Initializing System...", duration: 0.5, ease: "none" },
+          "<"
+        )
+        .to(
+          progressBar,
+          { width: "100%", duration: 2, ease: "power2.inOut" },
+          "<0.5"
+        )
+        .to(
+          statusText,
+          { duration: 1, text: "Welcome.", ease: "none" },
+          "-=0.5"
+        );
+
+      // Start the preloader animation on DOMContentLoaded
+      document.addEventListener("DOMContentLoaded", () => {
+        preloaderTL.play();
+      });
+
+      // --- HERO NAME SCRAMBLE EFFECT ---
+      const scrambleHeroName = () => {
+        const heroName = document.getElementById("hero-name");
+        const originalText = heroName.dataset.value;
+        const chars = "!<>-\\/[]{}—=+*^?#_";
+        let frame = 0;
+
+        const scramble = () => {
+          let scrambledText = "";
+          for (let i = 0; i < originalText.length; i++) {
+            const progress = frame / (originalText.length * 2);
+            if (i < progress * originalText.length) {
+              scrambledText += originalText[i];
+            } else {
+              scrambledText += chars[Math.floor(Math.random() * chars.length)];
+            }
+          }
+          heroName.textContent = scrambledText;
+
+          if (frame < originalText.length * 2) {
+            frame++;
+            requestAnimationFrame(scramble);
+          } else {
+            heroName.textContent = originalText;
+          }
+        };
+        scramble();
+      };
+
+      // --- 2D CANVAS BACKGROUND ANIMATION (MATRIX RAIN) ---
+      const canvas = document.getElementById("background-canvas");
+      const ctx = canvas.getContext("2d");
+
+      let resizeTimer;
+      const setup = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const fontSize = 16;
+        const textColor = "#00BFFF";
+        const characters =
+          "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789";
+
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = new Array(columns).fill(1);
+        const charArray = characters.split("");
+
+        function draw() {
+          ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ctx.fillStyle = textColor;
+          ctx.font = `${fontSize}px Roboto Mono`;
+
+          for (let i = 0; i < drops.length; i++) {
+            const text =
+              charArray[Math.floor(Math.random() * charArray.length)];
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
+
+            ctx.fillText(text, x, y);
+
+            if (y > canvas.height && Math.random() > 0.975) {
+              drops[i] = 0;
+            }
+
+            drops[i]++;
+          }
+        }
+
+        setInterval(draw, 33);
+      };
+
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(setup, 500);
+      });
+
+      setup();
+
+      // --- GSAP ANIMATIONS ---
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.utils.toArray(".section-content").forEach((el) => {
+        gsap.from(el.children, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.2,
+        });
+      });
+      gsap.utils.toArray(".section-heading").forEach((heading) => {
+        ScrollTrigger.create({
+          trigger: heading,
+          start: "top 85%",
+          onEnter: () => heading.classList.add("is-visible"),
+        });
+      });
+
+      // --- ABOUT SECTION DECORATIVE SHAPES ANIMATION ---
+      gsap.to("#about-shape-1", {
+        duration: 10,
+        rotation: 360,
+        transformOrigin: "center center",
+        repeat: -1,
+        ease: "none",
+      });
+      gsap.to("#about-shape-2", {
+        duration: 8,
+        y: "-=20",
+        x: "+=10",
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+      });
+
+      // --- TEXT REVEAL ON SCROLL ---
+      gsap.utils.toArray(".reveal-text").forEach((textElement) => {
+        const words = textElement.innerText.split(" ");
+        textElement.innerHTML = "";
+        words.forEach((word) => {
+          const span = document.createElement("span");
+          span.className = "word-wrapper";
+          const innerSpan = document.createElement("span");
+          innerSpan.className = "word";
+          innerSpan.textContent = word + " ";
+          span.appendChild(innerSpan);
+          textElement.appendChild(span);
+        });
+
+        gsap.from(textElement.querySelectorAll(".word"), {
+          scrollTrigger: {
+            trigger: textElement,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+          yPercent: 100,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.05,
+        });
+      });
+
+      // --- MAGNETIC ICONS ---
+      const magneticIcons = document.querySelectorAll(".magnetic-icon");
+      magneticIcons.forEach((icon) => {
+        const strength = 50;
+        const iconTimeline = gsap.timeline({ paused: true });
+        iconTimeline.to(icon, {
+          scale: 1.2,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+
+        icon.addEventListener("mouseenter", () => iconTimeline.play());
+        icon.addEventListener("mouseleave", () => iconTimeline.reverse());
+
+        icon.addEventListener("mousemove", (e) => {
+          const rect = icon.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          gsap.to(icon, {
+            x: (x / rect.width) * strength,
+            y: (y / rect.height) * strength,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        });
+        icon.addEventListener("mouseleave", () => {
+          gsap.to(icon, {
+            x: 0,
+            y: 0,
+            duration: 0.7,
+            ease: "elastic.out(1, 0.3)",
+          });
+        });
+      });
+
+      // --- INTERACTIVE CARD GLARE ---
+      document.querySelectorAll(".glass-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty("--mouse-x", `${x}px`);
+          card.style.setProperty("--mouse-y", `${y}px`);
+        });
+      });
+
+      // --- CUSTOM CURSOR ---
+      const cursorRing = document.querySelector(".cursor-ring");
+      const cursorDot = document.querySelector(".cursor-dot");
+      window.addEventListener("mousemove", (e) => {
+        gsap.to(cursorDot, { duration: 0.1, x: e.clientX, y: e.clientY });
+        gsap.to(cursorRing, {
+          duration: 0.5,
+          x: e.clientX,
+          y: e.clientY,
+          ease: "power2.out",
+        });
+      });
+      document.querySelectorAll("a, button, .glass-card").forEach((el) => {
+        el.addEventListener("mouseenter", () =>
+          cursorRing.classList.add("hovered")
+        );
+        el.addEventListener("mouseleave", () =>
+          cursorRing.classList.remove("hovered")
+        );
+      });
+      window.addEventListener("mousedown", () =>
+        cursorRing.classList.add("active")
+      );
+      window.addEventListener("mouseup", () =>
+        cursorRing.classList.remove("active")
+      );
+
+      // --- MOBILE MENU TOGGLE ---
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      menuToggle.addEventListener("click", () =>
+        mobileMenu.classList.toggle("hidden")
+      );
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () =>
+          mobileMenu.classList.add("hidden")
+        );
+      });
+    </script>
+  </body>
+</html>
