@@ -1,0 +1,28 @@
+<svg
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+  stroke="#00BFFF"
+  stroke-width="2"
+  fill="none"
+>
+  <path
+    id="path-a"
+    class="logo-path"
+    d="M30 35 L50 15 L70 35 M50 15 L50 85"
+  />
+  <path
+    id="path-b"
+    class="logo-path"
+    d="M70 35 Q 85 50, 70 65 L30 65 Q 15 50, 30 35"
+  />
+  <text
+    x="50"
+    y="50"
+    text-anchor="middle"
+    alignment-baseline="middle"
+    id="logo-dt-text"
+    class="logo-letters"
+  >
+    DT
+  </text>
+</svg>
