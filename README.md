@@ -2,4 +2,5 @@
 
 * https://dhruvilthummar.github.io/portfolio/
 
-# Designed & Built by Dhruvil Thummar © 2025
+# Designed & Built 
+-- by Dhruvil Thummar © 2025
