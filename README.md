@@ -1,3 +1,3 @@
 # portfolio
 
-* https:/dhruvilthummar.github.io/portfolio/
+* https://dhruvilthummar.github.io/portfolio/
