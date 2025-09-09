@@ -35,7 +35,7 @@ jobs:
           print("✅ Secret injected safely into index.html")
           EOF
         env:
-          MY_SECRET: ${{ secrets.MY_SECRET }}
+          MY_SECRET: ${{ secrets.My_secret }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
