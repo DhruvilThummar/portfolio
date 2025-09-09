@@ -1093,8 +1093,7 @@
 
       const systemPrompt = "You are an expert tech recruiter's assistant. Your task is to draft a concise, professional, and personalized hiring inquiry email to Dhruvil Thummar, a talented Computer Engineering student. Use the provided job title and Dhruvil's portfolio information to make the message relevant. The tone should be encouraging and show genuine interest in his skills.";
       const userQuery = `Based on Dhruvil's skills in Java, Web Development, Data Structures, and Algorithms, and his projects like 'The Intelliverse' and 'Tourism Management System', please draft an introductory email for the job role of '${jobTitle}'. Mention how his skills seem like a good fit. Keep it under 100 words and sign off as "[Your Name]".`;
-      const apiKey = "<%=apiKey %>";
-      console.log("My_secret",apiKey);
+      const apiKey = "__MY_SECRET__";
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
       const payload = {
@@ -1334,6 +1333,7 @@
 </body>
 
 </html>
+
 
 
 
