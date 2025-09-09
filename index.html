@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Basic SEO -->
+  <title>Dhruvil Thummar – Java & Web Developer</title>
+  <meta name="description"
+    content="Portfolio of Dhruvil Thummar (DT) – Java & Web Developer. Explore projects in Java, Web Development, and more." />
+  <meta name="keywords"
+    content="Dhruvil Thummar, DT, Portfolio, Java Developer, Web Developer, Projects, Coding, Programming" />
+  <meta name="author" content="Dhruvil Thummar" />
+
+  <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+  <meta property="og:title" content="Dhruvil Thummar – Java & Web Developer" />
+  <meta property="og:description"
+    content="Explore the portfolio of Dhruvil Thummar – showcasing Java, Web Development, and creative projects." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dhruvilthummar.github.io/portfolio/" />
+  <meta property="og:image" content="https://dhruvilthummar.github.io/portfolio/assets/dt-logo.svg" />
+  <meta property="og:image:type" content="image/svg+xml" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dhruvil Thummar – Java & Web Developer" />
+  <meta name="twitter:description" content="Java & Web Developer | Explore my projects, skills, and coding journey." />
+  <meta name="twitter:image" content="https://dhruvilthummar.github.io/portfolio/assets/dt-logo.svg" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/dt-logo.svg" type="image/svg+xml" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&family=Roboto+Mono:wght@400&family=Montserrat:wght@700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Devicon for Skill Logos -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+
+
+  <!-- GSAP Libraries for Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+  <style>
+    /* General Styles */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .font-display {
+      font-family: "Poppins", sans-serif;
+    }
+
+    .font-mono {
+      font-family: "Roboto Mono", monospace;
+    }
+
+    .font-logo {
+      font-family: "Montserrat", sans-serif;
+    }
+
+    /* Preloader Styles */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #00bfff;
+      opacity: 1;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .preloader-wrapper {
+      width: 300px;
+      text-align: center;
+    }
+
+    #preloader-logo {
+      position: relative;
+      width: 250px;
+      height: 150px;
+      margin: 0 auto 20px;
+    }
+
+    #preloader-logo svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke-width: 2;
+      transform-origin: center center;
+    }
+
+    .logo-path {
+      stroke: #00bfff;
+      stroke-dasharray: 3000;
+      stroke-dashoffset: 3000;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 4px;
+      background-color: rgba(0, 191, 255, 0.2);
+      border-radius: 2px;
+      margin-top: 1rem;
+    }
+
+    #progress-bar {
+      width: 0%;
+      height: 100%;
+      background-color: #00bfff;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    #status-text {
+      margin-top: 1rem;
+      font-family: "Roboto Mono", monospace;
+      color: #b0b0b0;
+    }
+
+    /* Custom Cursor */
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1100;
+      pointer-events: none;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+    }
+
+    .cursor-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .cursor-ring {
+      width: 30px;
+      height: 30px;
+      border: 2px solid #fff;
+      transition: width 0.3s ease, height 0.3s ease, border-width 0.3s ease, opacity 0.3s ease;
+    }
+
+    body.link-hover .cursor-ring {
+      width: 50px;
+      height: 50px;
+      border-width: 1px;
+      opacity: 0.5;
+    }
+
+    body.link-hover .cursor-dot {
+      transform: translate(-50%, -50%) scale(0.7);
+    }
+
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #111;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #00bfff;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0077b6;
+    }
+
+    /* Background Animation Canvas */
+    #background-canvas {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    /* Enhanced Glassmorphism Card Effect */
+    .glass-card {
+      background: rgba(10, 10, 10, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      /* For 3D tilt effect */
+    }
+
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      top: var(--mouse-y, -100px);
+      left: var(--mouse-x, -100px);
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle,
+          rgba(0, 191, 255, 0.25) 0%,
+          rgba(0, 191, 255, 0) 60%);
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 0 40px rgba(0, 191, 255, 0.3),
+        0 0 15px rgba(0, 191, 255, 0.2);
+    }
+
+    .glass-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Navbar styling */
+    #navbar.scrolled {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #00BFFF;
+      transition: width 0.3s ease-in-out;
+    }
+
+    .nav-link:hover {
+      transform: translateY(-2px);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: #FFFFFF;
+    }
+
+    #header-logo path {
+      stroke: #fff;
+      stroke-width: 5;
+      fill: none;
+      transition: stroke 0.3s ease, filter 0.3s ease;
+    }
+
+    #header-logo:hover path {
+      stroke: #00BFFF;
+      filter: drop-shadow(0 0 8px #00BFFF);
+    }
+
+    /* General Futuristic Styles */
+    .glow-link {
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .glow-link:hover {
+      color: #00bfff;
+      text-shadow: 0 0 10px #00bfff;
+    }
+
+    /* Text Reveal CSS */
+    .word-wrapper {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+    }
+
+    .word {
+      display: inline-block;
+      transform-origin: bottom;
+    }
+
+    /* About Section Decorative Shapes */
+    .about-shape {
+      position: absolute;
+      stroke: #00bfff;
+      stroke-width: 1;
+      fill: none;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    /* Contact Button Styling */
+    .contact-button {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      color: #00BFFF;
+      border-color: #00BFFF;
+      transition: color 0.4s ease-in-out;
+    }
+
+    .contact-button .btn-text,
+    .contact-button .btn-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .contact-button:hover .btn-text {
+      transform: translateY(-150%);
+    }
+
+    .contact-button .btn-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 150%);
+    }
+
+    .contact-button:hover .btn-icon {
+      transform: translate(-50%, -50%);
+    }
+
+    .contact-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #00BFFF;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.4s ease-in-out;
+      z-index: -1;
+    }
+
+    .contact-button:hover {
+      color: #000;
+    }
+
+    .contact-button:hover::before {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+
+
+    /* Skill Tag Styling */
+    .skill-tag {
+      background-color: rgba(0, 191, 255, 0.1);
+      border: 1px solid rgba(0, 191, 255, 0.3);
+      transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .skill-tag:hover {
+      background-color: rgba(0, 191, 255, 0.3);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
+    }
+
+    .skill-tag i {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+      color: #00BFFF;
+    }
+
+    /* Footer decorative line */
+    .footer-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #00BFFF, transparent);
+      animation: animate-line 4s linear infinite;
+    }
+
+    @keyframes animate-line {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* Gemini Modal Styles */
+    #gemini-modal-overlay {
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    #gemini-modal {
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+
+    .gemini-modal-spinner {
+      border-color: rgba(0, 191, 255, 0.2);
+      border-top-color: #00BFFF;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: "#000000",
+            primary: "#FFFFFF",
+            secondary: "#B0B0B0",
+            accent: "#00BFFF",
+            "accent-dark": "#0077B6",
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            display: ["Poppins", "sans-serif"],
+            mono: ["Roboto Mono", "monospace"],
+            logo: ["Montserrat", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-background">
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+
+  <canvas id="background-canvas"></canvas>
+
+  <div id="preloader">
+    <div class="preloader-wrapper">
+      <div id="preloader-logo">
+        <svg viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" stroke="#00BFFF" fill="none">
+          <defs>
+            <filter id="handwriting">
+              <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="1" result="turbulence" />
+              <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1.2" xChannelSelector="R"
+                yChannelSelector="G" />
+            </filter>
+          </defs>
+          <g filter="url(#handwriting)">
+            <path id="preloader-logo-path-signature" class="logo-path"
+              d="M40 75 C 10 10, 100 10, 100 50 C 100 90, 40 95, 40 75 L 90 30 C 110 40, 115 75, 130 65 L 140 50 C 145 70, 155 70, 160 50 L 170 70 L 180 50 L 190 70 L 200 50 L 210 70 L 220 50 L 230 70 L 260 40"
+              stroke-width="3" />
+            <path id="preloader-logo-path-strike" class="logo-path" d="M20 68 C 100 55, 180 75, 270 62"
+              stroke-width="2" />
+          </g>
+        </svg>
+      </div>
+      <div id="status-text">Initializing System...</div>
+      <div class="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <header class="fixed top-0 left-0 w-full bg-transparent z-50 transition-all duration-300" id="navbar">
+    <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="#" class="glow-link">
+        <svg id="header-logo" class="w-28 md:w-36 h-auto" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="header-handwriting">
+              <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="1" result="turbulence" />
+              <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1.2" xChannelSelector="R"
+                yChannelSelector="G" />
+            </filter>
+          </defs>
+          <g filter="url(#header-handwriting)">
+            <path id="header-logo-path-signature"
+              d="M40 75 C 10 10, 100 10, 100 50 C 100 90, 40 95, 40 75 L 90 30 C 110 40, 115 75, 130 65 L 140 50 C 145 70, 155 70, 160 50 L 170 70 L 180 50 L 190 70 L 200 50 L 210 70 L 220 50 L 230 70 L 260 40" />
+            <path id="header-logo-path-strike" d="M20 68 C 100 55, 180 75, 270 62" stroke-width="4" />
+          </g>
+        </svg>
+      </a>
+
+      <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-6" id="nav-links">
+        <a href="#about" class="text-secondary hover:text-primary nav-link">About</a>
+        <a href="#education" class="text-secondary hover:text-primary nav-link">Education</a>
+        <a href="#projects" class="text-secondary hover:text-primary nav-link">Projects</a>
+        <a href="#skills" class="text-secondary hover:text-primary nav-link">Skills</a>
+        <a href="#contact" class="text-secondary hover:text-primary nav-link">Contact</a>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="https://www.linkedin.com/in/dhruvil-thummar-54422731a" target="_blank" rel="noopener noreferrer"
+          class="text-secondary hover:text-accent transition-colors text-xl"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/DhruvilThummar" target="_blank" rel="noopener noreferrer"
+          class="text-secondary hover:text-accent transition-colors text-xl"><i class="fab fa-github"></i></a>
+      </div>
+
+      <button class="md:hidden text-secondary hover:text-accent focus:outline-none" id="menu-toggle">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </nav>
+    <div id="mobile-menu"
+      class="md:hidden bg-background/95 backdrop-blur-sm absolute top-full left-0 w-full py-4 opacity-0 -translate-y-4 pointer-events-none transition-all duration-300">
+      <div class="flex flex-col items-center space-y-4">
+        <a href="#about" class="text-secondary hover:text-accent transition-colors">About</a>
+        <a href="#education" class="text-secondary hover:text-accent transition-colors">Education</a>
+        <a href="#projects" class="text-secondary hover:text-accent transition-colors">Projects</a>
+        <a href="#skills" class="text-secondary hover:text-accent transition-colors">Skills</a>
+        <a href="#contact" class="text-secondary hover:text-accent transition-colors">Contact</a>
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+    <section id="home"
+      class="relative w-full h-screen mx-auto flex flex-col justify-center items-center text-center view-section">
+      <div class="z-10 p-4">
+        <h1 id="hero-name" class="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-primary"
+          data-value="Dhruvil Thummar">
+          Dhruvil Thummar
+        </h1>
+        <p class="mt-4 text-secondary text-md sm:text-lg md:text-2xl flex justify-center items-center gap-2">
+          <span class="text-accent font-semibold">Computer Engineering Student at L.J. University</span>
+        </p>
+        <div class="mt-8 flex justify-center items-center gap-6">
+          <a href="#about" class="text-secondary animate-bounce">
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about"
+      class="relative min-h-screen container mx-auto px-4 sm:px-6 py-32 flex justify-center items-center view-section">
+      <!-- Decorative Shape 1 -->
+      <svg id="about-shape-1" class="about-shape" width="100" height="100" viewBox="0 0 100 100"
+        style="top: 20%; left: 10%">
+        <rect x="10" y="10" width="80" height="80" />
+      </svg>
+
+      <!-- Decorative Shape 2 -->
+      <svg id="about-shape-2" class="about-shape" width="120" height="120" viewBox="0 0 120 120"
+        style="bottom: 15%; right: 5%">
+        <circle cx="60" cy="60" r="50" />
+      </svg>
+
+      <!-- Content -->
+      <div class="max-w-3xl text-center">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary mb-6 section-heading">
+          About Me
+        </h2>
+        <p class="text-secondary text-lg leading-relaxed reveal-text text-justify">
+          I'm a Computer Engineering student with a real passion for building things with code. I love the challenge of
+          turning a complex idea into a <span class="text-accent font-semibold">clean, efficient, and user-friendly
+            application</span>. Whether I'm working on the <span class="text-accent font-semibold">backend</span> with
+          <span class="text-accent font-semibold">Java</span>
+          or designing an <span class="text-accent font-semibold">intuitive frontend</span>, my goal is to create
+          software that works well and feels great to use. My solid understanding of
+          <span class="text-accent font-semibold">data structures and algorithms</span>
+          helps me write code that's not just functional, but also <span class="text-accent font-semibold">robust and
+            scalable</span>. I'm excited to bring my skills to real-world projects and work with a team to build
+          something amazing.
+        </p>
+      </div>
+    </section>
+
+    <section id="education" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
+        Education
+      </h2>
+      <div class="max-w-2xl mx-auto education-card">
+        <div class="glass-card p-8 rounded-lg">
+          <div class="flex items-center mb-4">
+            <i class="fas fa-university text-accent text-3xl mr-4"></i>
+            <div>
+              <h3 class="font-display text-2xl text-primary">
+                L J University
+              </h3>
+              <p class="text-secondary">Ahmedabad, Gujarat, India</p>
+            </div>
+          </div>
+          <p class="text-accent font-semibold mb-2">
+            Bachelor of Technology - B.Tech, Computer Engineering
+          </p>
+          <p class="text-secondary">2024 - 2028</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
+        Projects
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Project Cards will be animated -->
+        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+          <h3 class="font-display text-2xl text-accent mb-3">
+            What's in my Fridge?
+          </h3>
+          <p class="text-secondary mb-4 flex-grow">
+            A web app that suggests recipes based on ingredients you have,
+            helping to reduce food waste.
+          </p>
+          <div class="mt-auto flex justify-between items-center">
+            <p class="font-mono text-sm text-accent-dark mb-3">
+              HTML, CSS, JavaScript, API
+            </p>
+            <div class="flex items-center gap-4">
+              <a href="https://github.com/DhruvilThummar/What-s-in-my-fridge" target="_blank"
+                class="glow-link text-secondary"><i class="fab fa-github mr-2"></i>GitHub</a>
+              <a href="https://fridgezy.vercel.app/" target="_blank" class="glow-link text-secondary"><i
+                  class="fa-solid fa-arrow-up-right-from-square mr-2"></i>Live Demo</a>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+          <h3 class="font-display text-2xl text-accent mb-3">
+            The Intelliverse
+          </h3>
+          <p class="text-secondary mb-4 flex-grow">
+            A modern AI chatbot with voice input, integrated with the GPT API
+            for intelligent, human-like conversations.
+          </p>
+          <div class="mt-auto flex justify-between items-center">
+            <p class="font-mono text-sm text-accent-dark mb-3">
+              Html , Tailwind CSS , JavaScript , API
+            </p>
+            <div class="flex items-center gap-4">
+              <a href="https://github.com/DhruvilThummar/The-Intelliverse" target="_blank"
+                class="glow-link text-secondary"><i class="fab fa-github mr-2"></i>GitHub</a>
+              <a href="https://the-intelliverse.vercel.app/" target="_blank" class="glow-link text-secondary"><i
+                  class="fa-solid fa-arrow-up-right-from-square mr-2"></i>Live Demo</a>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+          <h3 class="font-display text-2xl text-accent mb-3">
+            Tourism Management System
+          </h3>
+          <p class="text-secondary mb-4 flex-grow">
+            A Java-based system for booking tours, accommodations, and
+            transportation, featuring roles for Admins, Agents, and Customers, with a MySQL backend.
+          </p>
+          <div class="mt-auto">
+            <p class="font-mono text-sm text-accent-dark mb-3">Java, MySQL</p>
+            <a href="https://github.com/DhruvilThummar/Tourism_Management_System" target="_blank"
+              class="glow-link text-secondary"><i class="fab fa-github mr-2"></i>View on GitHub</a>
+          </div>
+        </div>
+        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+          <h3 class="font-display text-2xl text-accent mb-3">Hangman Game</h3>
+          <p class="text-secondary mb-4 flex-grow">
+            A console-based Hangman game in Java with multiple difficulty levels and a score tracker, using Java-related
+            words.
+          </p>
+          <div class="mt-auto">
+            <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
+            <a href="https://github.com/DhruvilThummar/HangmanGame" target="_blank" class="glow-link text-secondary"><i
+                class="fab fa-github mr-2"></i>View on GitHub</a>
+          </div>
+        </div>
+        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+          <h3 class="font-display text-2xl text-accent mb-3">
+            Airline Reservation System
+          </h3>
+          <p class="text-secondary mb-4 flex-grow">
+            A comprehensive airline reservation system built with Java,
+            allowing users to book, cancel, and manage flight reservations.
+          </p>
+          <div class="mt-auto">
+            <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
+            <a href="https://github.com/DhruvilThummar/Airline-Reservation-System" target="_blank"
+              class="glow-link text-secondary"><i class="fab fa-github mr-2"></i>View on GitHub</a>
+          </div>
+        </div>
+        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+          <h3 class="font-display text-2xl text-accent mb-3">
+            Stone Paper Scissors Game
+          </h3>
+          <p class="text-secondary mb-4 flex-grow">
+            A simple Java implementation of the classic Stone-Paper-Scissors
+            game, allowing users to play against the computer.
+          </p>
+          <div class="mt-auto">
+            <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
+            <a href="https://github.com/DhruvilThummar/Stone-Paper-Scissors-Game" target="_blank"
+              class="glow-link text-secondary"><i class="fab fa-github mr-2"></i>View on GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
+        Technical Skills
+      </h2>
+      <div class="max-w-4xl mx-auto space-y-8">
+        <div class="skills-category">
+          <h3 class="font-display text-xl text-accent mb-4">Languages</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-java-plain"></i>Java</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-python-plain"></i>Python</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i
+                class="devicon-javascript-plain"></i>JavaScript</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"></i>SQL</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-html5-plain"></i>HTML</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-css3-plain"></i>CSS</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <h3 class="font-display text-xl text-accent mb-4">Web Development</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-html5-plain"></i>HTML</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i
+                class="devicon-javascript-plain"></i>JavaScript</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-tailwindcss-plain"></i>Tailwind
+              CSS</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <h3 class="font-display text-xl text-accent mb-4">Databases</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"></i>MySQL</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i
+                class="devicon-postgresql-plain"></i>PostgreSQL</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <h3 class="font-display text-xl text-accent mb-4">Tools & Platforms</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-git-plain"></i>Git</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-github-original"></i>GitHub</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-vscode-plain"></i>VS Code</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-androidstudio-plain"></i>Android
+              Studio</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-intellij-plain"></i>IntelliJ
+              IDEA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact" class="container mx-auto px-4 sm:px-6 py-20 text-center border-t border-gray-800 view-section">
+      <div class="contact-content">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary mb-4 section-heading">
+          Get In Touch
+        </h2>
+        <p class="text-secondary text-lg mb-8 max-w-2xl mx-auto">
+          I'm actively looking for internship and freelance opportunities.
+          Let's connect and build something amazing together.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
+          <a href="mailto:dhruvithummar1303@gmail.com"
+            class="contact-button w-full sm:w-auto inline-flex items-center justify-center font-semibold px-8 py-3 rounded-lg border-2 h-12">
+            <span class="btn-text">Say Hello!</span>
+            <span class="btn-icon"><i class="fa-solid fa-paper-plane"></i></span>
+          </a>
+          <!-- Gemini Feature Button -->
+          <button id="open-gemini-modal"
+            class="contact-button w-full sm:w-auto inline-flex items-center justify-center font-semibold px-8 py-3 rounded-lg border-2 h-12">
+            <span class="btn-text">✨ Generate Hiring Message</span>
+            <span class="btn-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+          </button>
+        </div>
+        <div class="flex justify-center gap-8 mb-10">
+          <a href="https://www.linkedin.com/in/dhruvil-thummar-54422731a" target="_blank" rel="noopener noreferrer"
+            class="text-secondary glow-link text-3xl magnetic-icon"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/DhruvilThummar" target="_blank" rel="noopener noreferrer"
+            class="text-secondary glow-link text-3xl magnetic-icon"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/dhruvil_thummar_?igsh=ZG9xdGw3aGxsYjZv" target="_blank"
+            rel="noopener noreferrer" class="text-secondary glow-link text-3xl magnetic-icon"><i
+              class="fab fa-instagram"></i></a>
+        </div>
+        <div class="relative w-full max-w-lg mx-auto mt-12 overflow-hidden">
+          <div class="footer-line"></div>
+        </div>
+        <p class="text-gray-600 mt-4 text-sm">
+          Designed & Built by Dhruvil Thummar © 2025
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Gemini AI Modal -->
+  <div id="gemini-modal-overlay" class="fixed inset-0 bg-black bg-opacity-70 z-[60] hidden opacity-0"></div>
+  <div id="gemini-modal"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 border border-accent rounded-lg shadow-2xl shadow-accent/20 p-6 w-11/12 max-w-2xl z-[70] hidden opacity-0 scale-95">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-display text-2xl text-accent flex items-center"><i
+          class="fa-solid fa-wand-magic-sparkles mr-3"></i>AI Message Generator</h3>
+      <button id="close-gemini-modal" class="text-secondary hover:text-primary transition-colors">&times;</button>
+    </div>
+    <p class="text-secondary mb-4">Let Gemini AI help you draft a hiring message. Just enter the job title you're hiring
+      for.</p>
+
+    <div class="space-y-4">
+      <input type="text" id="job-title-input" placeholder="e.g., Junior Java Developer"
+        class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-primary focus:outline-none focus:ring-2 focus:ring-accent">
+      <button id="generate-message-btn"
+        class="w-full bg-accent text-black font-bold py-2 px-4 rounded-md hover:bg-accent-dark transition-colors flex items-center justify-center">
+        <span id="generate-btn-text">Generate Message</span>
+        <div id="gemini-spinner" class="gemini-modal-spinner w-5 h-5 rounded-full border-2 hidden ml-2"></div>
+      </button>
+    </div>
+
+    <div id="result-container" class="mt-4 hidden">
+      <textarea id="generated-message" readonly
+        class="w-full h-40 bg-gray-800 border border-gray-700 rounded-md p-2 text-secondary resize-none"></textarea>
+      <button id="copy-message-btn"
+        class="mt-2 w-full bg-gray-700 text-primary font-semibold py-2 px-4 rounded-md hover:bg-gray-600 transition-colors">
+        Copy to Clipboard
+      </button>
+      <p id="copy-feedback" class="text-xs text-accent text-center mt-2 opacity-0 transition-opacity">Copied!</p>
+    </div>
+  </div>
+
+
+  <script type="module">
+    let animationFrameId;
+
+    // --- PRELOADER ---
+    gsap.registerPlugin(TextPlugin);
+    const preloader = document.getElementById("preloader");
+    const statusText = document.getElementById("status-text");
+    const progressBar = document.getElementById("progress-bar");
+    const logoPathSignature = document.getElementById("preloader-logo-path-signature");
+    const logoPathStrike = document.getElementById("preloader-logo-path-strike");
+
+    const pageLoaded = new Promise((resolve) => {
+      window.addEventListener("load", resolve, { once: true });
+    });
+
+    const preloaderTL = gsap.timeline({
+      paused: true,
+      onComplete: () => {
+        pageLoaded.then(() => {
+          gsap.to(preloader, {
+            opacity: 0,
+            duration: 1,
+            delay: 0.5,
+            onComplete: () => {
+              preloader.style.display = "none";
+              document.body.style.overflow = 'auto';
+              scrambleHeroName();
+              initMainAnimations();
+            },
+          });
+        });
+      },
+    });
+
+    const lengthSignature = logoPathSignature.getTotalLength();
+    const lengthStrike = logoPathStrike.getTotalLength();
+    gsap.set(logoPathSignature, { strokeDasharray: lengthSignature, strokeDashoffset: lengthSignature, opacity: 1 });
+    gsap.set(logoPathStrike, { strokeDasharray: lengthStrike, strokeDashoffset: lengthStrike, opacity: 1 });
+
+    preloaderTL
+      .to(logoPathSignature, { strokeDashoffset: 0, duration: 2, ease: "power2.inOut" })
+      .to(logoPathStrike, { strokeDashoffset: 0, duration: 1, ease: "power2.inOut" }, "-=1.0")
+      .to(statusText, { text: "Calibrating...", duration: 0.5, ease: "none" }, "<")
+      .to(progressBar, { width: "100%", duration: 2.5, ease: "power2.inOut" }, "<0.5")
+      .to(statusText, { duration: 1, text: "Welcome.", ease: "none" }, "-=0.5");
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.style.overflow = 'hidden';
+      preloaderTL.play();
+    });
+
+    // --- HERO NAME SCRAMBLE EFFECT ---
+    const scrambleHeroName = () => {
+      const heroName = document.getElementById("hero-name");
+      const originalText = heroName.dataset.value;
+      const chars = "!<>-\\/[]{}—=+*^?#_";
+      let frame = 0;
+      const scrambleDuration = originalText.length * 4;
+      const revealDuration = 3000; // 3 seconds delay
+
+      const scramble = () => {
+        let scrambledText = "";
+        const progress = frame / scrambleDuration;
+
+        for (let i = 0; i < originalText.length; i++) {
+          if (i < progress * originalText.length) {
+            scrambledText += originalText[i];
+          } else {
+            scrambledText += chars[Math.floor(Math.random() * chars.length)];
+          }
+        }
+
+        heroName.textContent = scrambledText;
+
+        if (frame < scrambleDuration) {
+          frame++;
+          requestAnimationFrame(scramble);
+        } else {
+          // Animation finished, wait for the delay then restart
+          setTimeout(() => {
+            frame = 0; // Reset frame
+            requestAnimationFrame(scramble); // Restart animation
+          }, revealDuration);
+        }
+      };
+      scramble();
+    };
+
+    // --- NAVBAR HIDE/SHOW ON SCROLL ---
+    let lastScrollTop = 0;
+    const navbar = document.getElementById('navbar');
+    window.addEventListener("scroll", function () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
+        navbar.style.top = "-100px";
+      } else {
+        navbar.style.top = "0";
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    }, false);
+
+
+    // --- CANVAS PARTICLE ANIMATION ---
+    const canvas = document.getElementById("background-canvas");
+    const ctx = canvas.getContext("2d");
+
+    const setupCanvas = () => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const fontSize = 16;
+      const textColor = "#00BFFF";
+      const characters = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン01";
+      const columns = Math.floor(canvas.width / fontSize);
+      const drops = new Array(columns).fill(1);
+      const charArray = characters.split("");
+
+      function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = textColor;
+        ctx.font = `${fontSize}px Roboto Mono`;
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = charArray[Math.floor(Math.random() * charArray.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+        animationFrameId = requestAnimationFrame(draw);
+      }
+      draw();
+    };
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(setupCanvas, 250);
+    });
+
+    setupCanvas();
+
+
+    // --- CUSTOM CURSOR ---
+    const cursorDot = document.querySelector(".cursor-dot");
+    const cursorRing = document.querySelector(".cursor-ring");
+    window.addEventListener("mousemove", (e) => {
+      gsap.to(cursorDot, { duration: 0.2, x: e.clientX, y: e.clientY });
+      gsap.to(cursorRing, { duration: 0.6, x: e.clientX, y: e.clientY, ease: 'power2.out' });
+    });
+
+    document.querySelectorAll("a, button, .glass-card, .magnetic-icon").forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        document.body.classList.add('link-hover');
+      });
+      el.addEventListener("mouseleave", () => {
+        document.body.classList.remove('link-hover');
+      });
+    });
+
+    // --- HEADER LOGO ANIMATION ---
+    const animateLogo = () => {
+      const logoSignature = document.getElementById('header-logo-path-signature');
+      const logoStrike = document.getElementById('header-logo-path-strike');
+      const lengthSignature = logoSignature.getTotalLength();
+      const lengthStrike = logoStrike.getTotalLength();
+
+      gsap.set(logoSignature, { strokeDasharray: lengthSignature, strokeDashoffset: lengthSignature });
+      gsap.set(logoStrike, { strokeDasharray: lengthStrike, strokeDashoffset: lengthStrike });
+
+      gsap.timeline({ delay: 1 }) // Delay after preloader
+        .to(logoSignature, { strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' })
+        .to(logoStrike, { strokeDashoffset: 0, duration: 1, ease: 'power2.inOut' }, "-=1.0");
+    };
+
+    // --- GEMINI API FEATURE ---
+    const openModalBtn = document.getElementById('open-gemini-modal');
+    const closeModalBtn = document.getElementById('close-gemini-modal');
+    const modalOverlay = document.getElementById('gemini-modal-overlay');
+    const modal = document.getElementById('gemini-modal');
+    const generateBtn = document.getElementById('generate-message-btn');
+    const jobTitleInput = document.getElementById('job-title-input');
+    const resultContainer = document.getElementById('result-container');
+    const generatedMessageTextarea = document.getElementById('generated-message');
+    const copyBtn = document.getElementById('copy-message-btn');
+    const copyFeedback = document.getElementById('copy-feedback');
+    const spinner = document.getElementById('gemini-spinner');
+    const generateBtnText = document.getElementById('generate-btn-text');
+
+    function openModal() {
+      modalOverlay.classList.remove('hidden');
+      modal.classList.remove('hidden');
+      gsap.to(modalOverlay, { opacity: 1, duration: 0.3 });
+      gsap.to(modal, { opacity: 1, scale: 1, duration: 0.3 });
+    }
+
+    function closeModal() {
+      gsap.to(modal, { opacity: 0, scale: 0.95, duration: 0.3 });
+      gsap.to(modalOverlay, {
+        opacity: 0, duration: 0.3, onComplete: () => {
+          modalOverlay.classList.add('hidden');
+          modal.classList.add('hidden');
+        }
+      });
+    }
+
+    openModalBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', closeModal);
+
+    generateBtn.addEventListener('click', async () => {
+      const jobTitle = jobTitleInput.value.trim();
+      if (!jobTitle) {
+        alert('Please enter a job title.');
+        return;
+      }
+
+      // Show spinner and disable button
+      spinner.classList.remove('hidden');
+      generateBtnText.textContent = 'Generating...';
+      generateBtn.disabled = true;
+      resultContainer.classList.add('hidden');
+
+      const systemPrompt = "You are an expert tech recruiter's assistant. Your task is to draft a concise, professional, and personalized hiring inquiry email to Dhruvil Thummar, a talented Computer Engineering student. Use the provided job title and Dhruvil's portfolio information to make the message relevant. The tone should be encouraging and show genuine interest in his skills.";
+      const userQuery = `Based on Dhruvil's skills in Java, Web Development, Data Structures, and Algorithms, and his projects like 'The Intelliverse' and 'Tourism Management System', please draft an introductory email for the job role of '${jobTitle}'. Mention how his skills seem like a good fit. Keep it under 100 words and sign off as "[Your Name]".`;
+      const apiKey = "_AIzaSyB8wPXsDtGz1-vEtzxWTuNPBdErKruR0-c_";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+      const payload = {
+        contents: [{ parts: [{ text: userQuery }] }],
+        systemInstruction: { parts: [{ text: systemPrompt }] },
+      };
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        const candidate = result.candidates?.[0];
+        const text = candidate?.content?.parts?.[0]?.text;
+
+        if (text) {
+          generatedMessageTextarea.value = text;
+          resultContainer.classList.remove('hidden');
+        } else {
+          generatedMessageTextarea.value = "Sorry, couldn't generate a message. Please try again.";
+          resultContainer.classList.remove('hidden');
+        }
+      } catch (error) {
+        console.error("Error calling Gemini API:", error);
+        generatedMessageTextarea.value = `An error occurred: ${error.message}. Please check the console for details.`;
+        resultContainer.classList.remove('hidden');
+      } finally {
+        // Hide spinner and re-enable button
+        spinner.classList.add('hidden');
+        generateBtnText.textContent = 'Generate Message';
+        generateBtn.disabled = false;
+      }
+    });
+
+    copyBtn.addEventListener('click', () => {
+      generatedMessageTextarea.select();
+      document.execCommand('copy');
+
+      copyFeedback.style.opacity = '1';
+      setTimeout(() => {
+        copyFeedback.style.opacity = '0';
+      }, 2000);
+    });
+
+
+    // --- ENHANCED GSAP SCROLL ANIMATIONS ---
+    function initMainAnimations() {
+      gsap.registerPlugin(ScrollTrigger);
+      animateLogo(); // Animate logo when main animations start
+
+      // Active Nav Link Highlighting
+      const sections = document.querySelectorAll('.view-section');
+      const navLinks = document.querySelectorAll('#nav-links a');
+
+      sections.forEach(section => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top center",
+          end: "bottom center",
+          onToggle: self => {
+            const id = section.getAttribute('id');
+            const correspondingLink = document.querySelector(`#nav-links a[href="#${id}"]`);
+            if (self.isActive) {
+              navLinks.forEach(link => link.classList.remove('active'));
+              if (correspondingLink) correspondingLink.classList.add('active');
+            } else {
+              if (correspondingLink) correspondingLink.classList.remove('active');
+            }
+          }
+        });
+      });
+
+
+      gsap.utils.toArray('.section-heading').forEach(heading => {
+        gsap.from(heading, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: 'power3.out',
+        });
+      });
+
+      // About Section Text Reveal
+      gsap.utils.toArray(".reveal-text").forEach((textElement) => {
+        const words = textElement.innerText.split(/(\s+)/); // Split by space, keeping spaces
+        textElement.innerHTML = "";
+        words.forEach((word) => {
+          if (word.trim() === '') {
+            textElement.appendChild(document.createTextNode(' '));
+          } else {
+            const span = document.createElement("span");
+            span.className = "word-wrapper";
+            const innerSpan = document.createElement("span");
+            innerSpan.className = "word";
+            innerSpan.textContent = word;
+            span.appendChild(innerSpan);
+            textElement.appendChild(span);
+          }
+        });
+
+        gsap.from(textElement.querySelectorAll(".word"), {
+          scrollTrigger: { trigger: textElement, start: "top 90%", toggleActions: "play none none none" },
+          yPercent: 100,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.05,
+        });
+      });
+
+      // Education Card
+      gsap.from(".education-card", {
+        scrollTrigger: { trigger: "#education", start: "top 70%" },
+        opacity: 0,
+        scale: 0.9,
+        duration: 1,
+        ease: 'power3.out'
+      });
+
+      // Project Cards
+      gsap.from(".project-card", {
+        scrollTrigger: { trigger: "#projects", start: "top 70%" },
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out'
+      });
+
+      // Skills Categories
+      gsap.utils.toArray('.skills-category').forEach(category => {
+        gsap.from(category.children, {
+          scrollTrigger: { trigger: category, start: "top 80%" },
+          opacity: 0,
+          y: 30,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out'
+        });
+      });
+
+      // Contact Section
+      gsap.from(".contact-content > *", {
+        scrollTrigger: { trigger: "#contact", start: "top 70%" },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power3.out'
+      });
+
+      // About Section Decorative Shapes
+      gsap.to("#about-shape-1", { duration: 10, rotation: 360, transformOrigin: "center", repeat: -1, ease: "none" });
+      gsap.to("#about-shape-2", { duration: 8, y: "-=20", x: "+=10", yoyo: true, repeat: -1, ease: "sine.inOut" });
+
+      // 3D Tilt for Project Cards
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const { width, height } = rect;
+          const rotateX = (y / height - 0.5) * -15; // Max 7.5 deg
+          const rotateY = (x / width - 0.5) * 15;   // Max 7.5 deg
+          gsap.to(card, {
+            rotationX: rotateX,
+            rotationY: rotateY,
+            transformPerspective: 1000,
+            ease: 'power1.out',
+            duration: 0.5
+          });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            rotationX: 0,
+            rotationY: 0,
+            ease: 'elastic.out(1, 0.3)',
+            duration: 1
+          });
+        });
+      });
+
+    }
+
+    // --- MAGNETIC ICONS ---
+    document.querySelectorAll(".magnetic-icon").forEach((icon) => {
+      const strength = 50;
+      icon.addEventListener("mousemove", (e) => {
+        const rect = icon.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        gsap.to(icon, { x: (x / rect.width) * strength, y: (y / rect.height) * strength, duration: 0.5, ease: "power2.out" });
+      });
+      icon.addEventListener("mouseleave", () => {
+        gsap.to(icon, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+      });
+    });
+
+    // --- INTERACTIVE CARD GLARE ---
+    document.querySelectorAll(".glass-card").forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+      });
+    });
+
+    // --- MOBILE MENU TOGGLE ---
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    menuToggle.addEventListener("click", () => {
+      if (mobileMenu.classList.contains('opacity-0')) {
+        mobileMenu.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+      } else {
+        mobileMenu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+      }
+    });
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+      });
+    });
+  </script>
+</body>
+
+</html>
+
+
+
+

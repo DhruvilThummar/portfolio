@@ -1,0 +1,71 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  role="img"
+  aria-labelledby="logoTitle logoDesc"
+>
+  <title id="logoTitle">Dhruvil Thummar Portfolio Logo - DT</title>
+  <desc id="logoDesc">
+    Abstract geometric logo forming the initials DT with animated gradient lines and glowing text.
+  </desc>
+
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00BFFF"/>
+      <stop offset="100%" stop-color="#1E90FF"/>
+    </linearGradient>
+    <linearGradient id="text-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF4500"/>
+      <stop offset="100%" stop-color="#FF1493"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Top & Middle Lines -->
+  <path
+    d="M30 35 L50 15 L70 35 M50 15 L50 85"
+    stroke="url(#path-gradient)"
+    stroke-width="2.5"
+    fill="none"
+    stroke-dasharray="300"
+    stroke-dashoffset="300"
+  >
+    <animate attributeName="stroke-dashoffset" from="300" to="0" dur="2s" fill="freeze"/>
+  </path>
+
+  <!-- Bottom Curve -->
+  <path
+    d="M70 35 Q 85 50, 70 65 L30 65 Q 15 50, 30 35"
+    stroke="url(#path-gradient)"
+    stroke-width="2.5"
+    fill="none"
+    stroke-dasharray="300"
+    stroke-dashoffset="300"
+  >
+    <animate attributeName="stroke-dashoffset" from="300" to="0" dur="2s" begin="1s" fill="freeze"/>
+  </path>
+
+  <!-- Text DT -->
+  <text
+    x="50"
+    y="55"
+    text-anchor="middle"
+    alignment-baseline="middle"
+    font-size="24"
+    font-weight="bold"
+    font-family="Arial, sans-serif"
+    fill="url(#text-gradient)"
+    filter="url(#glow)"
+    opacity="0"
+  >
+    DT
+    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2.5s" fill="freeze"/>
+  </text>
+</svg>
