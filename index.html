@@ -4,15 +4,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <!-- SEO: Primary Meta Tags -->
-  <title>Dhruvil Thummar – Java & Web Developer Portfolio</title>
+  <title>👨‍💻 Java & Web Developer Portfolio | Dhruvil Thummar</title>
   <meta name="description"
-    content="Explore the portfolio of Dhruvil Thummar, a passionate Computer Engineering student specializing in Java and modern web development. Discover innovative projects, technical skills, and a commitment to creating efficient, user-friendly applications." />
+    content="Explore the portfolio of Dhruvil Thummar, a passionate Computer Engineering student from Ahmedabad, specializing in Java and modern web development. Discover innovative projects, technical skills, and a commitment to creating efficient, user-friendly applications." />
   <meta name="keywords"
-    content="Dhruvil Thummar, DT, Portfolio, Java Developer, Web Developer, Software Engineer, Full-Stack Developer, Computer Engineering, Projects, Coding" />
+    content="Dhruvil Thummar, Java Developer, Web Developer, Software Engineer, Portfolio, Computer Engineering Student, Full-Stack Developer, Ahmedabad, Gujarat, India, Java Projects, Web Development Portfolio, Student Developer" />
   <meta name="author" content="Dhruvil Thummar" />
   <link rel="canonical" href="https://dhruvilthummar.github.io/portfolio/" />
+
+  <!-- SEO: Control search engine behavior -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- SEO: Geographic Meta Tags for Local Search -->
+  <meta name="geo.region" content="IN-GJ" />
+  <meta name="geo.placename" content="Ahmedabad" />
+  <meta name="geo.position" content="23.0225;72.5714" />
+  <meta name="ICBM" content="23.0225, 72.5714" />
+
+  <!-- UI/Browser Theming -->
+  <meta name="theme-color" content="#000000" />
 
   <!-- SEO: Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website" />
@@ -25,6 +37,8 @@
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:updated_time" content="2025-09-10T13:33:00+05:30" />
 
   <!-- SEO: Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -34,9 +48,70 @@
     content="Discover the projects and skills of Dhruvil Thummar, a developer focused on building robust Java applications and intuitive web experiences." />
   <meta name="twitter:image" content="https://dhruvilthummar.github.io/portfolio/assets/dt-logo-og.png" />
 
+  <!-- SEO: Dublin Core Metadata -->
+  <meta name="DC.title" content="Dhruvil Thummar – Java & Web Developer Portfolio" />
+  <meta name="DC.creator" content="Dhruvil Thummar" />
+  <meta name="DC.description"
+    content="Explore the portfolio of Dhruvil Thummar, a passionate Computer Engineering student specializing in Java and modern web development." />
+  <meta name="DC.language" content="en" />
+  <meta name="DC.rights" content="Copyright 2025 Dhruvil Thummar" />
+
   <!-- Favicon -->
   <link rel="icon" href="assets/favicon.ico" sizes="any" />
   <link rel="icon" href="assets/dt-logo.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/dt-logo.svg" />
+
+
+  <!-- SEO: Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dhruvil Thummar",
+    "url": "https://dhruvilthummar.github.io/portfolio/",
+    "image": "https://dhruvilthummar.github.io/portfolio/assets/dt-logo-og.png",
+    "sameAs": [
+      "https://www.linkedin.com/in/dhruvil-thummar-54422731a",
+      "https://github.com/DhruvilThummar",
+      "https://www.instagram.com/dhruvil_thummar_?igsh=ZG9xdGw3aGxsYjZv"
+    ],
+    "jobTitle": "Software Developer",
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Computer Engineering Student",
+      "educationRequirements": "Bachelor of Technology in Computer Engineering"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "L J University",
+      "sameAs": "https://ljku.edu.in/"
+    },
+    "knowsAbout": [
+      "Java",
+      "Web Development",
+      "Software Engineering",
+      "Python",
+      "JavaScript",
+      "SQL",
+      "HTML",
+      "CSS",
+      "Tailwind CSS",
+      "MySQL",
+      "PostgreSQL",
+      "Git",
+      "GitHub"
+    ],
+    "knowsLanguage": ["en-US", "gu-IN", "hi-IN"],
+    "nationality": "Indian",
+    "description": "Passionate Computer Engineering student specializing in Java and modern web development. Skilled in creating efficient, scalable, and user-friendly applications. Actively seeking internship and freelance opportunities.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ahmedabad",
+      "addressRegion": "Gujarat",
+      "addressCountry": "IN"
+    }
+  }
+  </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -573,8 +648,8 @@
 
 
   <main>
-    <section id="home"
-      class="relative w-full h-screen mx-auto flex flex-col justify-center items-center text-center view-section">
+    <section id="home" role="region"
+      class="relative w-full h-screen mx-auto flex flex-col justify-center items-center text-center view-section" aria-labelledby="hero-name">
       <div class="z-10 p-4">
         <h1 id="hero-name" class="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-primary"
           data-value="Dhruvil Thummar">
@@ -591,8 +666,8 @@
       </div>
     </section>
 
-    <section id="about"
-      class="relative min-h-screen container mx-auto px-4 sm:px-6 py-32 flex justify-center items-center view-section">
+    <section id="about" role="region"
+      class="relative min-h-screen container mx-auto px-4 sm:px-6 py-32 flex justify-center items-center view-section" aria-labelledby="about-heading">
       <svg id="about-shape-1" class="about-shape" width="100" height="100" viewBox="0 0 100 100"
         style="top: 20%; left: 10%" aria-hidden="true">
         <rect x="10" y="10" width="80" height="80" />
@@ -604,7 +679,7 @@
       </svg>
 
       <div class="max-w-3xl text-center">
-        <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary mb-6 section-heading">
+        <h2 id="about-heading" class="font-display text-3xl sm:text-4xl font-bold text-primary mb-6 section-heading">
           About Me
         </h2>
         <p class="text-secondary text-lg leading-relaxed reveal-text text-justify">
@@ -622,8 +697,8 @@
       </div>
     </section>
 
-    <section id="education" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
+    <section id="education" role="region" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section" aria-labelledby="education-heading">
+      <h2 id="education-heading" class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
         Education
       </h2>
       <div class="max-w-2xl mx-auto education-card">
@@ -645,12 +720,12 @@
       </div>
     </section>
 
-    <section id="projects" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
+    <section id="projects" role="region" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section" aria-labelledby="projects-heading">
+      <h2 id="projects-heading" class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
         Projects
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
           <h3 class="font-display text-2xl text-accent mb-3">
             What's in my Fridge?
           </h3>
@@ -669,8 +744,8 @@
                   class="fa-solid fa-arrow-up-right-from-square mr-2" aria-hidden="true"></i>Live Demo</a>
             </div>
           </div>
-        </div>
-        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+        </article>
+        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
           <h3 class="font-display text-2xl text-accent mb-3">
             The Intelliverse
           </h3>
@@ -689,8 +764,8 @@
                   class="fa-solid fa-arrow-up-right-from-square mr-2" aria-hidden="true"></i>Live Demo</a>
             </div>
           </div>
-        </div>
-        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+        </article>
+        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
           <h3 class="font-display text-2xl text-accent mb-3">
             Tourism Management System
           </h3>
@@ -703,8 +778,8 @@
             <a href="https://github.com/DhruvilThummar/Tourism_Management_System" target="_blank"
               class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
           </div>
-        </div>
-        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+        </article>
+        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
           <h3 class="font-display text-2xl text-accent mb-3">Hangman Game</h3>
           <p class="text-secondary mb-4 flex-grow">
             A console-based Hangman game in Java with multiple difficulty levels and a score tracker, using Java-related
@@ -715,8 +790,8 @@
             <a href="https://github.com/DhruvilThummar/HangmanGame" target="_blank" class="glow-link text-secondary"><i
                 class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
           </div>
-        </div>
-        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+        </article>
+        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
           <h3 class="font-display text-2xl text-accent mb-3">
             Airline Reservation System
           </h3>
@@ -729,8 +804,8 @@
             <a href="https://github.com/DhruvilThummar/Airline-Reservation-System" target="_blank"
               class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
           </div>
-        </div>
-        <div class="glass-card p-6 rounded-lg flex flex-col project-card">
+        </article>
+        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
           <h3 class="font-display text-2xl text-accent mb-3">
             Stone Paper Scissors Game
           </h3>
@@ -743,72 +818,72 @@
             <a href="https://github.com/DhruvilThummar/Stone-Paper-Scissors-Game" target="_blank"
               class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
-    <section id="skills" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
+    <section id="skills" role="region" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section" aria-labelledby="skills-heading">
+      <h2 id="skills-heading" class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
         Technical Skills
       </h2>
       <div class="max-w-4xl mx-auto space-y-8">
         <div class="skills-category">
           <h3 class="font-display text-xl text-accent mb-4">Languages</h3>
-          <div class="flex flex-wrap gap-3">
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-java-plain"
-                aria-hidden="true"></i>Java</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-python-plain"
-                aria-hidden="true"></i>Python</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-javascript-plain"
-                aria-hidden="true"></i>JavaScript</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"
-                aria-hidden="true"></i>SQL</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-html5-plain"
-                aria-hidden="true"></i>HTML</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-css3-plain"
-                aria-hidden="true"></i>CSS</span>
-          </div>
+          <ul class="flex flex-wrap gap-3">
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-java-plain"
+                aria-hidden="true"></i>Java</li>
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-python-plain"
+                aria-hidden="true"></i>Python</li>
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-javascript-plain"
+                aria-hidden="true"></i>JavaScript</li>
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"
+                aria-hidden="true"></i>SQL</li>
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-html5-plain"
+                aria-hidden="true"></i>HTML</li>
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-css3-plain"
+                aria-hidden="true"></i>CSS</li>
+          </ul>
         </div>
         <div class="skills-category">
           <h3 class="font-display text-xl text-accent mb-4">Web Development</h3>
-          <div class="flex flex-wrap gap-3">
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-tailwindcss-plain"
+          <ul class="flex flex-wrap gap-3">
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-tailwindcss-plain"
                 aria-hidden="true"></i>Tailwind
-              CSS</span>
-          </div>
+              CSS</li>
+          </ul>
         </div>
         <div class="skills-category">
           <h3 class="font-display text-xl text-accent mb-4">Databases</h3>
-          <div class="flex flex-wrap gap-3">
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"
-                aria-hidden="true"></i>MySQL</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-postgresql-plain"
-                aria-hidden="true"></i>PostgreSQL</span>
-          </div>
+          <ul class="flex flex-wrap gap-3">
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"
+                aria-hidden="true"></i>MySQL</li>
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-postgresql-plain"
+                aria-hidden="true"></i>PostgreSQL</li>
+          </ul>
         </div>
         <div class="skills-category">
           <h3 class="font-display text-xl text-accent mb-4">Tools & Platforms</h3>
-          <div class="flex flex-wrap gap-3">
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-git-plain"
-                aria-hidden="true"></i>Git</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-github-original"
-                aria-hidden="true"></i>GitHub</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-vscode-plain"
-                aria-hidden="true"></i>VS Code</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-androidstudio-plain"
+          <ul class="flex flex-wrap gap-3">
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-git-plain"
+                aria-hidden="true"></i>Git</li>
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-github-original"
+                aria-hidden="true"></i>GitHub</li>
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-vscode-plain"
+                aria-hidden="true"></i>VS Code</li>
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-androidstudio-plain"
                 aria-hidden="true"></i>Android
-              Studio</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-intellij-plain"
+              Studio</li>
+            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-intellij-plain"
                 aria-hidden="true"></i>IntelliJ
-              IDEA</span>
-          </div>
+              IDEA</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <footer id="contact" class="container mx-auto px-4 sm:px-6 py-20 text-center border-t border-gray-800 view-section">
+    <footer id="contact" class="container mx-auto px-4 sm:px-6 py-20 text-center view-section" aria-labelledby="contact-heading">
       <div class="contact-content">
-        <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary mb-4 section-heading">
+        <h2 id="contact-heading" class="font-display text-3xl sm:text-4xl font-bold text-primary mb-4 section-heading">
           Get In Touch
         </h2>
         <p class="text-secondary text-lg mb-8 max-w-2xl mx-auto">
