@@ -1,9 +1,4 @@
 <svg width="280" height="100" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg">
-  <!-- 
-    This is a static, colored version of the logo from the portfolio.
-    It has been optimized for SEO and general use by removing animation hooks.
-    The visual design remains the same as the final rendered logo on the webpage.
-  -->
   <defs>
     <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:#00BFFF;stop-opacity:1" />
