@@ -1,0 +1,14 @@
+<svg width="280" height="100" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="black">
+    <path
+      id="signature-path"
+      stroke-width="5"
+      d="M40 75 C 10 10, 100 10, 100 50 C 100 90, 40 95, 40 75 L 90 30 C 110 40, 115 75, 130 65 L 140 50 C 145 70, 155 70, 160 50 L 170 70 L 180 50 L 190 70 L 200 50 L 210 70 L 220 50 L 230 70 L 260 40"
+    />
+    <path
+      id="strike-path"
+      stroke-width="4"
+      d="M20 68 C 100 55, 180 75, 270 62"
+    />
+  </g>
+</svg>
