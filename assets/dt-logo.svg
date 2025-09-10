@@ -1,46 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Homepage -->
-  <url>
-    <loc>https://dhruvilthummar.github.io/portfolio/</loc>
-    <lastmod>2025-08-28</lastmod>
-    <priority>1.0</priority>
-  </url>
-
-  <!-- About Section -->
-  <url>
-    <loc>https://dhruvilthummar.github.io/portfolio/#about</loc>
-    <lastmod>2025-08-28</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Education Section -->
-  <url>
-    <loc>https://dhruvilthummar.github.io/portfolio/#education</loc>
-    <lastmod>2025-08-28</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Projects Section -->
-  <url>
-    <loc>https://dhruvilthummar.github.io/portfolio/#projects</loc>
-    <lastmod>2025-08-28</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Skills Section -->
-  <url>
-    <loc>https://dhruvilthummar.github.io/portfolio/#skills</loc>
-    <lastmod>2025-08-28</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Contact Section -->
-  <url>
-    <loc>https://dhruvilthummar.github.io/portfolio/#contact</loc>
-    <lastmod>2025-08-28</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-</urlset>
+<svg width="280" height="100" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 
+    This is a static version of the logo from the portfolio.
+    It has been optimized for SEO and general use by removing animation hooks.
+    The visual design remains the same as the final rendered logo on the webpage.
+  -->
+  <g stroke="#FFFFFF" fill="none">
+    <path 
+      d="M40 75 C 10 10, 100 10, 100 50 C 100 90, 40 95, 40 75 L 90 30 C 110 40, 115 75, 130 65 L 140 50 C 145 70, 155 70, 160 50 L 170 70 L 180 50 L 190 70 L 200 50 L 210 70 L 220 50 L 230 70 L 260 40" 
+      stroke-width="5" />
+    <path 
+      d="M20 68 C 100 55, 180 75, 270 62" 
+      stroke-width="4" />
+  </g>
+</svg>
