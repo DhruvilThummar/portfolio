@@ -1,6 +1,6 @@
 <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle logoDesc">
   <title id="logoTitle">Dhruvil Thummar Portfolio Logo - DT</title>
-  <desc id="logoDesc">Creative logo for Dhruvil Thummar's portfolio, forming the initials DT with an abstract geometric shape and gradient lines.</desc>
+  <desc id="logoDesc">Creative logo for Dhruvil Thummar's portfolio, forming the initials DT with an abstract geometric shape, glowing text, and gradient lines.</desc>
   
   <!-- Gradients & Filters -->
   <defs>
@@ -38,4 +38,18 @@
     stroke-linecap="round"
     fill="none"
   />
+
+  <!-- DT Text -->
+  <text
+    x="50"
+    y="55"
+    font-family="Montserrat, sans-serif"
+    font-size="38"
+    font-weight="bold"
+    fill="url(#text-gradient)"
+    filter="url(#glow)"
+    text-anchor="middle"
+  >
+    DT
+  </text>
 </svg>
