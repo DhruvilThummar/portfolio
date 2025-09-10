@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Basic SEO -->
   <title>Dhruvil Thummar – Java & Web Developer</title>
   <meta name="description"
     content="Portfolio of Dhruvil Thummar (DT) – Java & Web Developer. Explore projects in Java, Web Development, and more." />
@@ -12,7 +11,6 @@
     content="Dhruvil Thummar, DT, Portfolio, Java Developer, Web Developer, Projects, Coding, Programming" />
   <meta name="author" content="Dhruvil Thummar" />
 
-  <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
   <meta property="og:title" content="Dhruvil Thummar – Java & Web Developer" />
   <meta property="og:description"
     content="Explore the portfolio of Dhruvil Thummar – showcasing Java, Web Development, and creative projects." />
@@ -21,35 +19,28 @@
   <meta property="og:image" content="https://dhruvilthummar.github.io/portfolio/assets/dt-logo.svg" />
   <meta property="og:image:type" content="image/svg+xml" />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Dhruvil Thummar – Java & Web Developer" />
   <meta name="twitter:description" content="Java & Web Developer | Explore my projects, skills, and coding journey." />
   <meta name="twitter:image" content="https://dhruvilthummar.github.io/portfolio/assets/dt-logo.svg" />
 
-  <!-- Favicon -->
   <link rel="icon" href="assets/dt-logo.svg" type="image/svg+xml" />
 
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&family=Roboto+Mono:wght@400&family=Montserrat:wght@700&display=swap"
     rel="stylesheet" />
 
-  <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- Devicon for Skill Logos -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 
 
-  <!-- GSAP Libraries for Animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
@@ -65,7 +56,15 @@
       color: #ffffff;
       font-family: "Inter", sans-serif;
       overflow-x: hidden;
-      cursor: none;
+      /* Default cursor is visible on touch devices */
+      cursor: default;
+    }
+
+    /* Hide custom cursor on touch devices */
+    @media (hover: hover) and (pointer: fine) {
+      body {
+        cursor: none;
+      }
     }
 
     .font-display {
@@ -159,7 +158,18 @@
       border-radius: 50%;
       transform: translate(-50%, -50%);
       mix-blend-mode: difference;
+      /* Initially hidden, will be shown via JS */
+      display: none;
     }
+
+    @media (hover: hover) and (pointer: fine) {
+
+      .cursor-dot,
+      .cursor-ring {
+        display: block;
+      }
+    }
+
 
     .cursor-dot {
       width: 10px;
@@ -425,16 +435,16 @@
       }
     }
 
-    /* Gemini Modal Styles */
-    #gemini-modal-overlay {
+    /* AI Modal Styles */
+    #ai-modal-overlay {
       transition: opacity 0.3s ease-in-out;
     }
 
-    #gemini-modal {
+    #ai-modal {
       transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     }
 
-    .gemini-modal-spinner {
+    .ai-modal-spinner {
       border-color: rgba(0, 191, 255, 0.2);
       border-top-color: #00BFFF;
       animation: spin 1s linear infinite;
@@ -473,7 +483,6 @@
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
 
-
   <canvas id="background-canvas"></canvas>
 
   <div id="preloader">
@@ -505,16 +514,10 @@
 
   <header class="fixed top-0 left-0 w-full bg-transparent z-50 transition-all duration-300" id="navbar">
     <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-      <a href="#" class="glow-link">
-        <svg id="header-logo" class="w-28 md:w-36 h-auto" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="header-handwriting">
-              <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="1" result="turbulence" />
-              <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1.2" xChannelSelector="R"
-                yChannelSelector="G" />
-            </filter>
-          </defs>
-          <g filter="url(#header-handwriting)">
+      <a href="#" aria-label="Back to top of the page">
+        <svg id="header-logo" class="w-28 md:w-36 h-auto" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true">
+          <g>
             <path id="header-logo-path-signature"
               d="M40 75 C 10 10, 100 10, 100 50 C 100 90, 40 95, 40 75 L 90 30 C 110 40, 115 75, 130 65 L 140 50 C 145 70, 155 70, 160 50 L 170 70 L 180 50 L 190 70 L 200 50 L 210 70 L 220 50 L 230 70 L 260 40" />
             <path id="header-logo-path-strike" d="M20 68 C 100 55, 180 75, 270 62" stroke-width="4" />
@@ -532,12 +535,15 @@
 
       <div class="hidden md:flex items-center space-x-6">
         <a href="https://www.linkedin.com/in/dhruvil-thummar-54422731a" target="_blank" rel="noopener noreferrer"
-          class="text-secondary hover:text-accent transition-colors text-xl"><i class="fab fa-linkedin"></i></a>
+          class="text-secondary hover:text-accent transition-colors text-xl" aria-label="Visit my LinkedIn profile"><i
+            class="fab fa-linkedin" aria-hidden="true"></i></a>
         <a href="https://github.com/DhruvilThummar" target="_blank" rel="noopener noreferrer"
-          class="text-secondary hover:text-accent transition-colors text-xl"><i class="fab fa-github"></i></a>
+          class="text-secondary hover:text-accent transition-colors text-xl" aria-label="Visit my GitHub profile"><i
+            class="fab fa-github" aria-hidden="true"></i></a>
       </div>
 
-      <button class="md:hidden text-secondary hover:text-accent focus:outline-none" id="menu-toggle">
+      <button class="md:hidden text-secondary hover:text-accent focus:outline-none" id="menu-toggle"
+        aria-label="Toggle mobile menu" aria-expanded="false">
         <i class="fas fa-bars text-2xl"></i>
       </button>
     </nav>
@@ -566,8 +572,8 @@
           <span class="text-accent font-semibold">Computer Engineering Student at L.J. University</span>
         </p>
         <div class="mt-8 flex justify-center items-center gap-6">
-          <a href="#about" class="text-secondary animate-bounce">
-            <i class="fa-solid fa-chevron-down text-2xl"></i>
+          <a href="#about" class="text-secondary animate-bounce" aria-label="Scroll to About section">
+            <i class="fa-solid fa-chevron-down text-2xl" aria-hidden="true"></i>
           </a>
         </div>
       </div>
@@ -575,19 +581,16 @@
 
     <section id="about"
       class="relative min-h-screen container mx-auto px-4 sm:px-6 py-32 flex justify-center items-center view-section">
-      <!-- Decorative Shape 1 -->
       <svg id="about-shape-1" class="about-shape" width="100" height="100" viewBox="0 0 100 100"
-        style="top: 20%; left: 10%">
+        style="top: 20%; left: 10%" aria-hidden="true">
         <rect x="10" y="10" width="80" height="80" />
       </svg>
 
-      <!-- Decorative Shape 2 -->
       <svg id="about-shape-2" class="about-shape" width="120" height="120" viewBox="0 0 120 120"
-        style="bottom: 15%; right: 5%">
+        style="bottom: 15%; right: 5%" aria-hidden="true">
         <circle cx="60" cy="60" r="50" />
       </svg>
 
-      <!-- Content -->
       <div class="max-w-3xl text-center">
         <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary mb-6 section-heading">
           About Me
@@ -614,7 +617,7 @@
       <div class="max-w-2xl mx-auto education-card">
         <div class="glass-card p-8 rounded-lg">
           <div class="flex items-center mb-4">
-            <i class="fas fa-university text-accent text-3xl mr-4"></i>
+            <i class="fas fa-university text-accent text-3xl mr-4" aria-hidden="true"></i>
             <div>
               <h3 class="font-display text-2xl text-primary">
                 L J University
@@ -635,7 +638,6 @@
         Projects
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <!-- Project Cards will be animated -->
         <div class="glass-card p-6 rounded-lg flex flex-col project-card">
           <h3 class="font-display text-2xl text-accent mb-3">
             What's in my Fridge?
@@ -644,15 +646,15 @@
             A web app that suggests recipes based on ingredients you have,
             helping to reduce food waste.
           </p>
-          <div class="mt-auto flex justify-between items-center">
-            <p class="font-mono text-sm text-accent-dark mb-3">
+          <div class="mt-auto flex justify-between items-center flex-wrap gap-4">
+            <p class="font-mono text-sm text-accent-dark">
               HTML, CSS, JavaScript, API
             </p>
             <div class="flex items-center gap-4">
               <a href="https://github.com/DhruvilThummar/What-s-in-my-fridge" target="_blank"
-                class="glow-link text-secondary"><i class="fab fa-github mr-2"></i>GitHub</a>
+                class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>GitHub</a>
               <a href="https://fridgezy.vercel.app/" target="_blank" class="glow-link text-secondary"><i
-                  class="fa-solid fa-arrow-up-right-from-square mr-2"></i>Live Demo</a>
+                  class="fa-solid fa-arrow-up-right-from-square mr-2" aria-hidden="true"></i>Live Demo</a>
             </div>
           </div>
         </div>
@@ -664,15 +666,15 @@
             A modern AI chatbot with voice input, integrated with the GPT API
             for intelligent, human-like conversations.
           </p>
-          <div class="mt-auto flex justify-between items-center">
-            <p class="font-mono text-sm text-accent-dark mb-3">
-              Html , Tailwind CSS , JavaScript , API
+          <div class="mt-auto flex justify-between items-center flex-wrap gap-4">
+            <p class="font-mono text-sm text-accent-dark">
+              Html, Tailwind CSS, JavaScript, API
             </p>
             <div class="flex items-center gap-4">
               <a href="https://github.com/DhruvilThummar/The-Intelliverse" target="_blank"
-                class="glow-link text-secondary"><i class="fab fa-github mr-2"></i>GitHub</a>
+                class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>GitHub</a>
               <a href="https://the-intelliverse.vercel.app/" target="_blank" class="glow-link text-secondary"><i
-                  class="fa-solid fa-arrow-up-right-from-square mr-2"></i>Live Demo</a>
+                  class="fa-solid fa-arrow-up-right-from-square mr-2" aria-hidden="true"></i>Live Demo</a>
             </div>
           </div>
         </div>
@@ -687,7 +689,7 @@
           <div class="mt-auto">
             <p class="font-mono text-sm text-accent-dark mb-3">Java, MySQL</p>
             <a href="https://github.com/DhruvilThummar/Tourism_Management_System" target="_blank"
-              class="glow-link text-secondary"><i class="fab fa-github mr-2"></i>View on GitHub</a>
+              class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
           </div>
         </div>
         <div class="glass-card p-6 rounded-lg flex flex-col project-card">
@@ -699,7 +701,7 @@
           <div class="mt-auto">
             <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
             <a href="https://github.com/DhruvilThummar/HangmanGame" target="_blank" class="glow-link text-secondary"><i
-                class="fab fa-github mr-2"></i>View on GitHub</a>
+                class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
           </div>
         </div>
         <div class="glass-card p-6 rounded-lg flex flex-col project-card">
@@ -713,7 +715,7 @@
           <div class="mt-auto">
             <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
             <a href="https://github.com/DhruvilThummar/Airline-Reservation-System" target="_blank"
-              class="glow-link text-secondary"><i class="fab fa-github mr-2"></i>View on GitHub</a>
+              class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
           </div>
         </div>
         <div class="glass-card p-6 rounded-lg flex flex-col project-card">
@@ -727,7 +729,7 @@
           <div class="mt-auto">
             <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
             <a href="https://github.com/DhruvilThummar/Stone-Paper-Scissors-Game" target="_blank"
-              class="glow-link text-secondary"><i class="fab fa-github mr-2"></i>View on GitHub</a>
+              class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
           </div>
         </div>
       </div>
@@ -741,42 +743,51 @@
         <div class="skills-category">
           <h3 class="font-display text-xl text-accent mb-4">Languages</h3>
           <div class="flex flex-wrap gap-3">
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-java-plain"></i>Java</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-python-plain"></i>Python</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i
-                class="devicon-javascript-plain"></i>JavaScript</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"></i>SQL</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-html5-plain"></i>HTML</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-css3-plain"></i>CSS</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-java-plain"
+                aria-hidden="true"></i>Java</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-python-plain"
+                aria-hidden="true"></i>Python</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-javascript-plain"
+                aria-hidden="true"></i>JavaScript</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"
+                aria-hidden="true"></i>SQL</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-html5-plain"
+                aria-hidden="true"></i>HTML</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-css3-plain"
+                aria-hidden="true"></i>CSS</span>
           </div>
         </div>
         <div class="skills-category">
           <h3 class="font-display text-xl text-accent mb-4">Web Development</h3>
           <div class="flex flex-wrap gap-3">
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-html5-plain"></i>HTML</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i
-                class="devicon-javascript-plain"></i>JavaScript</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-tailwindcss-plain"></i>Tailwind
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-tailwindcss-plain"
+                aria-hidden="true"></i>Tailwind
               CSS</span>
           </div>
         </div>
         <div class="skills-category">
           <h3 class="font-display text-xl text-accent mb-4">Databases</h3>
           <div class="flex flex-wrap gap-3">
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"></i>MySQL</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i
-                class="devicon-postgresql-plain"></i>PostgreSQL</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"
+                aria-hidden="true"></i>MySQL</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-postgresql-plain"
+                aria-hidden="true"></i>PostgreSQL</span>
           </div>
         </div>
         <div class="skills-category">
           <h3 class="font-display text-xl text-accent mb-4">Tools & Platforms</h3>
           <div class="flex flex-wrap gap-3">
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-git-plain"></i>Git</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-github-original"></i>GitHub</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-vscode-plain"></i>VS Code</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-androidstudio-plain"></i>Android
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-git-plain"
+                aria-hidden="true"></i>Git</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-github-original"
+                aria-hidden="true"></i>GitHub</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-vscode-plain"
+                aria-hidden="true"></i>VS Code</span>
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-androidstudio-plain"
+                aria-hidden="true"></i>Android
               Studio</span>
-            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-intellij-plain"></i>IntelliJ
+            <span class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-intellij-plain"
+                aria-hidden="true"></i>IntelliJ
               IDEA</span>
           </div>
         </div>
@@ -796,64 +807,69 @@
           <a href="mailto:dhruvithummar1303@gmail.com"
             class="contact-button w-full sm:w-auto inline-flex items-center justify-center font-semibold px-8 py-3 rounded-lg border-2 h-12">
             <span class="btn-text">Say Hello!</span>
-            <span class="btn-icon"><i class="fa-solid fa-paper-plane"></i></span>
+            <span class="btn-icon" aria-hidden="true"><i class="fa-solid fa-paper-plane"></i></span>
           </a>
-          <!-- Gemini Feature Button -->
-          <button id="open-gemini-modal"
+          <button id="open-ai-modal"
             class="contact-button w-full sm:w-auto inline-flex items-center justify-center font-semibold px-8 py-3 rounded-lg border-2 h-12">
             <span class="btn-text">✨ Generate Hiring Message</span>
-            <span class="btn-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+            <span class="btn-icon" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
           </button>
         </div>
         <div class="flex justify-center gap-8 mb-10">
           <a href="https://www.linkedin.com/in/dhruvil-thummar-54422731a" target="_blank" rel="noopener noreferrer"
-            class="text-secondary glow-link text-3xl magnetic-icon"><i class="fab fa-linkedin"></i></a>
+            class="text-secondary glow-link text-3xl magnetic-icon" aria-label="Visit my LinkedIn Profile"><i
+              class="fab fa-linkedin" aria-hidden="true"></i></a>
           <a href="https://github.com/DhruvilThummar" target="_blank" rel="noopener noreferrer"
-            class="text-secondary glow-link text-3xl magnetic-icon"><i class="fab fa-github"></i></a>
+            class="text-secondary glow-link text-3xl magnetic-icon" aria-label="Visit my GitHub Profile"><i
+              class="fab fa-github" aria-hidden="true"></i></a>
           <a href="https://www.instagram.com/dhruvil_thummar_?igsh=ZG9xdGw3aGxsYjZv" target="_blank"
-            rel="noopener noreferrer" class="text-secondary glow-link text-3xl magnetic-icon"><i
-              class="fab fa-instagram"></i></a>
+            rel="noopener noreferrer" class="text-secondary glow-link text-3xl magnetic-icon"
+            aria-label="Visit my Instagram Profile"><i class="fab fa-instagram" aria-hidden="true"></i></a>
         </div>
         <div class="relative w-full max-w-lg mx-auto mt-12 overflow-hidden">
           <div class="footer-line"></div>
         </div>
-        <p class="text-gray-600 mt-4 text-sm">
-          Designed & Built by Dhruvil Thummar © 2025
+        <p class="text-secondary mt-4 text-sm">
+          Designed & Built by Dhruvil Thummar &copy; 2025
         </p>
       </div>
     </footer>
   </main>
 
-  <!-- Gemini AI Modal -->
-  <div id="gemini-modal-overlay" class="fixed inset-0 bg-black bg-opacity-70 z-[60] hidden opacity-0"></div>
-  <div id="gemini-modal"
-    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 border border-accent rounded-lg shadow-2xl shadow-accent/20 p-6 w-11/12 max-w-2xl z-[70] hidden opacity-0 scale-95">
+  <div id="ai-modal-overlay" class="fixed inset-0 bg-black bg-opacity-70 z-[60] hidden opacity-0"></div>
+  <div id="ai-modal"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 border border-accent rounded-lg shadow-2xl shadow-accent/20 p-6 w-11/12 max-w-2xl z-[70] hidden opacity-0 scale-95"
+    role="dialog" aria-modal="true" aria-labelledby="ai-modal-title">
     <div class="flex justify-between items-center mb-4">
-      <h3 class="font-display text-2xl text-accent flex items-center"><i
-          class="fa-solid fa-wand-magic-sparkles mr-3"></i>AI Message Generator</h3>
-      <button id="close-gemini-modal" class="text-secondary hover:text-primary transition-colors">&times;</button>
+      <h3 id="ai-modal-title" class="font-display text-2xl text-accent flex items-center"><i
+          class="fa-solid fa-wand-magic-sparkles mr-3" aria-hidden="true"></i>Message Generator</h3>
+      <button id="close-ai-modal" class="text-secondary hover:text-primary transition-colors"
+        aria-label="Close modal">&times;</button>
     </div>
-    <p class="text-secondary mb-4">Let Gemini AI help you draft a hiring message. Just enter the job title you're hiring
-      for.</p>
+    <p class="text-secondary mb-4">Let our assistant help you draft a hiring message. Just enter the job title you're
+      hiring for.</p>
 
     <div class="space-y-4">
       <input type="text" id="job-title-input" placeholder="e.g., Junior Java Developer"
-        class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-primary focus:outline-none focus:ring-2 focus:ring-accent">
+        class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+        aria-label="Job Title">
       <button id="generate-message-btn"
         class="w-full bg-accent text-black font-bold py-2 px-4 rounded-md hover:bg-accent-dark transition-colors flex items-center justify-center">
         <span id="generate-btn-text">Generate Message</span>
-        <div id="gemini-spinner" class="gemini-modal-spinner w-5 h-5 rounded-full border-2 hidden ml-2"></div>
+        <div id="ai-spinner" class="ai-modal-spinner w-5 h-5 rounded-full border-2 hidden ml-2"></div>
       </button>
     </div>
 
     <div id="result-container" class="mt-4 hidden">
+      <label for="generated-message" class="sr-only">Generated Message</label>
       <textarea id="generated-message" readonly
         class="w-full h-40 bg-gray-800 border border-gray-700 rounded-md p-2 text-secondary resize-none"></textarea>
       <button id="copy-message-btn"
         class="mt-2 w-full bg-gray-700 text-primary font-semibold py-2 px-4 rounded-md hover:bg-gray-600 transition-colors">
         Copy to Clipboard
       </button>
-      <p id="copy-feedback" class="text-xs text-accent text-center mt-2 opacity-0 transition-opacity">Copied!</p>
+      <p id="copy-feedback" class="text-xs text-accent text-center mt-2 opacity-0 transition-opacity"
+        aria-live="polite">Copied!</p>
     </div>
   </div>
 
@@ -936,10 +952,9 @@
           frame++;
           requestAnimationFrame(scramble);
         } else {
-          // Animation finished, wait for the delay then restart
           setTimeout(() => {
-            frame = 0; // Reset frame
-            requestAnimationFrame(scramble); // Restart animation
+            frame = 0;
+            requestAnimationFrame(scramble);
           }, revealDuration);
         }
       };
@@ -1010,23 +1025,25 @@
 
     setupCanvas();
 
-
     // --- CUSTOM CURSOR ---
     const cursorDot = document.querySelector(".cursor-dot");
     const cursorRing = document.querySelector(".cursor-ring");
-    window.addEventListener("mousemove", (e) => {
-      gsap.to(cursorDot, { duration: 0.2, x: e.clientX, y: e.clientY });
-      gsap.to(cursorRing, { duration: 0.6, x: e.clientX, y: e.clientY, ease: 'power2.out' });
-    });
 
-    document.querySelectorAll("a, button, .glass-card, .magnetic-icon").forEach((el) => {
-      el.addEventListener("mouseenter", () => {
-        document.body.classList.add('link-hover');
+    // Check if the device supports hover, indicating a mouse is likely used
+    const isHoverableDevice = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    if (isHoverableDevice) {
+      window.addEventListener("mousemove", (e) => {
+        gsap.to(cursorDot, { duration: 0.2, x: e.clientX, y: e.clientY });
+        gsap.to(cursorRing, { duration: 0.6, x: e.clientX, y: e.clientY, ease: 'power2.out' });
       });
-      el.addEventListener("mouseleave", () => {
-        document.body.classList.remove('link-hover');
+
+      document.querySelectorAll("a, button, .glass-card, .magnetic-icon").forEach((el) => {
+        el.addEventListener("mouseenter", () => document.body.classList.add('link-hover'));
+        el.addEventListener("mouseleave", () => document.body.classList.remove('link-hover'));
       });
-    });
+    }
+
 
     // --- HEADER LOGO ANIMATION ---
     const animateLogo = () => {
@@ -1043,18 +1060,18 @@
         .to(logoStrike, { strokeDashoffset: 0, duration: 1, ease: 'power2.inOut' }, "-=1.0");
     };
 
-    // --- GEMINI API FEATURE ---
-    const openModalBtn = document.getElementById('open-gemini-modal');
-    const closeModalBtn = document.getElementById('close-gemini-modal');
-    const modalOverlay = document.getElementById('gemini-modal-overlay');
-    const modal = document.getElementById('gemini-modal');
+    // --- TEMPLATE-BASED MESSAGE GENERATOR LOGIC ---
+    const openModalBtn = document.getElementById('open-ai-modal');
+    const closeModalBtn = document.getElementById('close-ai-modal');
+    const modalOverlay = document.getElementById('ai-modal-overlay');
+    const modal = document.getElementById('ai-modal');
     const generateBtn = document.getElementById('generate-message-btn');
     const jobTitleInput = document.getElementById('job-title-input');
     const resultContainer = document.getElementById('result-container');
     const generatedMessageTextarea = document.getElementById('generated-message');
     const copyBtn = document.getElementById('copy-message-btn');
     const copyFeedback = document.getElementById('copy-feedback');
-    const spinner = document.getElementById('gemini-spinner');
+    const spinner = document.getElementById('ai-spinner');
     const generateBtnText = document.getElementById('generate-btn-text');
 
     function openModal() {
@@ -1078,80 +1095,69 @@
     closeModalBtn.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', closeModal);
 
-    generateBtn.addEventListener('click', async () => {
+    window.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('hidden') && e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    generateBtn.addEventListener('click', () => {
       const jobTitle = jobTitleInput.value.trim();
       if (!jobTitle) {
         alert('Please enter a job title.');
         return;
       }
 
-      // Show spinner and disable button
       spinner.classList.remove('hidden');
       generateBtnText.textContent = 'Generating...';
       generateBtn.disabled = true;
       resultContainer.classList.add('hidden');
 
-      const systemPrompt = "You are an expert tech recruiter's assistant. Your task is to draft a concise, professional, and personalized hiring inquiry email to Dhruvil Thummar, a talented Computer Engineering student. Use the provided job title and Dhruvil's portfolio information to make the message relevant. The tone should be encouraging and show genuine interest in his skills.";
-      const userQuery = `Based on Dhruvil's skills in Java, Web Development, Data Structures, and Algorithms, and his projects like 'The Intelliverse' and 'Tourism Management System', please draft an introductory email for the job role of '${jobTitle}'. Mention how his skills seem like a good fit. Keep it under 100 words and sign off as "[Your Name]".`;
-      const apiKey = "__MY_SECRET__";
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+      // ✅ FIX: Use JavaScript templates instead of an API call.
+      const templates = [
+        `Subject: Exciting Opportunity: ${jobTitle} at a Growing Tech Company\n\nHi there,\n\nI came across your profile and was very impressed with your experience. We're currently looking for a talented ${jobTitle} to join our innovative team.\n\nWe are working on cutting-edge projects and believe your skills would be a great asset. Would you be open to a brief chat next week to discuss how you could make a significant impact with us?\n\nBest regards,`,
+        `Subject: Are you the ${jobTitle} we've been searching for?\n\nHello,\n\nHope you're having a great week. Our team is expanding, and we have an immediate opening for a ${jobTitle}. We're seeking someone with a passion for technology and a drive to build amazing products. Given your background, I thought this might be a perfect fit.\n\nIf you're interested in learning more about a role where you can truly grow and innovate, let's connect.\n\nAll the best,`,
+        `Subject: Join Our Team as a ${jobTitle}\n\nHi,\n\nI'm reaching out because we have a fantastic new opportunity for a ${jobTitle} that aligns perfectly with your skills. We are a forward-thinking company dedicated to solving complex problems, and you would play a key role in developing our next-generation platform.\n\nAre you available for a quick call to explore this further?\n\nSincerely,`
+      ];
 
-      const payload = {
-        contents: [{ parts: [{ text: userQuery }] }],
-        systemInstruction: { parts: [{ text: systemPrompt }] },
-      };
+      // Simulate a short delay for better UX
+      setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * templates.length);
+        const generatedText = templates[randomIndex];
 
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result = await response.json();
-        const candidate = result.candidates?.[0];
-        const text = candidate?.content?.parts?.[0]?.text;
-
-        if (text) {
-          generatedMessageTextarea.value = text;
-          resultContainer.classList.remove('hidden');
-        } else {
-          generatedMessageTextarea.value = "Sorry, couldn't generate a message. Please try again.";
-          resultContainer.classList.remove('hidden');
-        }
-      } catch (error) {
-        console.error("Error calling Gemini API:", error);
-        generatedMessageTextarea.value = `An error occurred: ${error.message}. Please check the console for details.`;
+        generatedMessageTextarea.value = generatedText;
         resultContainer.classList.remove('hidden');
-      } finally {
-        // Hide spinner and re-enable button
+
         spinner.classList.add('hidden');
         generateBtnText.textContent = 'Generate Message';
         generateBtn.disabled = false;
-      }
+      }, 500); // 0.5 second delay
     });
 
     copyBtn.addEventListener('click', () => {
       generatedMessageTextarea.select();
-      document.execCommand('copy');
-
-      copyFeedback.style.opacity = '1';
-      setTimeout(() => {
-        copyFeedback.style.opacity = '0';
-      }, 2000);
+      try {
+        document.execCommand('copy');
+        copyFeedback.style.opacity = '1';
+        setTimeout(() => {
+          copyFeedback.style.opacity = '0';
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+        navigator.clipboard.writeText(generatedMessageTextarea.value).then(() => {
+          copyFeedback.style.opacity = '1';
+          setTimeout(() => {
+            copyFeedback.style.opacity = '0';
+          }, 2000);
+        });
+      }
     });
-
 
     // --- ENHANCED GSAP SCROLL ANIMATIONS ---
     function initMainAnimations() {
       gsap.registerPlugin(ScrollTrigger);
-      animateLogo(); // Animate logo when main animations start
+      animateLogo();
 
-      // Active Nav Link Highlighting
       const sections = document.querySelectorAll('.view-section');
       const navLinks = document.querySelectorAll('#nav-links a');
 
@@ -1173,7 +1179,6 @@
         });
       });
 
-
       gsap.utils.toArray('.section-heading').forEach(heading => {
         gsap.from(heading, {
           scrollTrigger: {
@@ -1188,9 +1193,8 @@
         });
       });
 
-      // About Section Text Reveal
       gsap.utils.toArray(".reveal-text").forEach((textElement) => {
-        const words = textElement.innerText.split(/(\s+)/); // Split by space, keeping spaces
+        const words = textElement.innerText.split(/(\s+)/);
         textElement.innerHTML = "";
         words.forEach((word) => {
           if (word.trim() === '') {
@@ -1216,7 +1220,6 @@
         });
       });
 
-      // Education Card
       gsap.from(".education-card", {
         scrollTrigger: { trigger: "#education", start: "top 70%" },
         opacity: 0,
@@ -1225,7 +1228,6 @@
         ease: 'power3.out'
       });
 
-      // Project Cards
       gsap.from(".project-card", {
         scrollTrigger: { trigger: "#projects", start: "top 70%" },
         opacity: 0,
@@ -1235,7 +1237,6 @@
         ease: 'power3.out'
       });
 
-      // Skills Categories
       gsap.utils.toArray('.skills-category').forEach(category => {
         gsap.from(category.children, {
           scrollTrigger: { trigger: category, start: "top 80%" },
@@ -1247,7 +1248,6 @@
         });
       });
 
-      // Contact Section
       gsap.from(".contact-content > *", {
         scrollTrigger: { trigger: "#contact", start: "top 70%" },
         opacity: 0,
@@ -1257,83 +1257,95 @@
         ease: 'power3.out'
       });
 
-      // About Section Decorative Shapes
       gsap.to("#about-shape-1", { duration: 10, rotation: 360, transformOrigin: "center", repeat: -1, ease: "none" });
       gsap.to("#about-shape-2", { duration: 8, y: "-=20", x: "+=10", yoyo: true, repeat: -1, ease: "sine.inOut" });
 
-      // 3D Tilt for Project Cards
-      const cards = document.querySelectorAll('.project-card');
-      cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const { width, height } = rect;
-          const rotateX = (y / height - 0.5) * -15; // Max 7.5 deg
-          const rotateY = (x / width - 0.5) * 15;   // Max 7.5 deg
-          gsap.to(card, {
-            rotationX: rotateX,
-            rotationY: rotateY,
-            transformPerspective: 1000,
-            ease: 'power1.out',
-            duration: 0.5
+      if (isHoverableDevice) {
+        const cards = document.querySelectorAll('.project-card');
+        cards.forEach(card => {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const { width, height } = rect;
+            const rotateX = (y / height - 0.5) * -15;
+            const rotateY = (x / width - 0.5) * 15;
+            gsap.to(card, {
+              rotationX: rotateX,
+              rotationY: rotateY,
+              transformPerspective: 1000,
+              ease: 'power1.out',
+              duration: 0.5
+            });
+          });
+          card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+              rotationX: 0,
+              rotationY: 0,
+              ease: 'elastic.out(1, 0.3)',
+              duration: 1
+            });
           });
         });
-        card.addEventListener('mouseleave', () => {
-          gsap.to(card, {
-            rotationX: 0,
-            rotationY: 0,
-            ease: 'elastic.out(1, 0.3)',
-            duration: 1
-          });
-        });
-      });
-
+      }
     }
 
     // --- MAGNETIC ICONS ---
-    document.querySelectorAll(".magnetic-icon").forEach((icon) => {
-      const strength = 50;
-      icon.addEventListener("mousemove", (e) => {
-        const rect = icon.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        gsap.to(icon, { x: (x / rect.width) * strength, y: (y / rect.height) * strength, duration: 0.5, ease: "power2.out" });
+    if (isHoverableDevice) {
+      document.querySelectorAll(".magnetic-icon").forEach((icon) => {
+        const strength = 50;
+        icon.addEventListener("mousemove", (e) => {
+          const rect = icon.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          gsap.to(icon, { x: (x / rect.width) * strength, y: (y / rect.height) * strength, duration: 0.5, ease: "power2.out" });
+        });
+        icon.addEventListener("mouseleave", () => {
+          gsap.to(icon, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+        });
       });
-      icon.addEventListener("mouseleave", () => {
-        gsap.to(icon, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
-      });
-    });
+    }
 
     // --- INTERACTIVE CARD GLARE ---
-    document.querySelectorAll(".glass-card").forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-        card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+    if (isHoverableDevice) {
+      document.querySelectorAll(".glass-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+          card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        });
       });
-    });
+    }
 
     // --- MOBILE MENU TOGGLE ---
     const menuToggle = document.getElementById("menu-toggle");
     const mobileMenu = document.getElementById("mobile-menu");
+    const menuIcon = menuToggle.querySelector("i");
+
     menuToggle.addEventListener("click", () => {
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !isExpanded);
+
       if (mobileMenu.classList.contains('opacity-0')) {
         mobileMenu.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+        menuIcon.classList.remove('fa-bars');
+        menuIcon.classList.add('fa-xmark');
       } else {
         mobileMenu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+        menuIcon.classList.remove('fa-xmark');
+        menuIcon.classList.add('fa-bars');
       }
     });
+
     mobileMenu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
+        menuToggle.setAttribute('aria-expanded', 'false');
         mobileMenu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+        menuIcon.classList.remove('fa-xmark');
+        menuIcon.classList.add('fa-bars');
       });
     });
   </script>
 </body>
 
 </html>
-
-
-
-
