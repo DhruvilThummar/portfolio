@@ -4,26 +4,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dhruvil Thummar – Java & Web Developer</title>
+  
+  <!-- SEO: Primary Meta Tags -->
+  <title>Dhruvil Thummar – Java & Web Developer Portfolio</title>
   <meta name="description"
-    content="Portfolio of Dhruvil Thummar (DT) – Java & Web Developer. Explore projects in Java, Web Development, and more." />
+    content="Explore the portfolio of Dhruvil Thummar, a passionate Computer Engineering student specializing in Java and modern web development. Discover innovative projects, technical skills, and a commitment to creating efficient, user-friendly applications." />
   <meta name="keywords"
-    content="Dhruvil Thummar, DT, Portfolio, Java Developer, Web Developer, Projects, Coding, Programming" />
+    content="Dhruvil Thummar, DT, Portfolio, Java Developer, Web Developer, Software Engineer, Full-Stack Developer, Computer Engineering, Projects, Coding" />
   <meta name="author" content="Dhruvil Thummar" />
+  <link rel="canonical" href="https://dhruvilthummar.github.io/portfolio/" />
 
-  <meta property="og:title" content="Dhruvil Thummar – Java & Web Developer" />
-  <meta property="og:description"
-    content="Explore the portfolio of Dhruvil Thummar – showcasing Java, Web Development, and creative projects." />
+  <!-- SEO: Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Dhruvil Thummar's Portfolio" />
   <meta property="og:url" content="https://dhruvilthummar.github.io/portfolio/" />
-  <meta property="og:image" content="https://dhruvilthummar.github.io/portfolio/assets/dt-logo.svg" />
-  <meta property="og:image:type" content="image/svg+xml" />
+  <meta property="og:title" content="Dhruvil Thummar – Java & Web Developer Portfolio" />
+  <meta property="og:description"
+    content="Discover the projects and skills of Dhruvil Thummar, a developer focused on building robust Java applications and intuitive web experiences." />
+  <meta property="og:image" content="https://dhruvilthummar.github.io/portfolio/assets/dt-logo-og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
+  <!-- SEO: Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Dhruvil Thummar – Java & Web Developer" />
-  <meta name="twitter:description" content="Java & Web Developer | Explore my projects, skills, and coding journey." />
-  <meta name="twitter:image" content="https://dhruvilthummar.github.io/portfolio/assets/dt-logo.svg" />
+  <meta property="twitter:url" content="https://dhruvilthummar.github.io/portfolio/" />
+  <meta name="twitter:title" content="Dhruvil Thummar – Java & Web Developer Portfolio" />
+  <meta name="twitter:description"
+    content="Discover the projects and skills of Dhruvil Thummar, a developer focused on building robust Java applications and intuitive web experiences." />
+  <meta name="twitter:image" content="https://dhruvilthummar.github.io/portfolio/assets/dt-logo-og.png" />
 
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
   <link rel="icon" href="assets/dt-logo.svg" type="image/svg+xml" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -505,7 +517,7 @@
           </g>
         </svg>
       </div>
-      <div id="status-text">Initializing System...</div>
+      <div id="status-text">Booting up the system...</div>
       <div class="progress-bar-container">
         <div id="progress-bar"></div>
       </div>
@@ -932,7 +944,7 @@
       const chars = "!<>-\\/[]{}—=+*^?#_";
       let frame = 0;
       const scrambleDuration = originalText.length * 4;
-      const revealDuration = 3000; // 3 seconds delay
+      const revealDuration = 2000; // 2 seconds delay
 
       const scramble = () => {
         let scrambledText = "";
@@ -1113,14 +1125,12 @@
       generateBtn.disabled = true;
       resultContainer.classList.add('hidden');
 
-      // ✅ FIX: Use JavaScript templates instead of an API call.
       const templates = [
         `Subject: Exciting Opportunity: ${jobTitle} at a Growing Tech Company\n\nHi there,\n\nI came across your profile and was very impressed with your experience. We're currently looking for a talented ${jobTitle} to join our innovative team.\n\nWe are working on cutting-edge projects and believe your skills would be a great asset. Would you be open to a brief chat next week to discuss how you could make a significant impact with us?\n\nBest regards,`,
         `Subject: Are you the ${jobTitle} we've been searching for?\n\nHello,\n\nHope you're having a great week. Our team is expanding, and we have an immediate opening for a ${jobTitle}. We're seeking someone with a passion for technology and a drive to build amazing products. Given your background, I thought this might be a perfect fit.\n\nIf you're interested in learning more about a role where you can truly grow and innovate, let's connect.\n\nAll the best,`,
         `Subject: Join Our Team as a ${jobTitle}\n\nHi,\n\nI'm reaching out because we have a fantastic new opportunity for a ${jobTitle} that aligns perfectly with your skills. We are a forward-thinking company dedicated to solving complex problems, and you would play a key role in developing our next-generation platform.\n\nAre you available for a quick call to explore this further?\n\nSincerely,`
       ];
 
-      // Simulate a short delay for better UX
       setTimeout(() => {
         const randomIndex = Math.floor(Math.random() * templates.length);
         const generatedText = templates[randomIndex];
@@ -1131,7 +1141,7 @@
         spinner.classList.add('hidden');
         generateBtnText.textContent = 'Generate Message';
         generateBtn.disabled = false;
-      }, 500); // 0.5 second delay
+      }, 500);
     });
 
     copyBtn.addEventListener('click', () => {
@@ -1349,3 +1359,4 @@
 </body>
 
 </html>
+
