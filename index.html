@@ -143,15 +143,8 @@
       color: #ffffff;
       font-family: "Inter", sans-serif;
       overflow-x: hidden;
-      /* Default cursor is visible on touch devices */
+      /* Default cursor is visible */
       cursor: default;
-    }
-
-    /* Hide custom cursor on touch devices */
-    @media (hover: hover) and (pointer: fine) {
-      body {
-        cursor: none;
-      }
     }
 
     .font-display {
@@ -522,7 +515,7 @@
       }
     }
 
-    /* AI Modal Styles */
+    /* Modal Styles */
     #ai-modal-overlay {
       transition: opacity 0.3s ease-in-out;
     }
@@ -649,7 +642,8 @@
 
   <main>
     <section id="home" role="region"
-      class="relative w-full h-screen mx-auto flex flex-col justify-center items-center text-center view-section" aria-labelledby="hero-name">
+      class="relative w-full h-screen mx-auto flex flex-col justify-center items-center text-center view-section"
+      aria-labelledby="hero-name">
       <div class="z-10 p-4">
         <h1 id="hero-name" class="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-primary"
           data-value="Dhruvil Thummar">
@@ -667,7 +661,8 @@
     </section>
 
     <section id="about" role="region"
-      class="relative min-h-screen container mx-auto px-4 sm:px-6 py-32 flex justify-center items-center view-section" aria-labelledby="about-heading">
+      class="relative min-h-screen container mx-auto px-4 sm:px-6 py-32 flex justify-center items-center view-section"
+      aria-labelledby="about-heading">
       <svg id="about-shape-1" class="about-shape" width="100" height="100" viewBox="0 0 100 100"
         style="top: 20%; left: 10%" aria-hidden="true">
         <rect x="10" y="10" width="80" height="80" />
@@ -697,8 +692,10 @@
       </div>
     </section>
 
-    <section id="education" role="region" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section" aria-labelledby="education-heading">
-      <h2 id="education-heading" class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
+    <section id="education" role="region" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section"
+      aria-labelledby="education-heading">
+      <h2 id="education-heading"
+        class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
         Education
       </h2>
       <div class="max-w-2xl mx-auto education-card">
@@ -720,168 +717,29 @@
       </div>
     </section>
 
-    <section id="projects" role="region" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section" aria-labelledby="projects-heading">
-      <h2 id="projects-heading" class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
+    <section id="projects" role="region" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section"
+      aria-labelledby="projects-heading">
+      <h2 id="projects-heading"
+        class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
         Projects
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
-          <h3 class="font-display text-2xl text-accent mb-3">
-            What's in my Fridge?
-          </h3>
-          <p class="text-secondary mb-4 flex-grow">
-            A web app that suggests recipes based on ingredients you have,
-            helping to reduce food waste.
-          </p>
-          <div class="mt-auto flex justify-between items-center flex-wrap gap-4">
-            <p class="font-mono text-sm text-accent-dark">
-              HTML, CSS, JavaScript, API
-            </p>
-            <div class="flex items-center gap-4">
-              <a href="https://github.com/DhruvilThummar/What-s-in-my-fridge" target="_blank"
-                class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>GitHub</a>
-              <a href="https://fridgezy.vercel.app/" target="_blank" class="glow-link text-secondary"><i
-                  class="fa-solid fa-arrow-up-right-from-square mr-2" aria-hidden="true"></i>Live Demo</a>
-            </div>
-          </div>
-        </article>
-        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
-          <h3 class="font-display text-2xl text-accent mb-3">
-            The Intelliverse
-          </h3>
-          <p class="text-secondary mb-4 flex-grow">
-            A modern AI chatbot with voice input, integrated with the GPT API
-            for intelligent, human-like conversations.
-          </p>
-          <div class="mt-auto flex justify-between items-center flex-wrap gap-4">
-            <p class="font-mono text-sm text-accent-dark">
-              Html, Tailwind CSS, JavaScript, API
-            </p>
-            <div class="flex items-center gap-4">
-              <a href="https://github.com/DhruvilThummar/The-Intelliverse" target="_blank"
-                class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>GitHub</a>
-              <a href="https://the-intelliverse.vercel.app/" target="_blank" class="glow-link text-secondary"><i
-                  class="fa-solid fa-arrow-up-right-from-square mr-2" aria-hidden="true"></i>Live Demo</a>
-            </div>
-          </div>
-        </article>
-        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
-          <h3 class="font-display text-2xl text-accent mb-3">
-            Tourism Management System
-          </h3>
-          <p class="text-secondary mb-4 flex-grow">
-            A Java-based system for booking tours, accommodations, and
-            transportation, featuring roles for Admins, Agents, and Customers, with a MySQL backend.
-          </p>
-          <div class="mt-auto">
-            <p class="font-mono text-sm text-accent-dark mb-3">Java, MySQL</p>
-            <a href="https://github.com/DhruvilThummar/Tourism_Management_System" target="_blank"
-              class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
-          </div>
-        </article>
-        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
-          <h3 class="font-display text-2xl text-accent mb-3">Hangman Game</h3>
-          <p class="text-secondary mb-4 flex-grow">
-            A console-based Hangman game in Java with multiple difficulty levels and a score tracker, using Java-related
-            words.
-          </p>
-          <div class="mt-auto">
-            <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
-            <a href="https://github.com/DhruvilThummar/HangmanGame" target="_blank" class="glow-link text-secondary"><i
-                class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
-          </div>
-        </article>
-        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
-          <h3 class="font-display text-2xl text-accent mb-3">
-            Airline Reservation System
-          </h3>
-          <p class="text-secondary mb-4 flex-grow">
-            A comprehensive airline reservation system built with Java,
-            allowing users to book, cancel, and manage flight reservations.
-          </p>
-          <div class="mt-auto">
-            <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
-            <a href="https://github.com/DhruvilThummar/Airline-Reservation-System" target="_blank"
-              class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
-          </div>
-        </article>
-        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
-          <h3 class="font-display text-2xl text-accent mb-3">
-            Stone Paper Scissors Game
-          </h3>
-          <p class="text-secondary mb-4 flex-grow">
-            A simple Java implementation of the classic Stone-Paper-Scissors
-            game, allowing users to play against the computer.
-          </p>
-          <div class="mt-auto">
-            <p class="font-mono text-sm text-accent-dark mb-3">Java</p>
-            <a href="https://github.com/DhruvilThummar/Stone-Paper-Scissors-Game" target="_blank"
-              class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>View on GitHub</a>
-          </div>
-        </article>
+      <!-- Projects will be dynamically injected here -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
       </div>
     </section>
 
-    <section id="skills" role="region" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section" aria-labelledby="skills-heading">
-      <h2 id="skills-heading" class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
+    <section id="skills" role="region" class="min-h-screen container mx-auto px-4 sm:px-6 py-20 view-section"
+      aria-labelledby="skills-heading">
+      <h2 id="skills-heading"
+        class="font-display text-3xl sm:text-4xl font-bold text-primary text-center mb-12 section-heading">
         Technical Skills
       </h2>
-      <div class="max-w-4xl mx-auto space-y-8">
-        <div class="skills-category">
-          <h3 class="font-display text-xl text-accent mb-4">Languages</h3>
-          <ul class="flex flex-wrap gap-3">
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-java-plain"
-                aria-hidden="true"></i>Java</li>
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-python-plain"
-                aria-hidden="true"></i>Python</li>
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-javascript-plain"
-                aria-hidden="true"></i>JavaScript</li>
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"
-                aria-hidden="true"></i>SQL</li>
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-html5-plain"
-                aria-hidden="true"></i>HTML</li>
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-css3-plain"
-                aria-hidden="true"></i>CSS</li>
-          </ul>
-        </div>
-        <div class="skills-category">
-          <h3 class="font-display text-xl text-accent mb-4">Web Development</h3>
-          <ul class="flex flex-wrap gap-3">
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-tailwindcss-plain"
-                aria-hidden="true"></i>Tailwind
-              CSS</li>
-          </ul>
-        </div>
-        <div class="skills-category">
-          <h3 class="font-display text-xl text-accent mb-4">Databases</h3>
-          <ul class="flex flex-wrap gap-3">
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-mysql-plain"
-                aria-hidden="true"></i>MySQL</li>
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-postgresql-plain"
-                aria-hidden="true"></i>PostgreSQL</li>
-          </ul>
-        </div>
-        <div class="skills-category">
-          <h3 class="font-display text-xl text-accent mb-4">Tools & Platforms</h3>
-          <ul class="flex flex-wrap gap-3">
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-git-plain"
-                aria-hidden="true"></i>Git</li>
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-github-original"
-                aria-hidden="true"></i>GitHub</li>
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-vscode-plain"
-                aria-hidden="true"></i>VS Code</li>
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-androidstudio-plain"
-                aria-hidden="true"></i>Android
-              Studio</li>
-            <li class="skill-tag font-mono px-4 py-2 rounded-md"><i class="devicon-intellij-plain"
-                aria-hidden="true"></i>IntelliJ
-              IDEA</li>
-          </ul>
-        </div>
-      </div>
+      <!-- Skills will be dynamically injected here -->
+      <div id="skills-container" class="max-w-4xl mx-auto space-y-8"></div>
     </section>
 
-    <footer id="contact" class="container mx-auto px-4 sm:px-6 py-20 text-center view-section" aria-labelledby="contact-heading">
+    <footer id="contact" class="container mx-auto px-4 sm:px-6 py-20 text-center view-section"
+      aria-labelledby="contact-heading">
       <div class="contact-content">
         <h2 id="contact-heading" class="font-display text-3xl sm:text-4xl font-bold text-primary mb-4 section-heading">
           Get In Touch
@@ -898,7 +756,7 @@
           </a>
           <button id="open-ai-modal"
             class="contact-button w-full sm:w-auto inline-flex items-center justify-center font-semibold px-8 py-3 rounded-lg border-2 h-12">
-            <span class="btn-text">✨ Generate Hiring Message</span>
+            <span class="btn-text">✨ Message Generator</span>
             <span class="btn-icon" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
           </button>
         </div>
@@ -929,11 +787,11 @@
     role="dialog" aria-modal="true" aria-labelledby="ai-modal-title">
     <div class="flex justify-between items-center mb-4">
       <h3 id="ai-modal-title" class="font-display text-2xl text-accent flex items-center"><i
-          class="fa-solid fa-wand-magic-sparkles mr-3" aria-hidden="true"></i>Message Generator</h3>
-      <button id="close-ai-modal" class="text-secondary hover:text-primary transition-colors"
+          class="fa-solid fa-wand-magic-sparkles mr-3" aria-hidden="true"></i>Hiring Message Generator</h3>
+      <button id="close-ai-modal" class="text-secondary hover:text-primary transition-colors text-3xl leading-none"
         aria-label="Close modal">&times;</button>
     </div>
-    <p class="text-secondary mb-4">Let our assistant help you draft a hiring message. Just enter the job title you're
+    <p class="text-secondary mb-4">This tool can help you draft a hiring message. Just enter the job title you're
       hiring for.</p>
 
     <div class="space-y-4">
@@ -963,6 +821,108 @@
 
   <script type="module">
     let animationFrameId;
+
+    // --- DATA ---
+    const projectsData = [
+      {
+        title: "What's in my Fridge?",
+        description: "A web app that suggests recipes based on ingredients you have, helping to reduce food waste.",
+        tags: ["HTML", "CSS", "JavaScript", "API"],
+        githubUrl: "https://github.com/DhruvilThummar/What-s-in-my-fridge",
+        liveUrl: "https://fridgezy.vercel.app/"
+      },
+      {
+        title: "The Intelliverse",
+        description: "A modern AI chatbot with voice input, integrated with the GPT API for intelligent, human-like conversations.",
+        tags: ["Html", "Tailwind CSS", "JavaScript", "API"],
+        githubUrl: "https://github.com/DhruvilThummar/The-Intelliverse",
+        liveUrl: "https://the-intelliverse.vercel.app/"
+      },
+      {
+        title: "Tourism Management System",
+        description: "A Java-based system for booking tours, accommodations, and transportation, featuring roles for Admins, Agents, and Customers, with a MySQL backend.",
+        tags: ["Java", "MySQL"],
+        githubUrl: "https://github.com/DhruvilThummar/Tourism_Management_System"
+      },
+      {
+        title: "Hangman Game",
+        description: "A console-based Hangman game in Java with multiple difficulty levels and a score tracker, using Java-related words.",
+        tags: ["Java"],
+        githubUrl: "https://github.com/DhruvilThummar/HangmanGame"
+      },
+      {
+        title: "Airline Reservation System",
+        description: "A comprehensive airline reservation system built with Java, allowing users to book, cancel, and manage flight reservations.",
+        tags: ["Java"],
+        githubUrl: "https://github.com/DhruvilThummar/Airline-Reservation-System"
+      },
+      {
+        title: "Stone Paper Scissors Game",
+        description: "A simple Java implementation of the classic Stone-Paper-Scissors game, allowing users to play against the computer.",
+        tags: ["Java"],
+        githubUrl: "https://github.com/DhruvilThummar/Stone-Paper-Scissors-Game"
+      }
+    ];
+
+    const skillsData = {
+      "Languages": [
+        { name: "Java", icon: "devicon-java-plain" },
+        { name: "Python", icon: "devicon-python-plain" },
+        { name: "JavaScript", icon: "devicon-javascript-plain" },
+        { name: "SQL", icon: "devicon-mysql-plain" },
+        { name: "HTML", icon: "devicon-html5-plain" },
+        { name: "CSS", icon: "devicon-css3-plain" },
+        { name: "Tailwind CSS", icon: "devicon-tailwindcss-plain" }
+      ],
+      "Databases": [
+        { name: "MySQL", icon: "devicon-mysql-plain" },
+        { name: "PostgreSQL", icon: "devicon-postgresql-plain" }
+      ],
+      "Tools & Platforms": [
+        { name: "Git", icon: "devicon-git-plain" },
+        { name: "GitHub", icon: "devicon-github-original" },
+        { name: "VS Code", icon: "devicon-vscode-plain" },
+        { name: "Android Studio", icon: "devicon-androidstudio-plain" },
+        { name: "IntelliJ IDEA", icon: "devicon-intellij-plain" }
+      ]
+    };
+
+
+    // --- DYNAMIC CONTENT RENDERING ---
+    function renderProjects() {
+      const grid = document.getElementById('projects-grid');
+      if (!grid) return;
+      grid.innerHTML = projectsData.map(project => `
+        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
+          <h3 class="font-display text-2xl text-accent mb-3">${project.title}</h3>
+          <p class="text-secondary mb-4 flex-grow">${project.description}</p>
+          <div class="mt-auto">
+            <p class="font-mono text-sm text-accent-dark mb-3">${project.tags.join(', ')}</p>
+            <div class="flex items-center gap-4 flex-wrap">
+              <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>GitHub</a>
+              ${project.liveUrl ? `<a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="glow-link text-secondary"><i class="fa-solid fa-arrow-up-right-from-square mr-2" aria-hidden="true"></i>Live Demo</a>` : ''}
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function renderSkills() {
+      const container = document.getElementById('skills-container');
+      if (!container) return;
+      container.innerHTML = Object.entries(skillsData).map(([category, skills]) => `
+        <div class="skills-category">
+          <h3 class="font-display text-xl text-accent mb-4">${category}</h3>
+          <ul class="flex flex-wrap gap-3">
+            ${skills.map(skill => `
+              <li class="skill-tag font-mono px-4 py-2 rounded-md">
+                <i class="${skill.icon}" aria-hidden="true"></i>${skill.name}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('');
+    }
 
     // --- PRELOADER ---
     gsap.registerPlugin(TextPlugin);
@@ -1010,6 +970,8 @@
     document.addEventListener("DOMContentLoaded", () => {
       document.body.style.overflow = 'hidden';
       preloaderTL.play();
+      renderProjects();
+      renderSkills();
     });
 
     // --- HERO NAME SCRAMBLE EFFECT ---
@@ -1116,7 +1078,6 @@
     const cursorDot = document.querySelector(".cursor-dot");
     const cursorRing = document.querySelector(".cursor-ring");
 
-    // Check if the device supports hover, indicating a mouse is likely used
     const isHoverableDevice = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
     if (isHoverableDevice) {
@@ -1147,7 +1108,7 @@
         .to(logoStrike, { strokeDashoffset: 0, duration: 1, ease: 'power2.inOut' }, "-=1.0");
     };
 
-    // --- TEMPLATE-BASED MESSAGE GENERATOR LOGIC ---
+    // --- MODAL & MESSAGE GENERATOR LOGIC ---
     const openModalBtn = document.getElementById('open-ai-modal');
     const closeModalBtn = document.getElementById('close-ai-modal');
     const modalOverlay = document.getElementById('ai-modal-overlay');
@@ -1165,7 +1126,12 @@
       modalOverlay.classList.remove('hidden');
       modal.classList.remove('hidden');
       gsap.to(modalOverlay, { opacity: 1, duration: 0.3 });
-      gsap.to(modal, { opacity: 1, scale: 1, duration: 0.3 });
+      gsap.to(modal, {
+        opacity: 1, scale: 1, duration: 0.3, onComplete: () => {
+          jobTitleInput.focus();
+        }
+      });
+      modal.addEventListener('keydown', handleFocusTrap);
     }
 
     function closeModal() {
@@ -1176,6 +1142,29 @@
           modal.classList.add('hidden');
         }
       });
+      modal.removeEventListener('keydown', handleFocusTrap);
+    }
+
+    function handleFocusTrap(e) {
+      if (e.key !== 'Tab') return;
+
+      const focusableElements = modal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey) { // Shift + Tab
+        if (document.activeElement === firstElement) {
+          lastElement.focus();
+          e.preventDefault();
+        }
+      } else { // Tab
+        if (document.activeElement === lastElement) {
+          firstElement.focus();
+          e.preventDefault();
+        }
+      }
     }
 
     openModalBtn.addEventListener('click', openModal);
@@ -1191,7 +1180,9 @@
     generateBtn.addEventListener('click', () => {
       const jobTitle = jobTitleInput.value.trim();
       if (!jobTitle) {
-        alert('Please enter a job title.');
+        // A simple custom alert could be implemented here if desired.
+        // For now, browser default validation will highlight the empty field.
+        jobTitleInput.reportValidity();
         return;
       }
 
@@ -1219,24 +1210,29 @@
       }, 500);
     });
 
-    copyBtn.addEventListener('click', () => {
-      generatedMessageTextarea.select();
-      try {
+    copyBtn.addEventListener('click', async () => {
+      if (!navigator.clipboard) {
+        // Fallback for older browsers
+        generatedMessageTextarea.select();
         document.execCommand('copy');
-        copyFeedback.style.opacity = '1';
-        setTimeout(() => {
-          copyFeedback.style.opacity = '0';
-        }, 2000);
+        showCopyFeedback();
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(generatedMessageTextarea.value);
+        showCopyFeedback();
       } catch (err) {
         console.error('Failed to copy text: ', err);
-        navigator.clipboard.writeText(generatedMessageTextarea.value).then(() => {
-          copyFeedback.style.opacity = '1';
-          setTimeout(() => {
-            copyFeedback.style.opacity = '0';
-          }, 2000);
-        });
       }
     });
+
+    function showCopyFeedback() {
+      copyFeedback.style.opacity = '1';
+      setTimeout(() => {
+        copyFeedback.style.opacity = '0';
+      }, 2000);
+    }
+
 
     // --- ENHANCED GSAP SCROLL ANIMATIONS ---
     function initMainAnimations() {
@@ -1313,24 +1309,28 @@
         ease: 'power3.out'
       });
 
-      gsap.from(".project-card", {
-        scrollTrigger: { trigger: "#projects", start: "top 70%" },
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power3.out'
+      // Animate dynamically added cards
+      ScrollTrigger.batch(".project-card", {
+        start: "top 80%",
+        onEnter: batch => gsap.from(batch, {
+          opacity: 0,
+          y: 50,
+          stagger: 0.15,
+          ease: 'power3.out',
+          duration: 0.8
+        }),
       });
 
-      gsap.utils.toArray('.skills-category').forEach(category => {
-        gsap.from(category.children, {
-          scrollTrigger: { trigger: category, start: "top 80%" },
+      // Animate dynamically added skills
+      ScrollTrigger.batch(".skills-category", {
+        start: "top 85%",
+        onEnter: batch => gsap.from(batch, {
           opacity: 0,
           y: 30,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power2.out'
-        });
+          stagger: 0.2,
+          ease: 'power2.out',
+          duration: 0.6
+        }),
       });
 
       gsap.from(".contact-content > *", {
@@ -1346,32 +1346,35 @@
       gsap.to("#about-shape-2", { duration: 8, y: "-=20", x: "+=10", yoyo: true, repeat: -1, ease: "sine.inOut" });
 
       if (isHoverableDevice) {
-        const cards = document.querySelectorAll('.project-card');
-        cards.forEach(card => {
-          card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const { width, height } = rect;
-            const rotateX = (y / height - 0.5) * -15;
-            const rotateY = (x / width - 0.5) * 15;
-            gsap.to(card, {
-              rotationX: rotateX,
-              rotationY: rotateY,
-              transformPerspective: 1000,
-              ease: 'power1.out',
-              duration: 0.5
-            });
-          });
-          card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-              rotationX: 0,
-              rotationY: 0,
-              ease: 'elastic.out(1, 0.3)',
-              duration: 1
-            });
+        // Use event delegation for dynamically added cards
+        document.getElementById('projects-grid').addEventListener('mousemove', (e) => {
+          const card = e.target.closest('.project-card');
+          if (!card) return;
+
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const { width, height } = rect;
+          const rotateX = (y / height - 0.5) * -15;
+          const rotateY = (x / width - 0.5) * 15;
+          gsap.to(card, {
+            rotationX: rotateX,
+            rotationY: rotateY,
+            transformPerspective: 1000,
+            ease: 'power1.out',
+            duration: 0.5
           });
         });
+        document.getElementById('projects-grid').addEventListener('mouseleave', (e) => {
+             const card = e.target.closest('.project-card');
+             if (!card) return;
+             gsap.to(card, {
+                rotationX: 0,
+                rotationY: 0,
+                ease: 'elastic.out(1, 0.3)',
+                duration: 1
+            });
+        }, true);
       }
     }
 
@@ -1393,12 +1396,13 @@
 
     // --- INTERACTIVE CARD GLARE ---
     if (isHoverableDevice) {
-      document.querySelectorAll(".glass-card").forEach((card) => {
-        card.addEventListener("mousemove", (e) => {
-          const rect = card.getBoundingClientRect();
-          card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-          card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-        });
+      // Use event delegation for dynamically added cards
+      document.body.addEventListener("mousemove", (e) => {
+        const card = e.target.closest('.glass-card');
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
       });
     }
 
