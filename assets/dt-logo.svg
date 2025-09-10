@@ -1,9 +1,11 @@
-<svg width="280" height="100" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg">
+<svg width="280" height="100" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">Dhruvil Thummar's DT Logo</title>
+  <desc id="logoDesc">A stylized signature logo for Dhruvil Thummar, featuring the initials 'D' and 'T' in a fluid, handwritten style with a horizontal strike-through. The logo has a vibrant color gradient.</desc>
   <defs>
-    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#00BFFF;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#FF4136;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0077B6;stop-opacity:1" />
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00BFFF;" />
+      <stop offset="60%" style="stop-color:#FF4136;" />
+      <stop offset="100%" style="stop-color:#0077B6;" />
     </linearGradient>
   </defs>
   <g stroke="url(#logoGradient)" fill="none">
