@@ -38,7 +38,7 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:updated_time" content="2025-09-10T13:33:00+05:30" />
+  <meta property="og:updated_time" content="2025-09-11T11:04:00+05:30" />
 
   <!-- SEO: Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -118,7 +118,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&family=Roboto+Mono:wght@400&family=Montserrat:wght@700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@400&family=Montserrat:wght@700&display=swap"
     rel="stylesheet" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -344,39 +344,11 @@
     }
 
     /* Navbar styling */
-    #navbar.scrolled {
+    #navbar {
       background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(12px);
-    }
-
-    .nav-link {
-      position: relative;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #00BFFF;
-      transition: width 0.3s ease-in-out;
-    }
-
-    .nav-link:hover {
-      transform: translateY(-2px);
-    }
-
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 100%;
-    }
-
-    .nav-link.active {
-      color: #FFFFFF;
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     #header-logo path {
@@ -514,27 +486,208 @@
         transform: translateX(100%);
       }
     }
-
-    /* Modal Styles */
-    #ai-modal-overlay {
-      transition: opacity 0.3s ease-in-out;
+    
+    /* New Sidebar Styles */
+    #sidebar-menu.open {
+      transform: translateX(0);
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
     }
 
-    #ai-modal {
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    /* Chatbot Styles */
+    #chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
     }
 
-    .ai-modal-spinner {
-      border-color: rgba(0, 191, 255, 0.2);
-      border-top-color: #00BFFF;
-      animation: spin 1s linear infinite;
+    #chatbot-bubble {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(45deg, #00BFFF, #0077B6);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0, 191, 255, 0.4);
+        transition: transform 0.3s, box-shadow 0.3s;
+        animation: pulse-glow 2s infinite ease-in-out;
     }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+    #chatbot-bubble:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(0, 191, 255, 0.6);
     }
+    
+    #chatbot-notification {
+        position: absolute;
+        bottom: 75px;
+        right: 0;
+        background: #1a1a1a;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 12px;
+        border: 1px solid #333;
+        font-size: 14px;
+        font-weight: 500;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        visibility: hidden;
+        transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+    }
+
+    #chatbot-notification.visible {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+        animation: subtle-bounce-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    #chatbot-window {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: calc(100vw - 40px);
+      max-width: 350px;
+      height: 70vh;
+      max-height: 500px;
+      background-color: #111;
+      border: 1px solid #333;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.95);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: bottom right;
+    }
+
+    #chatbot-window.open {
+      display: flex;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    #chat-header {
+      padding: 1rem;
+      background-color: #1a1a1a;
+      color: #FFFFFF;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+
+    #chat-messages {
+      flex-grow: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .chat-message {
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      max-width: 80%;
+      line-height: 1.4;
+      font-size: 0.9rem;
+    }
+
+    .user-message {
+      background-color: #00BFFF;
+      color: #000;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+    }
+
+    .bot-message {
+      background-color: #2a2a2a;
+      color: #B0B0B0;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+    }
+
+    #chat-input-container {
+      display: flex;
+      padding: 1rem;
+      border-top: 1px solid #333;
+    }
+
+    #chat-input {
+      flex-grow: 1;
+      border: none;
+      background-color: #2a2a2a;
+      color: #FFFFFF;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      outline: none;
+    }
+
+    #chat-send {
+      margin-left: 0.5rem;
+      background-color: #00BFFF;
+      color: #000;
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      cursor: pointer;
+    }
+
+    .quick-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .quick-reply {
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      color: #B0B0B0;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 0.8rem;
+    }
+
+    .quick-reply:hover {
+      background-color: #00BFFF;
+      color: #000;
+    }
+
+    @keyframes subtle-bounce-in {
+        0% { transform: translateY(10px) scale(0.9); opacity: 0; }
+        60% { transform: translateY(-5px) scale(1.05); opacity: 1; }
+        100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 191, 255, 0.4); }
+        50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 191, 255, 0.7); }
+    }
+
   </style>
   <script>
     tailwind.config = {
@@ -560,6 +713,22 @@
 </head>
 
 <body class="bg-background">
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-40 hidden transition-opacity duration-300"></div>
+  <aside id="sidebar-menu"
+    class="fixed top-0 left-0 h-full w-72 bg-gray-900/50 backdrop-blur-xl border-r border-gray-700 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-5 flex justify-between items-center border-b border-gray-800">
+      <h2 class="text-xl font-bold text-white">Menu</h2>
+      <button id="sidebar-close-btn" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+    </div>
+    <nav class="flex flex-col p-5 space-y-2">
+        <a href="#about" class="sidebar-link text-gray-300 hover:text-white hover:bg-gray-800/50 p-3 rounded-md transition-colors">About</a>
+        <a href="#education" class="sidebar-link text-gray-300 hover:text-white hover:bg-gray-800/50 p-3 rounded-md transition-colors">Education</a>
+        <a href="#projects" class="sidebar-link text-gray-300 hover:text-white hover:bg-gray-800/50 p-3 rounded-md transition-colors">Projects</a>
+        <a href="#skills" class="sidebar-link text-gray-300 hover:text-white hover:bg-gray-800/50 p-3 rounded-md transition-colors">Skills</a>
+        <a href="#contact" class="sidebar-link text-gray-300 hover:text-white hover:bg-gray-800/50 p-3 rounded-md transition-colors">Contact</a>
+    </nav>
+  </aside>
+
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
 
@@ -592,51 +761,33 @@
     </div>
   </div>
 
-  <header class="fixed top-0 left-0 w-full bg-transparent z-50 transition-all duration-300" id="navbar">
-    <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-      <a href="#" aria-label="Back to top of the page">
-        <svg id="header-logo" class="w-28 md:w-36 h-auto" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true">
-          <g>
-            <path id="header-logo-path-signature"
-              d="M40 75 C 10 10, 100 10, 100 50 C 100 90, 40 95, 40 75 L 90 30 C 110 40, 115 75, 130 65 L 140 50 C 145 70, 155 70, 160 50 L 170 70 L 180 50 L 190 70 L 200 50 L 210 70 L 220 50 L 230 70 L 260 40" />
-            <path id="header-logo-path-strike" d="M20 68 C 100 55, 180 75, 270 62" stroke-width="4" />
-          </g>
-        </svg>
-      </a>
+  <header class="fixed top-0 left-0 w-full z-30 transition-all duration-300" id="navbar">
+    <nav class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <button id="menu-toggle-btn" class="text-white focus:outline-none p-2 relative h-8 w-8 z-10"
+              aria-controls="sidebar-menu" aria-expanded="false">
+              <i class="fas fa-bars text-2xl"></i>
+              <span class="sr-only">Open navigation menu</span>
+            </button>
+            <a href="#" aria-label="Back to top of the page" class="z-10">
+                <svg id="header-logo" class="w-28 h-auto" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g>
+                        <path id="header-logo-path-signature" d="M40 75 C 10 10, 100 10, 100 50 C 100 90, 40 95, 40 75 L 90 30 C 110 40, 115 75, 130 65 L 140 50 C 145 70, 155 70, 160 50 L 170 70 L 180 50 L 190 70 L 200 50 L 210 70 L 220 50 L 230 70 L 260 40" />
+                        <path id="header-logo-path-strike" d="M20 68 C 100 55, 180 75, 270 62" stroke-width="4" />
+                    </g>
+                </svg>
+            </a>
+        </div>
 
-      <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-6" id="nav-links">
-        <a href="#about" class="text-secondary hover:text-primary nav-link">About</a>
-        <a href="#education" class="text-secondary hover:text-primary nav-link">Education</a>
-        <a href="#projects" class="text-secondary hover:text-primary nav-link">Projects</a>
-        <a href="#skills" class="text-secondary hover:text-primary nav-link">Skills</a>
-        <a href="#contact" class="text-secondary hover:text-primary nav-link">Contact</a>
-      </div>
-
-      <div class="hidden md:flex items-center space-x-6">
-        <a href="https://www.linkedin.com/in/dhruvil-thummar-54422731a" target="_blank" rel="noopener noreferrer"
-          class="text-secondary hover:text-accent transition-colors text-xl" aria-label="Visit my LinkedIn profile"><i
-            class="fab fa-linkedin" aria-hidden="true"></i></a>
-        <a href="https://github.com/DhruvilThummar" target="_blank" rel="noopener noreferrer"
-          class="text-secondary hover:text-accent transition-colors text-xl" aria-label="Visit my GitHub profile"><i
-            class="fab fa-github" aria-hidden="true"></i></a>
-      </div>
-
-      <button class="md:hidden text-secondary hover:text-accent focus:outline-none" id="menu-toggle"
-        aria-label="Toggle mobile menu" aria-expanded="false">
-        <i class="fas fa-bars text-2xl"></i>
-      </button>
+        <div class="flex items-center space-x-6 z-10">
+            <a href="https://www.linkedin.com/in/dhruvil-thummar-54422731a" target="_blank" rel="noopener noreferrer"
+              class="text-secondary hover:text-accent transition-colors text-xl" aria-label="Visit my LinkedIn profile"><i
+                class="fab fa-linkedin" aria-hidden="true"></i></a>
+            <a href="https://github.com/DhruvilThummar" target="_blank" rel="noopener noreferrer"
+              class="text-secondary hover:text-accent transition-colors text-xl" aria-label="Visit my GitHub profile"><i
+                class="fab fa-github" aria-hidden="true"></i></a>
+        </div>
     </nav>
-    <div id="mobile-menu"
-      class="md:hidden bg-background/95 backdrop-blur-sm absolute top-full left-0 w-full py-4 opacity-0 -translate-y-4 pointer-events-none transition-all duration-300">
-      <div class="flex flex-col items-center space-y-4">
-        <a href="#about" class="text-secondary hover:text-accent transition-colors">About</a>
-        <a href="#education" class="text-secondary hover:text-accent transition-colors">Education</a>
-        <a href="#projects" class="text-secondary hover:text-accent transition-colors">Projects</a>
-        <a href="#skills" class="text-secondary hover:text-accent transition-colors">Skills</a>
-        <a href="#contact" class="text-secondary hover:text-accent transition-colors">Contact</a>
-      </div>
-    </div>
   </header>
 
 
@@ -649,11 +800,14 @@
           data-value="Dhruvil Thummar">
           Dhruvil Thummar
         </h1>
-        <p class="mt-4 text-secondary text-md sm:text-lg md:text-2xl flex justify-center items-center gap-2">
+        <p id="hero-tagline" class="mt-4 text-secondary text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto">
+          A passionate developer building efficient and user-friendly web applications.
+        </p>
+        <p id="hero-university" class="mt-4 text-secondary text-md sm:text-lg md:text-2xl flex justify-center items-center gap-2">
           <span class="text-accent font-semibold">Computer Engineering Student at L.J. University</span>
         </p>
-        <div class="mt-8 flex justify-center items-center gap-6">
-          <a href="#about" class="text-secondary animate-bounce" aria-label="Scroll to About section">
+        <div id="hero-cta-container" class="mt-8 flex justify-center items-center gap-6">
+          <a href="#about" class="text-secondary" aria-label="Scroll to About section">
             <i class="fa-solid fa-chevron-down text-2xl" aria-hidden="true"></i>
           </a>
         </div>
@@ -664,12 +818,12 @@
       class="relative min-h-screen container mx-auto px-4 sm:px-6 py-32 flex justify-center items-center view-section"
       aria-labelledby="about-heading">
       <svg id="about-shape-1" class="about-shape" width="100" height="100" viewBox="0 0 100 100"
-        style="top: 20%; left: 10%" aria-hidden="true">
+        style="top: 20%; left: 10%" aria-hidden="true" data-speed="0.8">
         <rect x="10" y="10" width="80" height="80" />
       </svg>
 
       <svg id="about-shape-2" class="about-shape" width="120" height="120" viewBox="0 0 120 120"
-        style="bottom: 15%; right: 5%" aria-hidden="true">
+        style="bottom: 15%; right: 5%" aria-hidden="true" data-speed="1.2">
         <circle cx="60" cy="60" r="50" />
       </svg>
 
@@ -680,7 +834,7 @@
         <p class="text-secondary text-lg leading-relaxed reveal-text text-justify">
           Hi, I’m Dhruvil. I’m a Computer Engineering student who loves coding and building cool projects. I know Java, Python, and web development, and I enjoy solving problems and learning new tech.
         </p>
-<Br>
+<br>
         <p class="text-secondary text-lg leading-relaxed reveal-text text-justify">
 I’m always looking for chances to use my skills in real projects and grow as a developer. My goal is to make apps and websites that are simple, fast, and useful for people.
         </p>
@@ -749,11 +903,6 @@ I’m always looking for chances to use my skills in real projects and grow as a
             <span class="btn-text">Say Hello!</span>
             <span class="btn-icon" aria-hidden="true"><i class="fa-solid fa-paper-plane"></i></span>
           </a>
-          <button id="open-ai-modal"
-            class="contact-button w-full sm:w-auto inline-flex items-center justify-center font-semibold px-8 py-3 rounded-lg border-2 h-12">
-            <span class="btn-text">✨ Message Generator</span>
-            <span class="btn-icon" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-          </button>
         </div>
         <div class="flex justify-center gap-8 mb-10">
           <a href="https://www.linkedin.com/in/dhruvil-thummar-54422731a" target="_blank" rel="noopener noreferrer"
@@ -776,41 +925,26 @@ I’m always looking for chances to use my skills in real projects and grow as a
     </footer>
   </main>
 
-  <div id="ai-modal-overlay" class="fixed inset-0 bg-black bg-opacity-70 z-[60] hidden opacity-0"></div>
-  <div id="ai-modal"
-    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 border border-accent rounded-lg shadow-2xl shadow-accent/20 p-6 w-11/12 max-w-2xl z-[70] hidden opacity-0 scale-95"
-    role="dialog" aria-modal="true" aria-labelledby="ai-modal-title">
-    <div class="flex justify-between items-center mb-4">
-      <h3 id="ai-modal-title" class="font-display text-2xl text-accent flex items-center"><i
-          class="fa-solid fa-wand-magic-sparkles mr-3" aria-hidden="true"></i>Hiring Message Generator</h3>
-      <button id="close-ai-modal" class="text-secondary hover:text-primary transition-colors text-3xl leading-none"
-        aria-label="Close modal">&times;</button>
+  <div id="chatbot-container">
+    <div id="chatbot-notification">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-accent"><path d="M12 6V12l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+        <span id="notification-text">Have a question? Ask me!</span>
     </div>
-    <p class="text-secondary mb-4">This tool can help you draft a hiring message. Just enter the job title you're
-      hiring for.</p>
-
-    <div class="space-y-4">
-      <input type="text" id="job-title-input" placeholder="e.g., Junior Java Developer"
-        class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-primary focus:outline-none focus:ring-2 focus:ring-accent"
-        aria-label="Job Title">
-      <button id="generate-message-btn"
-        class="w-full bg-accent text-black font-bold py-2 px-4 rounded-md hover:bg-accent-dark transition-colors flex items-center justify-center">
-        <span id="generate-btn-text">Generate Message</span>
-        <div id="ai-spinner" class="ai-modal-spinner w-5 h-5 rounded-full border-2 hidden ml-2"></div>
-      </button>
+    <div id="chatbot-window">
+      <div id="chat-header" class="flex justify-between items-center">
+        <span>Dhruvil's AI Assistant</span>
+        <button id="clear-chat-btn" class="text-xs text-gray-400 hover:text-white">Clear</button>
+      </div>
+      <div id="chat-messages"></div>
+      <div id="quick-replies-container"></div>
+      <div id="chat-input-container">
+        <input type="text" id="chat-input" placeholder="Ask a question...">
+        <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
+      </div>
     </div>
-
-    <div id="result-container" class="mt-4 hidden">
-      <label for="generated-message" class="sr-only">Generated Message</label>
-      <textarea id="generated-message" readonly
-        class="w-full h-40 bg-gray-800 border border-gray-700 rounded-md p-2 text-secondary resize-none"></textarea>
-      <button id="copy-message-btn"
-        class="mt-2 w-full bg-gray-700 text-primary font-semibold py-2 px-4 rounded-md hover:bg-gray-600 transition-colors">
-        Copy to Clipboard
-      </button>
-      <p id="copy-feedback" class="text-xs text-accent text-center mt-2 opacity-0 transition-opacity"
-        aria-live="polite">Copied!</p>
-    </div>
+    <button id="chatbot-bubble" aria-label="Open chatbot">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
   </div>
 
 
@@ -944,6 +1078,7 @@ I’m always looking for chances to use my skills in real projects and grow as a
               document.body.style.overflow = 'auto';
               scrambleHeroName();
               initMainAnimations();
+              initChatbot();
             },
           });
         });
@@ -967,6 +1102,7 @@ I’m always looking for chances to use my skills in real projects and grow as a
       preloaderTL.play();
       renderProjects();
       renderSkills();
+      setupSidebar();
     });
 
     // --- HERO NAME SCRAMBLE EFFECT ---
@@ -1011,16 +1147,10 @@ I’m always looking for chances to use my skills in real projects and grow as a
     window.addEventListener("scroll", function () {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-
       if (scrollTop > lastScrollTop && scrollTop > 100) {
-        navbar.style.top = "-100px";
+        gsap.to(navbar, { y: -100, duration: 0.4, ease: 'power2.out' });
       } else {
-        navbar.style.top = "0";
+        gsap.to(navbar, { y: 0, duration: 0.4, ease: 'power2.out' });
       }
       lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }, false);
@@ -1102,130 +1232,117 @@ I’m always looking for chances to use my skills in real projects and grow as a
         .to(logoSignature, { strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' })
         .to(logoStrike, { strokeDashoffset: 0, duration: 1, ease: 'power2.inOut' }, "-=1.0");
     };
+    
+    // --- CHATBOT LOGIC ---
+    function initChatbot() {
+        const chatbotBubble = document.getElementById('chatbot-bubble');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const clearChatBtn = document.getElementById('clear-chat-btn');
+        const quickRepliesContainer = document.getElementById('quick-replies-container');
+        const notification = document.getElementById('chatbot-notification');
+        const bubbleIcon = chatbotBubble.querySelector('svg');
 
-    // --- MODAL & MESSAGE GENERATOR LOGIC ---
-    const openModalBtn = document.getElementById('open-ai-modal');
-    const closeModalBtn = document.getElementById('close-ai-modal');
-    const modalOverlay = document.getElementById('ai-modal-overlay');
-    const modal = document.getElementById('ai-modal');
-    const generateBtn = document.getElementById('generate-message-btn');
-    const jobTitleInput = document.getElementById('job-title-input');
-    const resultContainer = document.getElementById('result-container');
-    const generatedMessageTextarea = document.getElementById('generated-message');
-    const copyBtn = document.getElementById('copy-message-btn');
-    const copyFeedback = document.getElementById('copy-feedback');
-    const spinner = document.getElementById('ai-spinner');
-    const generateBtnText = document.getElementById('generate-btn-text');
+        const botKnowledge = [
+            { keywords: ['about', 'who are you', 'dhruvil'], response: "Dhruvil is a passionate Computer Engineering student at L.J. University, specializing in Java, Python, and web development. He loves building cool projects and solving problems." },
+            { keywords: ['skill', 'tech', 'know', 'do'], response: "Dhruvil is skilled in Java, Python, JavaScript, SQL, HTML/CSS, and Tailwind. He also has experience with databases like MySQL & PostgreSQL and tools like Git, GitHub, and VS Code." },
+            { keywords: ['project', 'work', 'experience'], response: "He has built several projects, including a 'What's in my Fridge?' recipe app, an AI chatbot called 'The Intelliverse', and a Tourism Management System in Java. You can see them all in the Projects section!" },
+            { keywords: ['contact', 'email', 'hire', 'connect'], response: "You can get in touch with Dhruvil by emailing him at dhruvithummar1303@gmail.com or by connecting on LinkedIn. All the links are in the Contact section at the bottom of the page." },
+            { keywords: ['education', 'college', 'university'], response: "Dhruvil is pursuing his Bachelor of Technology in Computer Engineering at L J University in Ahmedabad, from 2024 to 2028." },
+            { keywords: ['hello', 'hi', 'hey'], response: "Hello! I'm Dhruvil's personal AI assistant. How can I help you today?" }
+        ];
 
-    function openModal() {
-      modalOverlay.classList.remove('hidden');
-      modal.classList.remove('hidden');
-      gsap.to(modalOverlay, { opacity: 1, duration: 0.3 });
-      gsap.to(modal, {
-        opacity: 1, scale: 1, duration: 0.3, onComplete: () => {
-          jobTitleInput.focus();
+        const quickReplies = ["Tell me about Dhruvil.", "What are his skills?", "How can I contact him?"];
+
+        const getBotResponse = (userInput) => {
+            const lowerInput = userInput.toLowerCase();
+            for (const item of botKnowledge) {
+                if (item.keywords.some(keyword => lowerInput.includes(keyword))) {
+                    return item.response;
+                }
+            }
+            return "I can answer questions about Dhruvil's skills, projects, and education. For anything else, please use the contact form or connect with him on LinkedIn.";
+        };
+
+        const addMessage = (message, sender) => {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', sender === 'user' ? 'user-message' : 'bot-message');
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+
+        const handleChat = () => {
+            const userInput = chatInput.value.trim();
+            if (!userInput) return;
+            addMessage(userInput, 'user');
+            chatInput.value = '';
+            quickRepliesContainer.innerHTML = '';
+
+            setTimeout(() => {
+                const botResponse = getBotResponse(userInput);
+                addMessage(botResponse, 'bot');
+                showQuickReplies();
+            }, 1000);
+        };
+
+        const showQuickReplies = () => {
+            quickRepliesContainer.innerHTML = '';
+            const container = document.createElement('div');
+            container.className = 'quick-replies';
+            quickReplies.forEach(replyText => {
+                const button = document.createElement('button');
+                button.textContent = replyText;
+                button.className = 'quick-reply';
+                button.onclick = () => {
+                    chatInput.value = replyText;
+                    handleChat();
+                };
+                container.appendChild(button);
+            });
+            quickRepliesContainer.appendChild(container);
+        };
+        
+        const initializeChat = () => {
+            chatMessages.innerHTML = '';
+            addMessage("Hello! I'm Dhruvil's AI assistant. How can I help you today?", 'bot');
+            showQuickReplies();
+        };
+
+        chatbotBubble.addEventListener('click', () => {
+            const isOpen = chatbotWindow.classList.toggle('open');
+            gsap.to(bubbleIcon, { rotation: isOpen ? 180 : 0, duration: 0.4, ease: 'back.out(1.7)' });
+
+            if (isOpen) {
+                // If notification is visible, hide it smoothly before opening chat
+                if (notification.classList.contains('visible')) {
+                    gsap.to(notification, { opacity: 0, y: 10, duration: 0.3, onComplete: () => {
+                        notification.classList.remove('visible');
+                    }});
+                }
+                sessionStorage.setItem('chatNotifShown', 'true');
+            }
+        });
+
+        chatSend.addEventListener('click', handleChat);
+        chatInput.addEventListener('keypress', (e) => e.key === 'Enter' && handleChat());
+        clearChatBtn.addEventListener('click', initializeChat);
+        
+        // Notification logic
+        if (!sessionStorage.getItem('chatNotifShown')) {
+          setTimeout(() => {
+              notification.classList.add('visible');
+              setTimeout(() => {
+                  gsap.to(notification, { opacity: 0, y: 10, duration: 0.4, onComplete: () => {
+                      notification.classList.remove('visible');
+                  }});
+              }, 5000); // Hide notification after 5 seconds
+          }, 3000); // Show notification after 3 seconds
         }
-      });
-      modal.addEventListener('keydown', handleFocusTrap);
-    }
 
-    function closeModal() {
-      gsap.to(modal, { opacity: 0, scale: 0.95, duration: 0.3 });
-      gsap.to(modalOverlay, {
-        opacity: 0, duration: 0.3, onComplete: () => {
-          modalOverlay.classList.add('hidden');
-          modal.classList.add('hidden');
-        }
-      });
-      modal.removeEventListener('keydown', handleFocusTrap);
-    }
-
-    function handleFocusTrap(e) {
-      if (e.key !== 'Tab') return;
-
-      const focusableElements = modal.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      );
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-
-      if (e.shiftKey) { // Shift + Tab
-        if (document.activeElement === firstElement) {
-          lastElement.focus();
-          e.preventDefault();
-        }
-      } else { // Tab
-        if (document.activeElement === lastElement) {
-          firstElement.focus();
-          e.preventDefault();
-        }
-      }
-    }
-
-    openModalBtn.addEventListener('click', openModal);
-    closeModalBtn.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', closeModal);
-
-    window.addEventListener('keydown', (e) => {
-      if (!modal.classList.contains('hidden') && e.key === 'Escape') {
-        closeModal();
-      }
-    });
-
-    generateBtn.addEventListener('click', () => {
-      const jobTitle = jobTitleInput.value.trim();
-      if (!jobTitle) {
-        // A simple custom alert could be implemented here if desired.
-        // For now, browser default validation will highlight the empty field.
-        jobTitleInput.reportValidity();
-        return;
-      }
-
-      spinner.classList.remove('hidden');
-      generateBtnText.textContent = 'Generating...';
-      generateBtn.disabled = true;
-      resultContainer.classList.add('hidden');
-
-      const templates = [
-        `Subject: Exciting Opportunity: ${jobTitle} at a Growing Tech Company\n\nHi there,\n\nI came across your profile and was very impressed with your experience. We're currently looking for a talented ${jobTitle} to join our innovative team.\n\nWe are working on cutting-edge projects and believe your skills would be a great asset. Would you be open to a brief chat next week to discuss how you could make a significant impact with us?\n\nBest regards,`,
-        `Subject: Are you the ${jobTitle} we've been searching for?\n\nHello,\n\nHope you're having a great week. Our team is expanding, and we have an immediate opening for a ${jobTitle}. We're seeking someone with a passion for technology and a drive to build amazing products. Given your background, I thought this might be a perfect fit.\n\nIf you're interested in learning more about a role where you can truly grow and innovate, let's connect.\n\nAll the best,`,
-        `Subject: Join Our Team as a ${jobTitle}\n\nHi,\n\nI'm reaching out because we have a fantastic new opportunity for a ${jobTitle} that aligns perfectly with your skills. We are a forward-thinking company dedicated to solving complex problems, and you would play a key role in developing our next-generation platform.\n\nAre you available for a quick call to explore this further?\n\nSincerely,`
-      ];
-
-      setTimeout(() => {
-        const randomIndex = Math.floor(Math.random() * templates.length);
-        const generatedText = templates[randomIndex];
-
-        generatedMessageTextarea.value = generatedText;
-        resultContainer.classList.remove('hidden');
-
-        spinner.classList.add('hidden');
-        generateBtnText.textContent = 'Generate Message';
-        generateBtn.disabled = false;
-      }, 500);
-    });
-
-    copyBtn.addEventListener('click', async () => {
-      if (!navigator.clipboard) {
-        // Fallback for older browsers
-        generatedMessageTextarea.select();
-        document.execCommand('copy');
-        showCopyFeedback();
-        return;
-      }
-      try {
-        await navigator.clipboard.writeText(generatedMessageTextarea.value);
-        showCopyFeedback();
-      } catch (err) {
-        console.error('Failed to copy text: ', err);
-      }
-    });
-
-    function showCopyFeedback() {
-      copyFeedback.style.opacity = '1';
-      setTimeout(() => {
-        copyFeedback.style.opacity = '0';
-      }, 2000);
+        initializeChat();
     }
 
 
@@ -1233,27 +1350,22 @@ I’m always looking for chances to use my skills in real projects and grow as a
     function initMainAnimations() {
       gsap.registerPlugin(ScrollTrigger);
       animateLogo();
-
-      const sections = document.querySelectorAll('.view-section');
-      const navLinks = document.querySelectorAll('#nav-links a');
-
-      sections.forEach(section => {
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top center",
-          end: "bottom center",
-          onToggle: self => {
-            const id = section.getAttribute('id');
-            const correspondingLink = document.querySelector(`#nav-links a[href="#${id}"]`);
-            if (self.isActive) {
-              navLinks.forEach(link => link.classList.remove('active'));
-              if (correspondingLink) correspondingLink.classList.add('active');
-            } else {
-              if (correspondingLink) correspondingLink.classList.remove('active');
-            }
-          }
-        });
+      
+      // Hero Section Entrance Animation
+      const heroTl = gsap.timeline({delay: 0.2});
+      heroTl.from("#hero-name", { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' })
+            .from("#hero-tagline", { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' }, "-=0.6")
+            .from("#hero-university", { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' }, "-=0.6")
+            .from("#hero-cta-container", { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' }, "-=0.6");
+      
+      gsap.to('#hero-cta-container i', {
+        y: 10,
+        repeat: -1,
+        yoyo: true,
+        duration: 0.8,
+        ease: 'power1.inOut'
       });
+
 
       gsap.utils.toArray('.section-heading').forEach(heading => {
         gsap.from(heading, {
@@ -1304,7 +1416,6 @@ I’m always looking for chances to use my skills in real projects and grow as a
         ease: 'power3.out'
       });
 
-      // Animate dynamically added cards
       ScrollTrigger.batch(".project-card", {
         start: "top 80%",
         onEnter: batch => gsap.from(batch, {
@@ -1316,7 +1427,6 @@ I’m always looking for chances to use my skills in real projects and grow as a
         }),
       });
 
-      // Animate dynamically added skills
       ScrollTrigger.batch(".skills-category", {
         start: "top 85%",
         onEnter: batch => gsap.from(batch, {
@@ -1327,6 +1437,19 @@ I’m always looking for chances to use my skills in real projects and grow as a
           duration: 0.6
         }),
       });
+      
+      // Parallax effect for about shapes
+      gsap.utils.toArray('.about-shape').forEach(shape => {
+          const speed = shape.dataset.speed || 1;
+          gsap.to(shape, {
+              y: (i, el) => (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window) * 0.1,
+              ease: "none",
+              scrollTrigger: {
+                  scrub: 1.5
+              }
+          });
+      });
+
 
       gsap.from(".contact-content > *", {
         scrollTrigger: { trigger: "#contact", start: "top 70%" },
@@ -1337,11 +1460,7 @@ I’m always looking for chances to use my skills in real projects and grow as a
         ease: 'power3.out'
       });
 
-      gsap.to("#about-shape-1", { duration: 10, rotation: 360, transformOrigin: "center", repeat: -1, ease: "none" });
-      gsap.to("#about-shape-2", { duration: 8, y: "-=20", x: "+=10", yoyo: true, repeat: -1, ease: "sine.inOut" });
-
       if (isHoverableDevice) {
-        // Use event delegation for dynamically added cards
         document.getElementById('projects-grid').addEventListener('mousemove', (e) => {
           const card = e.target.closest('.project-card');
           if (!card) return;
@@ -1350,8 +1469,8 @@ I’m always looking for chances to use my skills in real projects and grow as a
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
           const { width, height } = rect;
-          const rotateX = (y / height - 0.5) * -15;
-          const rotateY = (x / width - 0.5) * 15;
+          const rotateX = (y / height - 0.5) * -20;
+          const rotateY = (x / width - 0.5) * 20;
           gsap.to(card, {
             rotationX: rotateX,
             rotationY: rotateY,
@@ -1391,7 +1510,6 @@ I’m always looking for chances to use my skills in real projects and grow as a
 
     // --- INTERACTIVE CARD GLARE ---
     if (isHoverableDevice) {
-      // Use event delegation for dynamically added cards
       document.body.addEventListener("mousemove", (e) => {
         const card = e.target.closest('.glass-card');
         if (!card) return;
@@ -1401,36 +1519,36 @@ I’m always looking for chances to use my skills in real projects and grow as a
       });
     }
 
-    // --- MOBILE MENU TOGGLE ---
-    const menuToggle = document.getElementById("menu-toggle");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const menuIcon = menuToggle.querySelector("i");
+    // --- SIDEBAR NAVIGATION ---
+    function setupSidebar() {
+        const menuToggleButton = document.getElementById('menu-toggle-btn');
+        const sidebarCloseButton = document.getElementById('sidebar-close-btn');
+        const sidebarMenu = document.getElementById('sidebar-menu');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
 
-    menuToggle.addEventListener("click", () => {
-      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', !isExpanded);
+        const openSidebar = () => {
+            sidebarMenu.classList.add('open');
+            sidebarOverlay.classList.remove('hidden');
+            menuToggleButton.setAttribute('aria-expanded', 'true');
+        };
 
-      if (mobileMenu.classList.contains('opacity-0')) {
-        mobileMenu.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
-        menuIcon.classList.remove('fa-bars');
-        menuIcon.classList.add('fa-xmark');
-      } else {
-        mobileMenu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
-        menuIcon.classList.remove('fa-xmark');
-        menuIcon.classList.add('fa-bars');
-      }
-    });
+        const closeSidebar = () => {
+            sidebarMenu.classList.remove('open');
+            sidebarOverlay.classList.add('hidden');
+            menuToggleButton.setAttribute('aria-expanded', 'false');
+        };
 
-    mobileMenu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        menuToggle.setAttribute('aria-expanded', 'false');
-        mobileMenu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
-        menuIcon.classList.remove('fa-xmark');
-        menuIcon.classList.add('fa-bars');
-      });
-    });
+        menuToggleButton.addEventListener('click', openSidebar);
+        sidebarCloseButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+    }
   </script>
 </body>
 
 </html>
+
 
