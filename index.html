@@ -470,16 +470,78 @@
       color: #00BFFF;
     }
 
-    /* New Skill Progress Bar Styling */
-    .skill-item {
-      opacity: 0;
-      /* Initially hidden for GSAP animation */
-      transform: translateY(20px);
+    /* New Skill Button Styling */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
     }
 
-    .progress-bar-fill {
-      box-shadow: 0 0 10px #00BFFF, 0 0 5px #00BFFF;
-      transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+    .skill-button {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, rgba(0, 191, 255, 0) 70%),
+        conic-gradient(#00BFFF var(--progress, 0deg), #2a2a2a var(--progress, 0deg));
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      opacity: 0;
+      /* for GSAP */
+      transform: translateY(20px);
+      /* for GSAP */
+    }
+
+    .skill-button::before {
+      content: '';
+      position: absolute;
+      width: 85%;
+      height: 85%;
+      background: #111;
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .skill-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
+    }
+
+    .skill-button i {
+      font-size: 2.5rem;
+      color: #fff;
+      transition: color 0.3s ease;
+      z-index: 1;
+    }
+
+    .skill-button:hover i {
+      color: #00BFFF;
+    }
+
+    .skill-button .tooltip {
+      position: absolute;
+      bottom: -35px;
+      background-color: #1a1a1a;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .skill-button:hover .tooltip {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Footer decorative line */
@@ -940,8 +1002,10 @@
           Let's connect and build something amazing together.
         </p>
         <!-- Contact Form -->
-        <form action="https://api.web3forms.com/submit" method="POST" class="max-w-xl mx-auto space-y-4 mb-10">
+        <form id="contact-form" class="max-w-xl mx-auto space-y-4 mb-10">
           <input type="hidden" name="access_key" value="d1cbbed6-523c-40d3-a0dc-4ac8e7287675">
+          <input type="hidden" name="subject" value="New Submission from Your Portfolio">
+          <input type="hidden" name="from_name" value="Portfolio Visitor">
 
           <div class="flex flex-col sm:flex-row gap-4">
             <input type="text" name="name" placeholder="Your Name" required
@@ -951,6 +1015,7 @@
           </div>
           <textarea name="message" placeholder="Your Message" rows="4" required
             class="w-full bg-gray-900/50 border border-gray-700 rounded-md px-4 py-2 text-primary focus:outline-none focus:ring-2 focus:ring-accent transition"></textarea>
+          <div id="form-result" class="text-secondary min-h-[1.5rem]"></div>
           <button type="submit"
             class="contact-button w-full sm:w-auto inline-flex items-center justify-center font-semibold px-8 py-3 rounded-lg border-2 h-12">
             <span class="btn-text">Send Message</span>
@@ -995,7 +1060,7 @@
     </div>
     <div id="chatbot-window">
       <div id="chat-header" class="flex justify-between items-center">
-        <span>Dhruvil's AI Assistant</span>
+        <span>Info-Byte</span>
         <button id="clear-chat-btn" class="text-xs text-gray-400 hover:text-white">Clear</button>
       </div>
       <div id="chat-messages"></div>
@@ -1088,40 +1153,38 @@
     function renderProjects() {
       const grid = document.getElementById('projects-grid');
       if (!grid) return;
-      grid.innerHTML = projectsData.map(project => `
-        <article class="glass-card p-6 rounded-lg flex flex-col project-card">
-          <h3 class="font-display text-2xl text-accent mb-3">${project.title}</h3>
-          <p class="text-secondary mb-4 flex-grow">${project.description}</p>
-          <div class="mt-auto">
-            <p class="font-mono text-sm text-accent-dark mb-3">${project.tags.join(', ')}</p>
-            <div class="flex items-center gap-4 flex-wrap">
-              <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="glow-link text-secondary"><i class="fab fa-github mr-2" aria-hidden="true"></i>GitHub</a>
-              ${project.liveUrl ? `<a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="glow-link text-secondary"><i class="fa-solid fa-arrow-up-right-from-square mr-2" aria-hidden="true"></i>Live Demo</a>` : ''}
+      grid.innerHTML = projectsData.map(project => {
+        const primaryLink = project.liveUrl || project.githubUrl;
+        return `
+          <a href="${primaryLink}" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-lg flex flex-col project-card">
+            <h3 class="font-display text-2xl text-accent mb-3">${project.title}</h3>
+            <p class="text-secondary mb-4 flex-grow">${project.description}</p>
+            <div class="mt-auto">
+              <p class="font-mono text-sm text-accent-dark mb-3">${project.tags.join(', ')}</p>
+              <div class="flex items-center gap-4 flex-wrap">
+                <span class="text-secondary inline-flex items-center"><i class="fab fa-github mr-2" aria-hidden="true"></i>GitHub</span>
+                ${project.liveUrl ? `<span class="text-secondary inline-flex items-center"><i class="fa-solid fa-arrow-up-right-from-square mr-2" aria-hidden="true"></i>Live Demo</span>` : ''}
+              </div>
             </div>
-          </div>
-        </article>
-      `).join('');
+          </a>
+        `;
+      }).join('');
     }
 
     function renderSkills() {
       const container = document.getElementById('skills-container');
       if (!container) return;
       container.innerHTML = Object.entries(skillsData).map(([category, skills]) => `
-            <div class="skills-category">
-                <h3 class="font-display text-xl text-accent mb-4">${category}</h3>
-                <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+            <div class="skills-category mb-12">
+                <h3 class="font-display text-xl text-accent mb-8 text-center">${category}</h3>
+                <div class="skills-grid">
                     ${skills.map(skill => `
-                        <li class="skill-item">
-                            <div class="flex items-center mb-1">
-                                <i class="${skill.icon} text-accent text-xl mr-2" aria-hidden="true"></i>
-                                <span class="font-mono text-primary">${skill.name}</span>
-                            </div>
-                            <div class="h-2 w-full bg-gray-700/50 rounded-full overflow-hidden">
-                                <div class="progress-bar-fill h-full bg-accent rounded-full" style="width: 0%;" data-level="${skill.level}"></div>
-                            </div>
-                        </li>
+                        <div class="skill-button" style="--progress: 0deg" data-level="${skill.level}">
+                            <i class="${skill.icon}" aria-hidden="true"></i>
+                            <span class="tooltip">${skill.name}</span>
+                        </div>
                     `).join('')}
-                </ul>
+                </div>
             </div>
         `).join('');
     }
@@ -1176,6 +1239,7 @@
       renderProjects();
       renderSkills();
       setupSidebar();
+      setupContactForm();
     });
 
     // --- HERO NAME SCRAMBLE EFFECT ---
@@ -1306,6 +1370,60 @@
         .to(logoStrike, { strokeDashoffset: 0, duration: 1, ease: 'power2.inOut' }, "-=1.0");
     };
 
+    // --- CONTACT FORM SUBMISSION ---
+    function setupContactForm() {
+      const form = document.getElementById('contact-form');
+      const resultDiv = document.getElementById('form-result');
+      if (!form || !resultDiv) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const object = {};
+        formData.forEach((value, key) => {
+          object[key] = value;
+        });
+        const json = JSON.stringify(object);
+        resultDiv.innerHTML = "Sending...";
+        resultDiv.classList.remove('text-accent', 'text-red-500');
+        resultDiv.classList.add('text-secondary');
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: json
+        })
+          .then(async (response) => {
+            let jsonResponse = await response.json();
+            if (response.status == 200) {
+              resultDiv.innerHTML = "Thanks for reaching out! 🙏 I'll get back to you soon.";
+              resultDiv.classList.remove('text-secondary', 'text-red-500');
+              resultDiv.classList.add('text-accent');
+            } else {
+              console.log(response);
+              resultDiv.innerHTML = jsonResponse.message || "Something went wrong!";
+              resultDiv.classList.remove('text-secondary', 'text-accent');
+              resultDiv.classList.add('text-red-500');
+            }
+          })
+          .catch(error => {
+            console.log(error);
+            resultDiv.innerHTML = "Something went wrong!";
+            resultDiv.classList.remove('text-secondary', 'text-accent');
+            resultDiv.classList.add('text-red-500');
+          })
+          .then(function () {
+            form.reset();
+            setTimeout(() => {
+              resultDiv.innerHTML = '';
+            }, 5000); // Clear message after 5 seconds
+          });
+      });
+    }
+
     // --- CHATBOT LOGIC ---
     function initChatbot() {
       const chatbotBubble = document.getElementById('chatbot-bubble');
@@ -1324,7 +1442,7 @@
         { keywords: ['project', 'work', 'experience'], response: "He has built several projects, including a 'What's in my Fridge?' recipe app, an AI chatbot called 'The Intelliverse', and a Tourism Management System in Java. You can see them all in the Projects section!" },
         { keywords: ['contact', 'email', 'hire', 'connect'], response: "You can get in touch with Dhruvil by emailing him at dhruvithummar1303@gmail.com or by connecting on LinkedIn. All the links are in the Contact section at the bottom of the page." },
         { keywords: ['education', 'college', 'university'], response: "Dhruvil is pursuing his Bachelor of Technology in Computer Engineering at L J University in Ahmedabad, from 2024 to 2028." },
-        { keywords: ['hello', 'hi', 'hey'], response: "Hello! I'm Dhruvil's personal AI assistant. How can I help you today?" }
+        { keywords: ['hello', 'hi', 'hey'], response: "Hello! I'm Info-Byte, Dhruvil's personal AI assistant. How can I help you today?" }
       ];
 
       const quickReplies = ["Tell me about Dhruvil.", "What are his skills?", "How can I contact him?"];
@@ -1380,7 +1498,7 @@
 
       const initializeChat = () => {
         chatMessages.innerHTML = '';
-        addMessage("Hello! I'm Dhruvil's AI assistant. How can I help you today?", 'bot');
+        addMessage("Hello! I'm Info-Byte, Dhruvil's AI assistant. How can I help you today?", 'bot');
         showQuickReplies();
       };
 
@@ -1504,7 +1622,7 @@
         }),
       });
 
-      ScrollTrigger.batch(".skill-item", {
+      ScrollTrigger.batch(".skill-button", {
         start: "top 85%",
         onEnter: batch => {
           gsap.to(batch, {
@@ -1514,13 +1632,15 @@
             duration: 0.6,
             ease: 'power2.out'
           });
-          batch.forEach(item => {
-            const bar = item.querySelector('.progress-bar-fill');
-            gsap.to(bar, {
-              width: `${bar.dataset.level}%`,
+          batch.forEach(button => {
+            const level = button.dataset.level;
+            const progressDegrees = (level / 100) * 360;
+            // Delay the progress animation slightly for better effect
+            gsap.to(button, {
+              '--progress': `${progressDegrees}deg`,
               duration: 1.5,
               ease: 'power3.out',
-              delay: 0.2
+              delay: 0.5
             });
           });
         },
@@ -1638,3 +1758,4 @@
 </body>
 
 </html>
+
