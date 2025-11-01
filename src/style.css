@@ -1,0 +1,1015 @@
+:root {
+    --bg-color: #000;
+    --text-primary: #fff;
+    --text-secondary: #b0b0b0;
+    --accent-color: #00bfff;
+    --accent-secondary-color: #00f5d4;
+    --accent-dark-color: #0077b6;
+    --card-bg: rgba(20, 20, 20, 0.5);
+    --navbar-bg: rgba(10, 10, 10, 0.2);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --skill-bg: #1a1a1a;
+    --skill-track: #2a2a2a;
+    --scrollbar-track: #111;
+    --footer-bg: #050505;
+    --form-bg: rgba(20, 20, 20, 0.7);
+    --highlight-primary: var(--accent-color);
+    --highlight-secondary: var(--accent-secondary-color);
+}
+
+body.light-mode {
+    --bg-color: #f8f9fa;
+    --text-primary: #212529;
+    --text-secondary: #495057;
+    --accent-color: #0077b6;
+    --accent-secondary-color: #00a896;
+    --accent-dark-color: #005f8d;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --navbar-bg: rgba(255, 255, 255, 0.5);
+    --border-color: rgba(0, 0, 0, 0.1);
+    --skill-bg: #ffffff;
+    --skill-track: #e9ecef;
+    --scrollbar-track: #e9ecef;
+    --footer-bg: #e9ecef;
+    --form-bg: rgba(248, 249, 250, 0.7);
+    --highlight-primary: #005f8d;
+    --highlight-secondary: #008080;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+.font-display {
+    font-family: "Poppins", sans-serif;
+}
+
+.font-mono {
+    font-family: "Roboto Mono", monospace;
+}
+
+.font-logo {
+    font-family: "Montserrat", sans-serif;
+}
+
+.project-card,
+.skill-button,
+.about-shape,
+#navbar {
+    will-change: transform, opacity;
+}
+
+.text-highlight-primary {
+    color: var(--highlight-primary);
+}
+
+.text-highlight-secondary {
+    color: var(--highlight-secondary);
+}
+
+/* --- NEW: Interactive Text Highlight --- */
+.text-highlight-primary,
+.text-highlight-secondary {
+    transition: text-shadow 100s ease, opacity 100s ease, transform 100s ease;
+    display: inline-block;
+    /* Needed for transform */
+}
+
+.text-highlight-primary:hover {
+    text-shadow: 0 0 10px var(--highlight-primary);
+    transform: scale(1.03);
+}
+
+.text-highlight-secondary:hover {
+    text-shadow: 0 0 10px var(--highlight-secondary);
+    transform: scale(1.03);
+}
+
+/* --- End New Styles --- */
+
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00bfff;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.preloader-wrapper {
+    width: 300px;
+    text-align: center;
+}
+
+#preloader-logo {
+    position: relative;
+    width: 250px;
+    height: 150px;
+    margin: 0 auto 20px;
+}
+
+#preloader-logo svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke-width: 2;
+    transform-origin: center center;
+}
+
+.logo-path {
+    stroke: var(--accent-color);
+    stroke-dasharray: 3000;
+    stroke-dashoffset: 3000;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(0, 191, 255, 0.2);
+    border-radius: 2px;
+    margin-top: 1rem;
+}
+
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+#status-text {
+    margin-top: 1rem;
+    font-family: "Roboto Mono", monospace;
+    color: var(--text-secondary);
+}
+
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1100;
+    pointer-events: none;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .cursor-dot,
+    .cursor-ring {
+        display: block;
+    }
+}
+
+.cursor-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--text-primary);
+    transition: transform 0.3s ease;
+}
+
+.cursor-ring {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--text-primary);
+    transition: width 0.3s ease, height 0.3s ease, border-width 0.3s ease,
+        opacity 0.3s ease;
+}
+
+body.link-hover .cursor-ring {
+    width: 50px;
+    height: 50px;
+    border-width: 1px;
+    opacity: 0.5;
+}
+
+body.link-hover .cursor-dot {
+    transform: translate(-50%, -50%) scale(0.7);
+}
+
+/**
+ * CURSOR I-FRAME FIX
+ * This rule disables the mix-blend-mode when hovering over an element
+ * (like the LinkedIn badge iframe) that breaks the effect.
+ */
+body.cursor-iframe-hover .cursor-dot {
+    mix-blend-mode: normal;
+    background-color: var(--accent-color);
+    transform: translate(-50%, -50%) scale(0.7);
+}
+
+body.cursor-iframe-hover .cursor-ring {
+    mix-blend-mode: normal;
+    border-color: var(--accent-color);
+    opacity: 0.5;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-dark-color);
+}
+
+#background-canvas {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.project-card {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 0 50px color-mix(in srgb, var(--accent-color) 40%, transparent),
+        0 0 20px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.project-thumbnail {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.project-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.project-button.primary {
+    background-color: var(--accent-color);
+    color: #fff;
+    /* Always white for better contrast */
+}
+
+.project-button.primary:hover {
+    background-color: var(--accent-dark-color);
+}
+
+.project-button.secondary {
+    background-color: color-mix(in srgb,
+            var(--text-primary) 10%,
+            transparent);
+    color: var(--text-primary);
+}
+
+.project-button.secondary:hover {
+    background-color: color-mix(in srgb,
+            var(--text-primary) 20%,
+            transparent);
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+#navbar {
+    background: var(--navbar-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+#header-logo path {
+    stroke: var(--text-primary);
+    stroke-width: 5;
+    fill: none;
+    transition: stroke 0.3s ease, filter 0.3s ease;
+}
+
+#header-logo:hover path {
+    stroke: var(--accent-color);
+    filter: drop-shadow(0 0 8px var(--accent-color));
+}
+
+.word-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.word {
+    display: inline-block;
+    transform-origin: bottom;
+}
+
+.about-shape {
+    position: absolute;
+    stroke: var(--accent-color);
+    stroke-width: 1;
+    fill: none;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* --- NEW: Education Icon Container --- */
+.icon-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    /* Make it circular */
+    width: 150px;
+    /* Fixed size */
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    /* Give the icon space */
+    animation: pulse-glow 2.5s infinite ease-in-out;
+    /* Reuse existing glow */
+    transition: transform 0.3s ease;
+}
+
+.icon-container img {
+    width: 200%;
+    height: 200%;
+    filter: drop-shadow(0 0 8px var(--accent-color));
+    /* Add glow to icon */
+}
+
+.icon-container:hover {
+    transform: scale(1.05);
+    /* Add a simple hover effect */
+    animation-play-state: paused;
+    /* Pause glow on hover */
+}
+
+/* --- End New Styles --- */
+
+.contact-button {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    transition: color 0.4s ease-in-out, opacity 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.contact-button .btn-content {
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-button.loading .btn-content {
+    transform: translateY(-150%);
+}
+
+.contact-button .loader-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 150%);
+    transition: transform 0.3s ease;
+}
+
+.contact-button.loading .loader-icon {
+    transform: translate(-50%, -50%);
+}
+
+.contact-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--accent-color);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s ease-in-out;
+    z-index: -1;
+}
+
+.contact-button:hover:not(:disabled) {
+    color: var(--bg-color);
+}
+
+body.light-mode .contact-button:hover:not(:disabled) {
+    color: #fff;
+}
+
+.contact-button:hover:not(:disabled)::before {
+    transform: scaleY(1);
+    transform-origin: top;
+}
+
+#form-toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 150%);
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-weight: 500;
+    z-index: 2100;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+#form-toast.show {
+    transform: translate(-50%, 0);
+}
+
+#form-toast.success {
+    background-color: #28a745;
+}
+
+#form-toast.error {
+    background-color: #dc3545;
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .skills-grid {
+        gap: 2rem;
+    }
+}
+
+.skill-button {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--skill-bg);
+    border: 1px solid var(--border-color);
+    cursor: default;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease,
+        background-color 0.4s ease;
+}
+
+.skill-button-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.skill-button-progress circle.progress-ring-bg {
+    stroke: var(--skill-track);
+}
+
+.skill-button-progress circle.progress-ring {
+    stroke-linecap: round;
+    transition: stroke-dasharray 1.5s cubic-bezier(0.25, 1, 0.5, 1) 0.5s;
+}
+
+.skill-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--accent-color) 40%, transparent);
+}
+
+.skill-button .skill-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.skill-button i {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.skill-button:hover i {
+    color: var(--accent-color);
+}
+
+.skill-button .skill-percentage {
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.8s;
+}
+
+.skill-button.visible .skill-percentage {
+    opacity: 1;
+}
+
+.skill-button .tooltip {
+    position: absolute;
+    bottom: -35px;
+    background-color: var(--skill-bg);
+    color: var(--text-primary);
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.skill-button:hover .tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+footer {
+    border-top: 1px solid var(--border-color);
+    transition: background-color 0.4s ease;
+}
+
+#sidebar-menu.open {
+    transform: translateX(0);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+#chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#chatbot-bubble {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg,
+            var(--accent-color),
+            var(--accent-dark-color));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--accent-color) 40%, transparent);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    animation: pulse-glow 2s infinite ease-in-out;
+}
+
+#chatbot-bubble.open {
+    background: #2a2a2a;
+}
+
+body.light-mode #chatbot-bubble.open {
+    background: #ccc;
+}
+
+#chatbot-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px color-mix(in srgb, var(--accent-color) 60%, transparent);
+}
+
+#chatbot-window {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: calc(100vw - 40px);
+    max-width: 370px;
+    height: 70vh;
+    max-height: 550px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95) translateY(10px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease,
+        background-color 0.4s ease, border-color 0.4s ease;
+    transform-origin: bottom right;
+}
+
+@media (max-width: 640px) {
+    #chatbot-window {
+        height: 65vh;
+        max-height: 90vh;
+    }
+}
+
+#chatbot-window.open {
+    display: flex;
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+#chat-header {
+    padding: 1rem;
+    background-color: var(--skill-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.chat-header-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(45deg,
+            var(--accent-color),
+            var(--accent-secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    font-family: "Poppins";
+}
+
+.chat-header-text .name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.chat-header-text .status {
+    font-size: 0.8rem;
+    color: #00ff8c;
+}
+
+body.light-mode .chat-header-text .status {
+    color: #1e8a5b;
+}
+
+.chat-header-text .status::before {
+    content: "●";
+    margin-right: 4px;
+}
+
+#chat-close-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#chat-close-btn:hover {
+    color: var(--text-primary);
+}
+
+#chat-messages {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chat-message-group {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 85%;
+}
+
+.chat-message-group.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.chat-message-group.bot {
+    align-self: flex-start;
+}
+
+.chat-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #333;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.light-mode .chat-avatar {
+    background-color: #ddd;
+}
+
+.chat-avatar i {
+    font-size: 1rem;
+}
+
+.chat-bubble {
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.user .chat-bubble {
+    background-color: var(--accent-color);
+    color: #fff;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.bot .chat-bubble {
+    background-color: var(--skill-track);
+    color: var(--text-secondary);
+    border-bottom-left-radius: 0.25rem;
+}
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.75rem 1rem;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background-color: #555;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+#chat-input-container {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--skill-bg);
+    flex-shrink: 0;
+}
+
+#chat-input {
+    flex-grow: 1;
+    border: none;
+    background-color: var(--skill-track);
+    color: var(--text-primary);
+    padding: 0.75rem 1rem;
+    border-radius: 9999px;
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+#chat-input:focus {
+    box-shadow: 0 0 0 2px var(--accent-dark-color);
+}
+
+#chat-send {
+    margin-left: 0.75rem;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+#chat-send:hover {
+    background-color: var(--accent-dark-color);
+}
+
+#quick-replies-container {
+    padding: 0 1rem 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.quick-reply {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    font-size: 0.8rem;
+}
+
+.quick-reply:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px color-mix(in srgb, var(--accent-color) 40%, transparent);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px color-mix(in srgb, var(--accent-color) 70%, transparent);
+    }
+}
+
+#copyright {
+    background-color: var(--footer-bg);
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Volume Control Slider Styles */
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--skill-track);
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--accent-color);
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: var(--accent-secondary-color);
+}
+
+.slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--accent-color);
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+    background: var(--accent-secondary-color);
+}
+
+.slider::-ms-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--accent-color);
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.slider::-ms-thumb:hover {
+    background: var(--accent-secondary-color);
+}
+
+.slider::-webkit-slider-track {
+    background: var(--skill-track);
+    height: 4px;
+    border-radius: 2px;
+}
+
+.slider::-moz-range-track {
+    background: var(--skill-track);
+    height: 4px;
+    border-radius: 2px;
+    border: none;
+}
+
+.slider::-ms-track {
+    background: var(--skill-track);
+    height: 4px;
+    border-radius: 2px;
+    border: none;
+}
