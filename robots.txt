@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dhruvilthummar.github.io/portfolio/sitemap.xml
+Sitemap: https://dhruvilthummar.github.io/sitemap.xml
