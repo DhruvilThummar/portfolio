@@ -1,4 +1,34 @@
+# Robots.txt for drthummar.me
+# Developer Portfolio - Dhruvil Thummar
+
+# Allow all crawlers full access
 User-agent: *
 Allow: /
 
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /assets/
+
+# Social Media Crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Sitemap Location
 Sitemap: https://drthummar.me/sitemap.xml
+
+# Host
+Host: https://drthummar.me
