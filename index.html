@@ -512,7 +512,8 @@
       }
     </script>
     
-    <script src="https://cdn.tailwindcss.com" defer></script>
+    <!-- Replaced Tailwind CDN with compiled CSS build -->
+    <link rel="stylesheet" href="assets/tailwind.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -1457,28 +1458,7 @@
             border-top: 1px solid var(--border-color);
         }
     </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        background: "var(--bg-color)",
-                        primary: "var(--text-primary)",
-                        secondary: "var(--text-secondary)",
-                        accent: "var(--accent-color)",
-                        "accent-dark": "var(--accent-dark-color)",
-                        "accent-secondary": "var(--accent-secondary-color)",
-                    },
-                    fontFamily: {
-                        sans: ["Inter", "sans-serif"],
-                        display: ["Poppins", "sans-serif"],
-                        mono: ["Roboto Mono", "monospace"],
-                        logo: ["Montserrat", "sans-serif"],
-                    },
-                },
-            },
-        };
-    </script>
+    <!-- Removed inline Tailwind runtime config (now handled via tailwind.config.js at build time) -->
 </head>
 
 <body class="bg-background text-primary">

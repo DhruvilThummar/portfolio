@@ -1,0 +1,18 @@
+{
+  "name": "dhruvilthummar.github.io",
+  "version": "1.0.0",
+  "description": "* https://drthummar.me/ --- ## Designed & Built by Dhruvil Thummar © 2025",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./assets/tailwind-input.css -o ./assets/tailwind.css --minify",
+    "watch:css": "npx tailwindcss -i ./assets/tailwind-input.css -o ./assets/tailwind.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.14"
+  }
+}
